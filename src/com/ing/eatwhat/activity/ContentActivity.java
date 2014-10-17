@@ -3,7 +3,6 @@ package com.ing.eatwhat.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,33 +26,13 @@ public class ContentActivity extends Activity {
 		String date = intent.getStringExtra("date");
 		String content = intent.getStringExtra("content");
 		
-		Log.i("込込", userName);
-		Log.i("込込", date);
-		Log.i("込込", content);
 		tv_userName = (TextView) findViewById(R.id.tv_userName);
 		tv_date = (TextView) findViewById(R.id.tv_date);
 		tv_content = (TextView) findViewById(R.id.tv_content);
 		
-		Log.i("込込", "1");
 		tv_userName.setText(userName);
-		Log.i("込込", "2");
-		tv_date.setText(date);
-		Log.i("込込", "3");
-		tv_content.setText("3");  
-		Log.i("込込", "4");
+		tv_date.setText(date);		
+		tv_content.setText(content);  
 		
-		/*ArrayList<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
-		HashMap<String,String> map1 = new HashMap<String,String>();
-		HashMap<String,String> map2 = new HashMap<String,String>();
-		HashMap<String,String> map3 = new HashMap<String,String>();
-		map1.put("user_name", "低挫亜��");
-		map2.put("user_name", "挫倖逃。。。");
-		map3.put("user_name", "獄。。。。。。。。");
-		list.add(map1);
-		list.add(map2);
-		list.add(map3);
-		SimpleAdapter listAdapter = new SimpleAdapter(this,list,R.layout.ping,new String[]{"user_name"},new int[]{R.id.pingtext});
-		pinglist = (ListView) findViewById(R.id.pinglist);
-		pinglist.setAdapter(listAdapter);*/
 	}
 }

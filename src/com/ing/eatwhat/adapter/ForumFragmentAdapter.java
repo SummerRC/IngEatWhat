@@ -15,9 +15,9 @@ import android.widget.TextView;
 public class ForumFragmentAdapter extends BaseAdapter{
 	private Context context;
 	public HashMap<String, ArrayList<String>> map;
-	private ArrayList<String> date;
-	private ArrayList<String> userName;
-	private ArrayList<String> content;
+	public ArrayList<String> date;
+	public ArrayList<String> userName;
+	public ArrayList<String> content;
 	private int count;
 	
 	//¹¹Ôìº¯Êý

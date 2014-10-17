@@ -1,14 +1,12 @@
 package com.ing.eatwhat.fragment;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.database.DBManager;
 import com.ing.eatwhat.entity.AllUse;
-import android.app.Service;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -40,7 +38,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -49,6 +46,7 @@ import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
 import android.widget.Toast;
 
+@SuppressLint("HandlerLeak")
 public class RecommendFragment extends Fragment implements AnimationListener{
 	private int index = 1; 
 	public ImageView wait;

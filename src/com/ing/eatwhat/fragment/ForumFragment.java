@@ -11,12 +11,12 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.activity.ContentActivity;
 import com.ing.eatwhat.activity.ForumPostActivity;
@@ -43,13 +43,18 @@ public class ForumFragment extends Fragment {
 			switch(msg.what) {
 			case 1:
 				//将帖子信息插入到数据库中，注意有个坑：若在线程中操作数据库会出现锁得问题
-				HashMap<String, ArrayList<String>> insert_map = (HashMap<String, ArrayList<String>>) msg.obj;
-				dbManager.insertMessages(insert_map);
-				map = dbManager.getMessages();	
+				map = (HashMap<String, ArrayList<String>>) msg.obj;
+				dbManager.insertMessages(map);
 				break;
 			case REFRESH_DATA_FINISH:	//下拉刷新完成
-				if(adapter !=null){
-					adapter.map = (HashMap<String, ArrayList<String>>)msg.obj;
+				if(adapter != null){
+					//注意：这样写是为了解决notifyDataSetChanged()不刷新的问题，不刷新产生的原因问度娘
+					adapter.date.clear();
+					adapter.date.addAll(map.get("date"));
+					adapter.userName.clear();
+					adapter.userName.addAll(map.get("userName"));
+					adapter.content.clear();
+					adapter.content.addAll(map.get("content"));
 					adapter.notifyDataSetChanged();
 				}
 				myListView.onRefreshComplete();	
@@ -88,13 +93,6 @@ public class ForumFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		buildData();
-		initView();
-	}
-	
-	//初始化相关数据，从网上下载帖子信息插入到数据库，再从数据库读出传给适配器
-	private void buildData() {		
-		map = dbManager.getMessages();	
 		bt_frag_post = (Button) getView().findViewById(R.id.bt_frag_post);
 		bt_frag_post.setOnClickListener(new OnClickListener(){
 			public void onClick(View v){
@@ -103,6 +101,15 @@ public class ForumFragment extends Fragment {
 				getActivity().startActivity(intent);
 			}
 		});
+		
+		buildData();
+		initView();
+	}
+	
+	//初始化相关数据，从网上下载帖子信息插入到数据库，再从数据库读出传给适配器
+	private void buildData() {		
+		map = dbManager.getMessages();	
+		
 	}
 	
 	//初始化view
@@ -152,12 +159,15 @@ public class ForumFragment extends Fragment {
 	
 	//下拉刷新和加载更多  对数据的处理
 	private void loadData(final int op) {
+		//开启线程返回帖子信息
+		GetMessagesNetThread thread = new GetMessagesNetThread(mHandler, "http://cqcreer.jd-app.com/get_note.php?index=0", 1);
+		thread.start();
 		new Thread(){
 			@Override
 			public void run() {
 				switch (op) {
 				case 0:
-					//下拉刷新
+					//下拉刷新2
 					//对数据库和map进行操作
 					break;
 				case 1:					
@@ -173,7 +183,7 @@ public class ForumFragment extends Fragment {
 				}
 				
 				if(op == 0){	//下拉刷新
-					//Collections.reverse(mList);	/、逆序
+					 //Collections.reverse(mList);	/、逆序
 					Message _Msg = mHandler.obtainMessage(REFRESH_DATA_FINISH, map);
 					mHandler.sendMessage(_Msg);
 				}else if(op == 1){

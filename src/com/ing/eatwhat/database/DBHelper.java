@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		db.execSQL(food_sql);
 		
 		//建立forum表（四个字段：帖子的id、帖子发表时间、发表帖子的用户名、帖子内容）
-		forum_sql = "create table if not exists forum(id int, date date(50), userName varchar(50), content varchar(50))";
+		forum_sql = "create table if not exists forum(id int, date date(50), userName varchar(50), content varchar(255))";
 		db.execSQL(forum_sql);
 	}
 
