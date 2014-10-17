@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentTop="true"
+        android:textSize="30sp"
+        android:background="#f6f6f6"
+        android:text="注册"
+        android:textColor="#0096ff"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/linear_emailorPN"
+        android:layout_below="@+id/more"
+        android:background="#ECECEC"
+        android:ems="10"
+        android:enabled="false" />
+
+
+	<LinearLayout 
+	    android:layout_height="55dp" 
+	    android:layout_width="match_parent" 
+	    android:id="@+id/linear_emailorPN"
+	    android:layout_below="@+id/editText4" 
+	    android:layout_marginTop="30dp"
+	    android:orientation="horizontal">
+	
+		<TextView 
+		    android:background="@drawable/lman"
+		    android:layout_height="match_parent" 
+		    android:layout_width="48dp"/>
+		
+		<EditText
+		    android:id="@+id/emailorPN"
+		    android:layout_width="match_parent"
+		    android:layout_height="55dp"
+		    android:ems="10"
+		    android:hint="@+string/activity_login_account"
+		   	android:singleLine="true"
+       	    android:maxLength="16"
+		    android:textColorHint="#cccccc"
+		    android:paddingLeft="10dp" />	    	
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:layout_height="55dp" 
+	    android:layout_width="match_parent" 
+	    android:id="@+id/linear_password"
+	    android:layout_below="@+id/linear_emailorPN" 
+	    android:orientation="horizontal">
+	
+		<TextView 
+		    android:background="@drawable/asuo"
+		    android:layout_height="match_parent" 
+		    android:layout_width="48dp"/>
+		
+		<EditText
+		        android:id="@+id/password"
+		        android:layout_width="fill_parent"
+		        android:layout_height="55dp"
+		        android:layout_below="@+id/emailorPN"
+		        android:ems="10"
+		        android:hint="@+string/activity_login_password"
+		        android:textColorHint="#cccccc"
+		        android:inputType="textPassword" />		
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:layout_height="55dp" 
+	    android:layout_width="match_parent" 
+	    android:id="@+id/linear_passwordagain"
+	    android:layout_below="@+id/linear_password" 
+	    android:orientation="horizontal">
+	
+		<TextView 
+		    android:background="@drawable/asuo"
+		    android:layout_height="match_parent" 
+		    android:layout_width="48dp"/>
+		
+		<EditText
+		        android:id="@+id/passwordagain"
+		        android:layout_width="fill_parent"
+		        android:layout_height="55dp"
+		        android:ems="10"
+		        android:hint="请再次输入密码"
+		        android:textColorHint="#cccccc"
+		        android:inputType="textPassword" />
+	</LinearLayout>
+	
+    
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/linear_passwordagain"
+        android:layout_below="@+id/linear_passwordagain"
+        android:background="@drawable/manorwm"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:enabled="false" />
+
+    <Button
+        android:id="@+id/bt_logon"
+        android:layout_width="100dp"
+        android:layout_height="33dp"
+        android:layout_alignBaseline="@+id/bt_login"
+        android:layout_alignBottom="@+id/bt_login"
+        android:layout_alignRight="@+id/editText1"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/register"
+        android:onClick="BackClick"
+        android:text="返回"
+        android:textColor="#0096ff" />
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="100dp"
+        android:layout_height="33dp"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/register"
+        android:onClick="MakeSureClick"
+        android:text="确认"
+        android:textColor="#0096ff" />
+	    
+</RelativeLayout>
