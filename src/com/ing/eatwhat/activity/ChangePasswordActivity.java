@@ -37,9 +37,8 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 			@Override
 			public void handleMessage(Message msg) {
 				switch(msg.what) {
-				case 1:
+				case 0:
 					String result = msg.obj.toString().trim();
-					Log.i("ÏÄÓê", result);
 					if(result.equalsIgnoreCase("seccess")) {
 						AllUse.info(ChangePasswordActivity.this, "ÐÞ¸Ä³É¹¦");
 						finish();

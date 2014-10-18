@@ -4,6 +4,7 @@ import com.ing.eatwhat.R;
 import com.ing.eatwhat.activity.AboutActivity;
 import com.ing.eatwhat.activity.ChangePasswordActivity;
 import com.ing.eatwhat.activity.TimeLineActivity;
+import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -96,7 +97,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 	
 	//调用该方法更新应用程序
 	private void  update() {
-		
+		AllUse.info(getActivity(), "当前版本已是最新版！");
 	}
 	
 	//退出当前账号时调用

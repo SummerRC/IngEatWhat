@@ -75,6 +75,9 @@ public class NetThread extends Thread {
 		case 7:    //返回用户的食物个数
 			url = "http://cqcreer.jd-app.com/get_food_num.php?username=" + str1;
 			break;
+		case 8:	   //修改密码
+			url = "http://cqcreer.jd-app.com/change_password.php?username=" + str1 + "&password=" + str2 + "&new_pw=" + str3;
+			break;
 		}
 		try {
 			HttpGet get = new HttpGet(url);
@@ -86,7 +89,7 @@ public class NetThread extends Thread {
 			
 			if(response.getStatusLine().getStatusCode() == 200) {
 			
-				if(op == 1 || op == 2 || op == 3 || op == 4 || op == 5) {
+				if(op == 1 || op == 2 || op == 3 || op == 4 || op == 5 || op == 8) {
 					BufferedReader bin = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 				    result = bin.readLine();			//result存的是状态信息
 				    

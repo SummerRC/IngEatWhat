@@ -83,9 +83,12 @@ public class ForumFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		context = this.getActivity();
 		dbManager = new DBManager(context);
-		//开启线程返回帖子信息
-		GetMessagesNetThread thread = new GetMessagesNetThread(mHandler, "http://cqcreer.jd-app.com/get_note.php?index=0", 1);
-		thread.start();
+		
+		if(map == null) {
+			//开启线程返回帖子信息
+			GetMessagesNetThread thread = new GetMessagesNetThread(mHandler, "http://cqcreer.jd-app.com/get_note.php?index=0", 1);
+			thread.start();
+		}		
 		return inflater.inflate(R.layout.fragment_forum, container, false);
 	}
 

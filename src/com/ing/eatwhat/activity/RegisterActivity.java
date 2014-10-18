@@ -4,6 +4,7 @@ import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.thread.NetThread;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
+@SuppressLint("HandlerLeak")
 public class RegisterActivity extends Activity{
 	private static Handler mHandler;         //注意：handler如果不申明为静态的话,eclipse警告可能会导致内存泄露，详情:http://www.cppblog.com/tx7do/archive/2013/11/14/204251.aspx
 	private EditText et_logon_name;          //注册用户名的文本框
@@ -52,6 +54,7 @@ public class RegisterActivity extends Activity{
 							clean();
 							return;
 						}
+					break;
 				case 222:
 					AllUse.info(RegisterActivity.this, "用户名不能包含特殊字符：? | & 空格等.");
 					clean();
