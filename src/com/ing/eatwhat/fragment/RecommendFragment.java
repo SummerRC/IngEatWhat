@@ -73,6 +73,45 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 		initSound();
 		mVibrator = (Vibrator) getActivity().getApplication().getSystemService(
 				Context.VIBRATOR_SERVICE);
+		wait.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startAnimation();
+				isfirstshark=false;
+				String result[] = random();
+//				String result[] = {"苹果","西瓜","桃子","芒果"};
+				if(result!=null){
+					Bitmap bitmap = null;
+					try {
+						bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.fromFile(new File(result[1])));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}						
+					draw_image.setImageBitmap(toRoundCorner(bitmap,10));
+                    draw_image.setAdjustViewBounds(true);
+                    LayoutParams para;
+                    para = draw_image.getLayoutParams();      
+                    para.height = screenWidth/5;
+                    para.width = screenWidth/5;
+                    draw_image.setLayoutParams(para);
+                   
+                    draw_image.setMaxHeight(screenHeigh/2);
+                    draw_image.setMaxWidth(screenWidth/2);
+                    draw_image.setScaleType(ScaleType.CENTER_CROP);
+					draw_name.setText("葱烧蹄筋");//+result[0]
+					address.setText("地址：工业南路44号闫府私房菜");
+					gongjiao.setText("公交路线：");
+					draw_name.setVisibility(View.VISIBLE);
+					draw_show.setVisibility(View.VISIBLE);
+					dianji.setVisibility(View.VISIBLE);
+					address.setVisibility(View.VISIBLE);
+					gongjiao.setVisibility(View.VISIBLE);
+				}
+			}
+		});
 				
 	}
 
