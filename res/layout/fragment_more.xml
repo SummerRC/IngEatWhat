@@ -50,7 +50,7 @@
                     android:background="@drawable/changepw" />
 
                 <Button
-                    android:id="@+id/bt_changePassword"
+                    android:id="@+id/bt_frag_more_changePassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bar"
@@ -73,6 +73,7 @@
                     android:background="@drawable/time" />
 
                 <Button
+                    android:id="@+id/bt_frag_more_timeLine"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bar"
@@ -118,6 +119,7 @@
                     android:background="@drawable/gift" />
 
                 <Button
+                    android:id="@+id/bt_frag_more_tips"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bar"

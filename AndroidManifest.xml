@@ -76,6 +76,21 @@
             android:name="com.ing.eatwhat.activity.ForumPostActivity"
             android:label="@string/app_name" >
         </activity>
+        
+        <activity
+            android:name="com.ing.eatwhat.activity.TimeLineActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="com.ing.eatwhat.activity.AboutActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name="com.ing.eatwhat.activity.ChangePasswordActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
