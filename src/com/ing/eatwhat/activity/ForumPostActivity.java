@@ -35,14 +35,14 @@ public class ForumPostActivity extends Activity implements View.OnClickListener{
 			public void handleMessage(Message msg) {	
 				if(msg.what == 0) {						
 					String result = msg.obj.toString().trim();
-					Toast.makeText(ForumPostActivity.this, "Ìû×Ó·¢ËÍ³É¹¦"+result, Toast.LENGTH_LONG).show();
+					Toast.makeText(ForumPostActivity.this, "å¸–å­å‘é€æˆåŠŸ"+result, Toast.LENGTH_LONG).show();
 					finish();	
 				}
 			}			
 		};			
 	}
 
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	private void initialize() {
 		//iv_addPicture = (ImageView ) findViewById(R.id.iv_addPicture);
 		et_content = (EditText) findViewById(R.id.et_content);
@@ -69,20 +69,20 @@ public class ForumPostActivity extends Activity implements View.OnClickListener{
 		}	
 	}
 	
-	//·¢ËÍÌû×Ó
+	//å‘é€å¸–å­
 	private void post() {
 		String content = et_content.getText().toString().trim();
-		//ÅĞ¶ÏÊÇ·ñÁªÍø
+		//åˆ¤æ–­æ˜¯å¦è”ç½‘
 		if(!AllUse.isHaveInternet(this)){
-			Toast.makeText(ForumPostActivity.this, "Î´Á¬½ÓÍøÂç,²Ù×÷Ê§°Ü", Toast.LENGTH_SHORT).show();
+			Toast.makeText(ForumPostActivity.this, "æœªè¿æ¥ç½‘ç»œ,æ“ä½œå¤±è´¥", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if(content.equals("")) {
-			AllUse.info(ForumPostActivity.this, "¾¯¸æ£ºÊäÈëÎÄ×Ö²»ÄÜÎª¿Õ£¡");
+			AllUse.info(ForumPostActivity.this, "è­¦å‘Šï¼šè¾“å…¥æ–‡å­—ä¸èƒ½ä¸ºç©ºï¼");
 			return;
 		}	
 		if(content.length() > 288) {
-			AllUse.info(ForumPostActivity.this, "¾¯¸æ£ºÊäÈëÎÄ×Ö¹ı³¤£¡");
+			AllUse.info(ForumPostActivity.this, "è­¦å‘Šï¼šè¾“å…¥æ–‡å­—è¿‡é•¿ï¼");
 			return;
 		}
 		

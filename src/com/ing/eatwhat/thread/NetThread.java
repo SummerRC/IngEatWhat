@@ -1,8 +1,8 @@
 /*
- * NetThreadÏß³ÌÀàÖ÷ÒªÓÃÈı¸ö¹¦ÄÜ£º¹¦ÄÜÒ»£¬·ÃÎÊ¾©¶«ÔÆµÄÊı¾İ¿â»ñµÃ²Ù×÷µÄ·µ»ØÖµ£¬²¢½«·µ»ØÖµÍ¨¹ıÏûÏ¢´«µİ¸øUIÏß³Ì    msg.what = 0;
- *                         ¹¦ÄÜ¶ş£¬´ÓÆßÅ£ÔÆ´æ´¢ÏÂÔØÍ¼Æ¬£¬²¢½«ÆäÍ¨¹ıÏûÏ¢´«µİ¸øUIÏß³Ì´¦Àí   msg.what = 1;
- *                         ¹¦ÄÜÈı£¬´Ó¾©¶«ÔÆ·şÎñÆ÷»ñµÃÉÏ´«Æ¾Ö¤   msg.what = 2.
- *                         op:1 µÇÂ¼£¬ 2 ×¢²á£¬ 3 ¼Ó²Ë£¬ 4 ĞŞ¸Ä²Ë£¬ 5 »ñµÃÉÏ´«Æ¾Ö¤£¬ 6 ´«Í¼Æ¬
+ * NetThreadçº¿ç¨‹ç±»ä¸»è¦ç”¨ä¸‰ä¸ªåŠŸèƒ½ï¼šåŠŸèƒ½ä¸€ï¼Œè®¿é—®äº¬ä¸œäº‘çš„æ•°æ®åº“è·å¾—æ“ä½œçš„è¿”å›å€¼ï¼Œå¹¶å°†è¿”å›å€¼é€šè¿‡æ¶ˆæ¯ä¼ é€’ç»™UIçº¿ç¨‹    msg.what = 0;
+ *                         åŠŸèƒ½äºŒï¼Œä»ä¸ƒç‰›äº‘å­˜å‚¨ä¸‹è½½å›¾ç‰‡ï¼Œå¹¶å°†å…¶é€šè¿‡æ¶ˆæ¯ä¼ é€’ç»™UIçº¿ç¨‹å¤„ç†   msg.what = 1;
+ *                         åŠŸèƒ½ä¸‰ï¼Œä»äº¬ä¸œäº‘æœåŠ¡å™¨è·å¾—ä¸Šä¼ å‡­è¯   msg.what = 2.
+ *                         op:1 ç™»å½•ï¼Œ 2 æ³¨å†Œï¼Œ 3 åŠ èœï¼Œ 4 ä¿®æ”¹èœï¼Œ 5 è·å¾—ä¸Šä¼ å‡­è¯ï¼Œ 6 ä¼ å›¾ç‰‡
  */
 package com.ing.eatwhat.thread;
 
@@ -25,11 +25,11 @@ public class NetThread extends Thread {
 	private String str2;
 	private String str3;
 	private String foodurl;
-	private int op;             //²Ù×÷ÀàĞÍ£ºjingdong  qiqiu
+	private int op;             //æ“ä½œç±»å‹ï¼šjingdong  qiqiu
 	DefaultHttpClient client;
 	String url;
 	
-	//µÚÒ»¸ö²ÎÊıÎªÓÃ»§Ãû£¬µÚ¶ş¸ö²ÎÊıÎªÃÜÂë»òÕßÊ³ÎïÃû£¬µÚÈı¸ö²ÎÊıÎªÊ³ÎïĞÂÃû£¬µÚËÄ¸ö²ÎÊıÎªuri(ÆßÅ£ÔÆ´æ´¢ÉÏµÄÃû×Ö),µÚÎå¸öÎª²Ù×÷ÀàĞÍ
+	//ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºç”¨æˆ·åï¼Œç¬¬äºŒä¸ªå‚æ•°ä¸ºå¯†ç æˆ–è€…é£Ÿç‰©åï¼Œç¬¬ä¸‰ä¸ªå‚æ•°ä¸ºé£Ÿç‰©æ–°åï¼Œç¬¬å››ä¸ªå‚æ•°ä¸ºuri(ä¸ƒç‰›äº‘å­˜å‚¨ä¸Šçš„åå­—),ç¬¬äº”ä¸ªä¸ºæ“ä½œç±»å‹
 	public NetThread(Handler mHandler, String str1, String str2, String str3, String str4, int op) {
 		this.mHandler = mHandler;
 		this.str1 = str1;
@@ -42,10 +42,10 @@ public class NetThread extends Thread {
 	public void run() {
 		
 		client = new DefaultHttpClient();
-	    client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 5000); // ÉèÖÃÇëÇó³¬Ê±Ê±¼ä
-	    client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 50000); // ¶ÁÈ¡³¬Ê±
+	    client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 5000); // è®¾ç½®è¯·æ±‚è¶…æ—¶æ—¶é—´
+	    client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 50000); // è¯»å–è¶…æ—¶
 
-	    //´¦ÀíÍøÂçÈÎÎñ
+	    //å¤„ç†ç½‘ç»œä»»åŠ¡
 		DoNetWork();
 	}
 	
@@ -54,28 +54,28 @@ public class NetThread extends Thread {
 		String result;
 		
 		switch(op) {
-		case 1:    //µÇÂ¼
+		case 1:    //ç™»å½•
 			url = "http://cqcreer.jd-app.com/login.php?username=" + str1 + "&password=" + str2;
 		    break;
-		case 2:    //×¢²á
+		case 2:    //æ³¨å†Œ
 			url = "http://cqcreer.jd-app.com/register.php?username=" + str1 + "&password=" + str2;
 		    break;
-		case 3:    //¼Ó²Ë
+		case 3:    //åŠ èœ
 		    url = "http://cqcreer.jd-app.com/add_food.php?username=" + str1 + "&foodname=" + str2 + "&foodurl=" + foodurl;
 			break;
-		case 4:    //ĞŞ¸Ä²Ë
+		case 4:    //ä¿®æ”¹èœ
 			url = "http://cqcreer.jd-app.com/change_food.php?username=" + str1 + "&foodname1=" + str2 + "&foodname2=" + str3 + "&foodurl=" + foodurl;
 			break;
-		case 5:    //É¾³ı²Ë
+		case 5:    //åˆ é™¤èœ
 			url = "http://cqcreer.jd-app.com/delete_food.php?username=" + str1 + "&foodname=" + str2;
 			break;
-		case 6:    //»ñµÃÉÏ´«Æ¾Ö¤
+		case 6:    //è·å¾—ä¸Šä¼ å‡­è¯
 			url = "http://cqcreer.jd-app.com/test_Uptoken.php";
 			break;
-		case 7:    //·µ»ØÓÃ»§µÄÊ³Îï¸öÊı
+		case 7:    //è¿”å›ç”¨æˆ·çš„é£Ÿç‰©ä¸ªæ•°
 			url = "http://cqcreer.jd-app.com/get_food_num.php?username=" + str1;
 			break;
-		case 8:	   //ĞŞ¸ÄÃÜÂë
+		case 8:	   //ä¿®æ”¹å¯†ç 
 			url = "http://cqcreer.jd-app.com/change_password.php?username=" + str1 + "&password=" + str2 + "&new_pw=" + str3;
 			break;
 		}
@@ -91,14 +91,14 @@ public class NetThread extends Thread {
 			
 				if(op == 1 || op == 2 || op == 3 || op == 4 || op == 5 || op == 8) {
 					BufferedReader bin = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-				    result = bin.readLine();			//result´æµÄÊÇ×´Ì¬ĞÅÏ¢
+				    result = bin.readLine();			//resultå­˜çš„æ˜¯çŠ¶æ€ä¿¡æ¯
 				    
 				    msg.what = 0;
 				    msg.obj = result;
 					mHandler.sendMessage(msg);		
 				} else
 					if(op == 7) {
-						//result´æµÄÊÇ·µ»ØµÄÊ³Îï¸öÊı
+						//resultå­˜çš„æ˜¯è¿”å›çš„é£Ÿç‰©ä¸ªæ•°
 					    result = EntityUtils.toString(response.getEntity(), "GBK");
 					    
 						msg.what = 1;
@@ -107,7 +107,7 @@ public class NetThread extends Thread {
 					} else
 						if(op == 6) {
 							BufferedReader bin = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-						    result = bin.readLine();   //result´æµÄÊÇÉÏ´«Æ¾Ö¤
+						    result = bin.readLine();   //resultå­˜çš„æ˜¯ä¸Šä¼ å‡­è¯
 						    
 						    msg.what = 2;
 						    msg.obj = result;

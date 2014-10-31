@@ -21,7 +21,7 @@
         <LinearLayout
             android:id="@+id/bottomList"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:baselineAligned="false" 
             android:background="#f9f9f9"

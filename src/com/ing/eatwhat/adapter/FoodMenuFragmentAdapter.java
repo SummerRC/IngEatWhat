@@ -26,7 +26,7 @@ public class FoodMenuFragmentAdapter extends BaseAdapter {
 	
 	public FoodMenuFragmentAdapter(Context context) {
 		this.context = context;
-		//´ÓÊı¾İ¿âÖĞÈ¡³öÊı¾İ¼¯nameºÍpicPath´æµ½ÏàÓ¦ArraList
+		//ä»æ•°æ®åº“ä¸­å–å‡ºæ•°æ®é›†nameå’ŒpicPathå­˜åˆ°ç›¸åº”ArraList
 		dbManager = new DBManager(this.context);
 		HashMap<String, ArrayList<String>> map = dbManager.getAllFood();
 		arr_name = map.get("name");
@@ -34,7 +34,7 @@ public class FoodMenuFragmentAdapter extends BaseAdapter {
 		count = arr_name.size();
 	}
 	
-	//»æÖÆÖ®Ç°ÏÈµÃµ½ÌõÄ¿×ÜÊı
+	//ç»˜åˆ¶ä¹‹å‰å…ˆå¾—åˆ°æ¡ç›®æ€»æ•°
 	@Override
 	public int getCount() {
 		if(count == 0){
@@ -44,7 +44,7 @@ public class FoodMenuFragmentAdapter extends BaseAdapter {
 		}
 	}
 	
-	//Ò»ÌõÒ»ÌõµÄ»æÖÆ
+	//ä¸€æ¡ä¸€æ¡çš„ç»˜åˆ¶
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
@@ -61,9 +61,9 @@ public class FoodMenuFragmentAdapter extends BaseAdapter {
 		
 		if(position == getCount()-1){
 			holder.iv.setImageResource(R.drawable.add);
-			holder.tv.setText("Ìí¼Ó");
+			holder.tv.setText("æ·»åŠ ");
 		} else {			
-			holder.tv.setText(arr_name.get(position));		//Êı¾İ¿â»ñµÃ
+			holder.tv.setText(arr_name.get(position));		//æ•°æ®åº“è·å¾—
 			holder.iv.setImageURI(Uri.fromFile(new File(arr_picPath.get(position))));
 		}
 		

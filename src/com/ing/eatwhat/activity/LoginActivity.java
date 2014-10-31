@@ -1,5 +1,6 @@
 package com.ing.eatwhat.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,25 +15,26 @@ import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.thread.NetThread;
 
+@SuppressLint("HandlerLeak")
 public class LoginActivity extends Activity {
  
 	private Handler mHandler;
-	private EditText et_login_name;               //ÊäÈë ÓÃ»§ÃûµÄÎÄ±¾¿ò
-	private EditText et_login_password;           //ÊäÈëÃÜÂëµÄÎÄ±¾¿ò
+	private EditText et_login_name;               //è¾“å…¥ ç”¨æˆ·åçš„æ–‡æœ¬æ¡†
+	private EditText et_login_password;           //è¾“å…¥å¯†ç çš„æ–‡æœ¬æ¡†
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//È«ÆÁÏÔÊ¾  ÎŞ±êÌâÀ¸
+		//å…¨å±æ˜¾ç¤º  æ— æ ‡é¢˜æ 
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_login);
 		
 		et_login_name = (EditText)findViewById(R.id.et_login_name);
 		et_login_password = (EditText)findViewById(R.id.et_login_password);
 		
-		//ÓÃ»§Ãû·µ»Ø²»ÎªnullÊ±£¬ËµÃ÷´æ´¢ÓĞÓÃ»§µÄµÇÂ¼ĞÅÏ¢£¬ÄÇÃ´×Ô¶¯Ìî³ä
+		//ç”¨æˆ·åè¿”å›ä¸ä¸ºnullæ—¶ï¼Œè¯´æ˜å­˜å‚¨æœ‰ç”¨æˆ·çš„ç™»å½•ä¿¡æ¯ï¼Œé‚£ä¹ˆè‡ªåŠ¨å¡«å……
 		if(!AllUse.getSharedPreferencesContent(LoginActivity.this, "userName").equalsIgnoreCase("null")) {
-			//×Ô¶¯Ìî³ä×îºóÒ»´ÎµÇÂ¼µÄĞÅÏ¢£ºÓÃ»§ÃûºÍÃÜÂë
+			//è‡ªåŠ¨å¡«å……æœ€åä¸€æ¬¡ç™»å½•çš„ä¿¡æ¯ï¼šç”¨æˆ·åå’Œå¯†ç 
 			et_login_name.setText(AllUse.getSharedPreferencesContent(LoginActivity.this, "userName"));
 			et_login_password.setText(AllUse.getSharedPreferencesContent(LoginActivity.this, "userPassword"));		
 		}
@@ -41,31 +43,31 @@ public class LoginActivity extends Activity {
 			@Override
 			public void handleMessage(Message msg) {	
 				switch(msg.what) {
-				case 0:                          //µÇÂ¼ÑéÖ¤Ïß³Ì·¢ËÍµÄÏûÏ¢
-					//»ñÈ¡Ïß³Ì·µ»ØµÄ½á¹û
+				case 0:                          //ç™»å½•éªŒè¯çº¿ç¨‹å‘é€çš„æ¶ˆæ¯
+					//è·å–çº¿ç¨‹è¿”å›çš„ç»“æœ
 					String result = msg.obj.toString().trim();	
 					if(result.compareToIgnoreCase("ok") == 0) {						
-						AllUse.info(LoginActivity.this, "µÇÂ½³É¹¦!");						
-						//·µ»ØÖµÎª-1ËµÃ÷food_num²»´æÔÚ£¬¼´ÓÃ»§µÚÒ»´ÎµÇÂ¼,ÄÇÃ´ĞèÒª³õÊ¼»¯µÇÂ¼ĞÅÏ¢(²»ÅĞ¶ÏÒ»ÏÂµÄ»°£¬µÇÂ¼ĞÅÏ¢»á±»¸²¸Çµô)
+						AllUse.info(LoginActivity.this, "ç™»é™†æˆåŠŸ!");						
+						//è¿”å›å€¼ä¸º-1è¯´æ˜food_numä¸å­˜åœ¨ï¼Œå³ç”¨æˆ·ç¬¬ä¸€æ¬¡ç™»å½•,é‚£ä¹ˆéœ€è¦åˆå§‹åŒ–ç™»å½•ä¿¡æ¯(ä¸åˆ¤æ–­ä¸€ä¸‹çš„è¯ï¼Œç™»å½•ä¿¡æ¯ä¼šè¢«è¦†ç›–æ‰)
 						if(AllUse.getFoodNum(LoginActivity.this) == -1) {	
-							//Èç¹ûÊÇµÚÒ»´ÎµÇÂ¼¾Í³õÊ¼»¯ÓÃ»§µÇÂ¼ĞÅÏ¢
+							//å¦‚æœæ˜¯ç¬¬ä¸€æ¬¡ç™»å½•å°±åˆå§‹åŒ–ç”¨æˆ·ç™»å½•ä¿¡æ¯
 							AllUse.saveLoginStatus(LoginActivity.this, User.userName, User.userPassword, true);
 						} else 
 							if(AllUse.getSharedPreferencesContent(LoginActivity.this, "userName").equalsIgnoreCase(User.userName)) {
-								//ËµÃ÷µÇÂ¼µÄÊÇÔ­ÕËºÅ,ÄÇÃ´ĞŞ¸ÄhaveLoginedÎªtrue
+								//è¯´æ˜ç™»å½•çš„æ˜¯åŸè´¦å·,é‚£ä¹ˆä¿®æ”¹haveLoginedä¸ºtrue
 								AllUse.editLoginStatus(LoginActivity.this, true);
 							} else {				
-								//ËµÃ÷µÇÂ¼ÁíÒ»¸öÕËºÅ
+								//è¯´æ˜ç™»å½•å¦ä¸€ä¸ªè´¦å·
 								AllUse.saveLoginStatus(LoginActivity.this, User.userName, User.userPassword, true);
 							}						
-						//ÓĞÁ½ÖÖÇé¿öĞèÒªÏÂÔØÍøÉÏµÄÊ³ÎïÍ¼Æ¬£º£¨1£©app±»Ğ¶ÔØ£» £¨2£©ÔÚÁíÍâµÄÊÖ»úÉÏµÇÂ¼
+						//æœ‰ä¸¤ç§æƒ…å†µéœ€è¦ä¸‹è½½ç½‘ä¸Šçš„é£Ÿç‰©å›¾ç‰‡ï¼šï¼ˆ1ï¼‰appè¢«å¸è½½ï¼› ï¼ˆ2ï¼‰åœ¨å¦å¤–çš„æ‰‹æœºä¸Šç™»å½•
 						if(AllUse.getFoodNum(LoginActivity.this) == 0 && AllUse.real_foodnum > 0) {
-						 	//Ìø×ªµ½¼ÓÔØ½çÃæ
+						 	//è·³è½¬åˆ°åŠ è½½ç•Œé¢
 							Intent intent = new Intent(LoginActivity.this, LoadActivity.class);
 						 	startActivity(intent);
 							finish();
 						} else {
-							//Ìø×ªµ½Ö÷½çÃæ
+							//è·³è½¬åˆ°ä¸»ç•Œé¢
 							Intent intent = new Intent();
 							intent.setClass(LoginActivity.this, MainActivity.class);
 							startActivity(intent);
@@ -73,22 +75,22 @@ public class LoginActivity extends Activity {
 						}	
 					}					
 					if(result.compareToIgnoreCase("wrong") == 0) {
-						AllUse.info(LoginActivity.this, "ÃÜÂë´íÎó£¡");
+						AllUse.info(LoginActivity.this, "å¯†ç é”™è¯¯ï¼");
 						clean();
 						return;
 					} 					
 					if(result.compareToIgnoreCase("notexist") == 0) {
-						AllUse.info(LoginActivity.this, "ÓÃ»§Ãû²»´æÔÚ!");
+						AllUse.info(LoginActivity.this, "ç”¨æˆ·åä¸å­˜åœ¨!");
 						clean();
 						return;
 					} 					
 					break;					
-				case 1:                     //»ñÈ¡ÓÃ»§foodÊıÄ¿Ïß³Ì·¢ËÍµÄÏûÏ¢
+				case 1:                     //è·å–ç”¨æˆ·foodæ•°ç›®çº¿ç¨‹å‘é€çš„æ¶ˆæ¯
 					String str = msg.obj.toString().trim();
 					AllUse.real_foodnum = Integer.valueOf(str).intValue();
 					break;
 				default:
-					AllUse.info(getApplicationContext(), "Î´Öª´íÎó!");
+					AllUse.info(getApplicationContext(), "æœªçŸ¥é”™è¯¯!");
 					clean();
 					return;
 				}				
@@ -96,58 +98,53 @@ public class LoginActivity extends Activity {
 		};
 	}
 
-	//µÇÂ¼°´Å¥µÄ¼àÌıÆ÷
+	//ç™»å½•æŒ‰é’®çš„ç›‘å¬å™¨
 	public void LoginClick(View view) {	
-		Intent intent = new Intent();
-		intent.setClass(LoginActivity.this, LoadActivity.class);
-		startActivity(intent);
-		finish();
-		
-		//ÓÃ»§Ãû¡¢ÃÜÂë²»ÄÜÎª¿Õ
+		//ç”¨æˆ·åã€å¯†ç ä¸èƒ½ä¸ºç©º
 		if(TextUtils.isEmpty(et_login_name.getText().toString().trim()) || TextUtils.isEmpty(et_login_password.getText().toString().trim())) {
-			AllUse.info(LoginActivity.this, "ÓÃ»§ÃûºÍÃÜÂë²»ÄÜÎª¿Õ£¡");
+			AllUse.info(LoginActivity.this, "ç”¨æˆ·åå’Œå¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 			clean();
 			return;
 		}
-		//ÓÃ»§Ãû¡¢ÃÜÂë³¤¶È²»ÄÜ³¬¹ı18¸ö×Ö·û
+		//ç”¨æˆ·åã€å¯†ç é•¿åº¦ä¸èƒ½è¶…è¿‡18ä¸ªå­—ç¬¦
 		if(et_login_name.getText().length() > 18 || et_login_password.getText().length() > 18 ) {
-			AllUse.info(LoginActivity.this, "¾¯¸æ£ºÓÃ»§ÃûºÍÃÜÂë³¤¶È¾ù²»ÄÜ³¬³ö18¸ö×Ö·û£¡");
+			AllUse.info(LoginActivity.this, "è­¦å‘Šï¼šç”¨æˆ·åå’Œå¯†ç é•¿åº¦å‡ä¸èƒ½è¶…å‡º18ä¸ªå­—ç¬¦ï¼");
 			clean();
 			return;
 		}		
-		//ÅĞ¶ÏÊÇ·ñÁªÍø
+		//åˆ¤æ–­æ˜¯å¦è”ç½‘
 		if(!AllUse.isHaveInternet(LoginActivity.this)){
-			AllUse.info(LoginActivity.this, "ÍøÂçÁ¬½Ó´íÎó,²Ù×÷Ê§°Ü");
+			AllUse.info(LoginActivity.this, "ç½‘ç»œè¿æ¥é”™è¯¯,æ“ä½œå¤±è´¥");
 			clean();
 			return;
 		}	
-		//»ñµÃ¸ÃÓÃ»§µÄÊ³Îï ¸öÊı
+		//è·å¾—è¯¥ç”¨æˆ·çš„é£Ÿç‰© ä¸ªæ•°
 		NetThread getNumber_thread = new NetThread(mHandler, et_login_name.getText().toString().trim(), null, null, null, 7);
 		getNumber_thread.start();		
-		//»ñÈ¡Ê³ÎïÊıÄ¿ºóÔÙÈÃÆäËûÏß³ÌÖ´ĞĞ,ÇÒ×î¶àÖ»µÈ´ıÒ»Ãë
+		//è·å–é£Ÿç‰©æ•°ç›®åå†è®©å…¶ä»–çº¿ç¨‹æ‰§è¡Œ,ä¸”æœ€å¤šåªç­‰å¾…ä¸€ç§’
 		try {
 			getNumber_thread.join(1000);
 		} catch (InterruptedException e) {
-			AllUse.info(getApplicationContext(), "ÍøÂç´íÎó£¬ÇëÖØĞÂµÇÂ¼!");
+			AllUse.info(getApplicationContext(), "ç½‘ç»œé”™è¯¯ï¼Œè¯·é‡æ–°ç™»å½•!");
 			clean();
 			return;
 		}		
-		//·ÅÔÚÕâÀïÖ÷ÒªÊÇÎªÁËÑÓ³ÙµÇÂ¼ÑéÖ¤Ïß³ÌÖ´ĞĞµÄÊ±¼ä£¬Îª»ñÈ¡ÓÃ»§Ê³Îï¸öÊıµÄÏß³ÌÕùÈ¡Ê±¼ä
+		//æ”¾åœ¨è¿™é‡Œä¸»è¦æ˜¯ä¸ºäº†å»¶è¿Ÿç™»å½•éªŒè¯çº¿ç¨‹æ‰§è¡Œçš„æ—¶é—´ï¼Œä¸ºè·å–ç”¨æˆ·é£Ÿç‰©ä¸ªæ•°çš„çº¿ç¨‹äº‰å–æ—¶é—´
 		User.userName = et_login_name.getText().toString().trim();
 		User.userPassword = et_login_password.getText().toString().trim();		
-		//µÇÂ¼ÑéÖ¤µÄÏß³Ì
+		//ç™»å½•éªŒè¯çš„çº¿ç¨‹
 		NetThread login_thread = new NetThread(mHandler, User.userName, User.userPassword, null, null, 1);
 		login_thread.start();
 	}
 	
-	//×¢²á°´Å¥µÄ¼àÌıÆ÷£¬½«ÌøÍù×¢²á½çÃæ
+	//æ³¨å†ŒæŒ‰é’®çš„ç›‘å¬å™¨ï¼Œå°†è·³å¾€æ³¨å†Œç•Œé¢
 	public void LogonClick(View view) {
 		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 		startActivity(intent);
 		finish();
 	}
 	
-	//½«EditTextÇå¿Õ£¬²¢³õÊ¼»¯User.userNameºÍ User.userPassword
+	//å°†EditTextæ¸…ç©ºï¼Œå¹¶åˆå§‹åŒ–User.userNameå’Œ User.userPassword
 	private void clean() {
 		et_login_name.setText("");
 		et_login_password.setText("");

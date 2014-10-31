@@ -1,5 +1,5 @@
 /**
- * ¹¦ÄÜ£º¹ÜÀíÊı¾İ¿âµÄÀà.¶ÔÊı¾İµÄ²åÈëÉ¾³ıµÈ²Ù×÷½øĞĞÁË·â×°¡¢²¢Ìá¹©Ò»¸ö¶ÔÍâµÄ½Ó¿Ú.
+ * åŠŸèƒ½ï¼šç®¡ç†æ•°æ®åº“çš„ç±».å¯¹æ•°æ®çš„æ’å…¥åˆ é™¤ç­‰æ“ä½œè¿›è¡Œäº†å°è£…ã€å¹¶æä¾›ä¸€ä¸ªå¯¹å¤–çš„æ¥å£.
  */
 
 package com.ing.eatwhat.database;
@@ -19,16 +19,16 @@ public class DBManager {
 	private SQLiteDatabase db;
 	private Cursor cursor;
 	
-	//¹¹Ôìº¯Êı´´½¨Êı¾İ¿â£¬²¢½¨±í
+	//æ„é€ å‡½æ•°åˆ›å»ºæ•°æ®åº“ï¼Œå¹¶å»ºè¡¨
 	public DBManager(Context ctx) {
 		context = ctx;
-		db = this.getReadableDB();		//³õÊ¼»¯Ò»¸öDBHelperÊ±£¬Èç¹ûÊı¾İ¿â²»´æÔÚ£¬½«´´½¨Ö®
-		close();						//ÊÍ·Å×ÊÔ´
+		db = this.getReadableDB();		//åˆå§‹åŒ–ä¸€ä¸ªDBHelperæ—¶ï¼Œå¦‚æœæ•°æ®åº“ä¸å­˜åœ¨ï¼Œå°†åˆ›å»ºä¹‹
+		close();						//é‡Šæ”¾èµ„æº
 	}
 	
-	/************************************  ¶Ôfood±íµÄ²Ù×÷     **********************************/
-	/************************************  ¶Ôfood±íµÄ²Ù×÷     **********************************/
-	//²åÈë£º²åÈëÒ»ÌõfoodĞÅÏ¢
+	/************************************  å¯¹foodè¡¨çš„æ“ä½œ     **********************************/
+	/************************************  å¯¹foodè¡¨çš„æ“ä½œ     **********************************/
+	//æ’å…¥ï¼šæ’å…¥ä¸€æ¡foodä¿¡æ¯
 	public void insertFood(Food food) {
 		ContentValues cv = new ContentValues();
 		cv.put("id", food.getId());
@@ -39,14 +39,14 @@ public class DBManager {
 		close();
 	}
 
-	//É¾³ı£º¸ù¾İÊ³ÎïÃûÉ¾³ıÒ»Ìõ¼ÇÂ¼
+	//åˆ é™¤ï¼šæ ¹æ®é£Ÿç‰©ååˆ é™¤ä¸€æ¡è®°å½•
 	public void delete(String foodName) {
         db = getWritableDB();
         db.delete("food", "name=?", new String[]{foodName});
         close();
 	}
 	
-	//¸üĞÂ£º¸üĞÂÊ³ÎïÃû
+	//æ›´æ–°ï¼šæ›´æ–°é£Ÿç‰©å
 	public void updateFoodName(String foodName, String newFoodName) {	
 		 db = getWritableDB();
          ContentValues values = new ContentValues();
@@ -55,7 +55,7 @@ public class DBManager {
          close();
 	}
 	
-	//¸üĞÂ£º¸üĞÂÕÕÆ¬µÄ´¢´æµØÖ·
+	//æ›´æ–°ï¼šæ›´æ–°ç…§ç‰‡çš„å‚¨å­˜åœ°å€
 	public void updateFoodPic(String foodName, String newPicPath) {	
 		db = getWritableDB();
         ContentValues values = new ContentValues();
@@ -64,7 +64,7 @@ public class DBManager {
         close();
 	}
 	
-	//²éÑ¯£º·µ»Øfood±íĞÅÏ¢¡¢ÖµÊÇHashMap<String, ArrayList<String>>ÀàĞÍ
+	//æŸ¥è¯¢ï¼šè¿”å›foodè¡¨ä¿¡æ¯ã€å€¼æ˜¯HashMap<String, ArrayList<String>>ç±»å‹
 	public HashMap<String, ArrayList<String>> getAllFood() {
 		db = this.getReadableDB();
 		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();        
@@ -85,7 +85,7 @@ public class DBManager {
 		return map;       
 	}
 	
-	//²éÑ¯£º¸ù¾İÊ³ÎïÃû²éÑ¯¶ÔÓ¦µÄÒ»Ìõ¼ÇÂ¼
+	//æŸ¥è¯¢ï¼šæ ¹æ®é£Ÿç‰©åæŸ¥è¯¢å¯¹åº”çš„ä¸€æ¡è®°å½•
 	public Food query(String foodName) {
 		Food food = new Food();
 		db = this.getReadableDB();
@@ -98,9 +98,9 @@ public class DBManager {
 		return food;      
 	 }
 	
-	/********************************  ¶Ôforum±íµÄ²Ù×÷    *************************************************/
-	/********************************  ¶Ôforum±íµÄ²Ù×÷    *************************************************/
-	//²åÈë£º½«´ÓÍøÉÏÏÂÔØµÄÌû×ÓĞÅÏ¢²åÈëµ½forum±í
+	/********************************  å¯¹forumè¡¨çš„æ“ä½œ    *************************************************/
+	/********************************  å¯¹forumè¡¨çš„æ“ä½œ    *************************************************/
+	//æ’å…¥ï¼šå°†ä»ç½‘ä¸Šä¸‹è½½çš„å¸–å­ä¿¡æ¯æ’å…¥åˆ°forumè¡¨
 	public void insertMessages(HashMap<String, ArrayList<String>> map) {
 		db = this.getWritableDB();
 		ContentValues cv = new ContentValues();
@@ -118,14 +118,14 @@ public class DBManager {
 		close();
 	}
 	
-	//²éÑ¯£º´ÓÊı¾İ¿â·µ»ØÌû×ÓĞÅÏ¢¡¢Ò»´Î×î¶à·µ»ØÊ®Ìõ
+	//æŸ¥è¯¢ï¼šä»æ•°æ®åº“è¿”å›å¸–å­ä¿¡æ¯ã€ä¸€æ¬¡æœ€å¤šè¿”å›åæ¡
 	public HashMap<String, ArrayList<String>> getMessages() {
-		//HashMapÓÃÓÚ´æ´¢Ìû×ÓĞÅÏ¢
+		//HashMapç”¨äºå­˜å‚¨å¸–å­ä¿¡æ¯
 		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		ArrayList<String> date = new ArrayList<String>();
 		ArrayList<String> userName = new ArrayList<String>();	
 		ArrayList<String> content = new ArrayList<String>();   
-		//¶Ôforum±íµÄ²éÑ¯²Ù×÷
+		//å¯¹forumè¡¨çš„æŸ¥è¯¢æ“ä½œ
 		db = this.getReadableDB();
 		Cursor cursor = db.rawQuery("select * from forum", null);
 		int count = 0;
@@ -136,7 +136,7 @@ public class DBManager {
 			count++;
 		}
 		close();
-		//½«²éÑ¯½á¹û´æ´¢µ½mapÖĞ£¬²¢·¢ËÍ³öÈ¥
+		//å°†æŸ¥è¯¢ç»“æœå­˜å‚¨åˆ°mapä¸­ï¼Œå¹¶å‘é€å‡ºå»
 		map.put("date", date);
 		map.put("userName", userName);
 		map.put("content", content);
@@ -144,7 +144,7 @@ public class DBManager {
 		return map;
 	}
 	
-	//·µ»ØÒ»¸öReadableDatabaseÀàĞÍµÄÊı¾İ¿â
+	//è¿”å›ä¸€ä¸ªReadableDatabaseç±»å‹çš„æ•°æ®åº“
 	private SQLiteDatabase getReadableDB() {
 		if(dbHelper == null) {
 			dbHelper = new DBHelper(context, User.userName + "eatwhat.db", null, 1);			
@@ -152,7 +152,7 @@ public class DBManager {
 		return dbHelper.getReadableDatabase();
 	}
 	
-	//·µ»ØÒ»¸öWritableDatabaseÀàĞÍµÄÊı¾İ¿â
+	//è¿”å›ä¸€ä¸ªWritableDatabaseç±»å‹çš„æ•°æ®åº“
 	private SQLiteDatabase getWritableDB() {
 		if(dbHelper == null) {
 			dbHelper = new DBHelper(context, User.userName + "eatwhat.db", null, 1);			
@@ -160,11 +160,11 @@ public class DBManager {
 		return dbHelper.getWritableDatabase();
 	}
 	
-	//¹Ø±ÕÊı¾İ¿â¡¢ÓÎ±êµÈ×ÊÔ´
+	//å…³é—­æ•°æ®åº“ã€æ¸¸æ ‡ç­‰èµ„æº
 	private void close() {
 		if(db != null) {
-			/*db.endTransaction();		//4.0ÒÔºóµÄ°æ±¾ÒòÎª°²È«ĞÔµÄÎÊÌâ£¬±ØĞë½áÊø¼´endTransactionyÒÔºó²ÅÄÜÔÙ´Î·ÃÎÊ±¾µØÊı¾İ¿â
-			*/db.close();				//4.0ÒÔÇ°µÄ°æ±¾ÔÚdb.close()Ö®Ç°»á½áÊøÊµÎï
+			/*db.endTransaction();		//4.0ä»¥åçš„ç‰ˆæœ¬å› ä¸ºå®‰å…¨æ€§çš„é—®é¢˜ï¼Œå¿…é¡»ç»“æŸå³endTransactionyä»¥åæ‰èƒ½å†æ¬¡è®¿é—®æœ¬åœ°æ•°æ®åº“
+			*/db.close();				//4.0ä»¥å‰çš„ç‰ˆæœ¬åœ¨db.close()ä¹‹å‰ä¼šç»“æŸå®ç‰©
 		}
 		if(cursor != null) {
 			cursor.close();

@@ -16,7 +16,7 @@ import android.app.Activity;
 
 public class ViewPagerAdapter extends PagerAdapter{
 
-	//½çÃæÁĞ±í  
+	//ç•Œé¢åˆ—è¡¨  
     private List<View> views;
     private Activity activity;
       
@@ -25,7 +25,7 @@ public class ViewPagerAdapter extends PagerAdapter{
         this.views = views;  
     }  
  
-    //»ñµÃµ±Ç°½çÃæÊı  
+    //è·å¾—å½“å‰ç•Œé¢æ•°  
     @Override  
     public int getCount() {  
         if (views != null)  
@@ -35,25 +35,25 @@ public class ViewPagerAdapter extends PagerAdapter{
         return 0;  
     }  
         
-    //³õÊ¼»¯arg1Î»ÖÃµÄ½çÃæ 
+    //åˆå§‹åŒ–arg1ä½ç½®çš„ç•Œé¢ 
     @Override  
     public Object instantiateItem(View arg0, int arg1) {  
     	((ViewPager) arg0).addView(views.get(arg1), LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);  
         if (arg1 == views.size() - 1) { 
-        	 //×¢²á×îºóÒ»Ò³°´Å¥µÄ¼àÌıÊÂ¼ş
+        	 //æ³¨å†Œæœ€åä¸€é¡µæŒ‰é’®çš„ç›‘å¬äº‹ä»¶
             views.get(arg1).findViewWithTag("1").setOnClickListener(new OnClickListener() {	
     			@Override
     			public void onClick(View v) {
-    				// ÉèÖÃÒÑ¾­Òıµ¼  
+    				// è®¾ç½®å·²ç»å¼•å¯¼  
                     setGuided();  
                     goHome(); 
     			}
     		});
-            //×¢²á×îºóÒ»Ò³µÄ¼àÌıÊÂ¼ş
+            //æ³¨å†Œæœ€åä¸€é¡µçš„ç›‘å¬äº‹ä»¶
         	views.get(arg1).setOnClickListener(new OnClickListener() {  
                 @Override  
                 public void onClick(View v) {  
-                    // ÉèÖÃÒÑ¾­Òıµ¼  
+                    // è®¾ç½®å·²ç»å¼•å¯¼  
                     setGuided();  
                     goHome();   
                 }    
@@ -62,32 +62,32 @@ public class ViewPagerAdapter extends PagerAdapter{
         return views.get(arg1);  
     }  
   
-    //Ïú»Ùarg1Î»ÖÃµÄ½çÃæ  
+    //é”€æ¯arg1ä½ç½®çš„ç•Œé¢  
     @Override  
     public void destroyItem(View arg0, int arg1, Object arg2) {  
         ((ViewPager) arg0).removeView(views.get(arg1));       
     } 
     
-    //ÅĞ¶ÏÊÇ·ñÓÉ¶ÔÏóÉú³É½çÃæ  
+    //åˆ¤æ–­æ˜¯å¦ç”±å¯¹è±¡ç”Ÿæˆç•Œé¢  
     @Override  
     public boolean isViewFromObject(View arg0, Object arg1) {  
         return (arg0 == arg1);  
     }  
   
     private void goHome() {  
-        // Ìø×ª  
+        // è·³è½¬  
         Intent intent = new Intent(activity, LoginActivity.class);  
         activity.startActivity(intent);  
         activity.finish();  
     }  
     
-    //ÉèÖÃÒÑ¾­Òıµ¼¹ıÁË£¬ÏÂ´ÎÆô¶¯²»ÓÃÔÙ´ÎÒıµ¼  
+    //è®¾ç½®å·²ç»å¼•å¯¼è¿‡äº†ï¼Œä¸‹æ¬¡å¯åŠ¨ä¸ç”¨å†æ¬¡å¼•å¯¼  
     private void setGuided() {  
         SharedPreferences preferences = activity.getSharedPreferences("first", Context.MODE_PRIVATE);  
         Editor editor = preferences.edit();  
-        // ´æÈëÊı¾İ  
+        // å­˜å…¥æ•°æ®  
         editor.putBoolean("isFirstIn", false);  
-        // Ìá½»ĞŞ¸Ä  
+        // æäº¤ä¿®æ”¹  
         editor.commit();  
     }  
     

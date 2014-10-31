@@ -26,14 +26,14 @@ import com.ing.eatwhat.thread.GetMessagesNetThread;
 import com.ing.eatwhat.widget.MyListView;
 
 public class ForumFragment extends Fragment {
-	private static Button bt_frag_post;				//·¢ÌûµÄ°´Å¥
-	private static MyListView myListView;			//×Ô¶¨ÒåµÄListView 
-	private static ForumFragmentAdapter adapter;	//ÊÊÅäÆ÷
+	private static Button bt_frag_post;				//å‘å¸–çš„æŒ‰é’®
+	private static MyListView myListView;			//è‡ªå®šä¹‰çš„ListView 
+	private static ForumFragmentAdapter adapter;	//é€‚é…å™¨
 	HashMap<String, ArrayList<String>> map;
 	private Context context;
 	private DBManager dbManager;
-	private final static int REFRESH_DATA_FINISH = 2;	//ÏÂÀ­Ë¢ĞÂ¼ÓÔØÊı¾İÍê³É
-	private final static int LOAD_DATA_FINISH = 3;		//¼ÓÔØÊı¾İÍê³É 
+	private final static int REFRESH_DATA_FINISH = 2;	//ä¸‹æ‹‰åˆ·æ–°åŠ è½½æ•°æ®å®Œæˆ
+	private final static int LOAD_DATA_FINISH = 3;		//åŠ è½½æ•°æ®å®Œæˆ 
 		
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
@@ -42,13 +42,13 @@ public class ForumFragment extends Fragment {
 		public void handleMessage(Message msg) {
 			switch(msg.what) {
 			case 1:
-				//½«Ìû×ÓĞÅÏ¢²åÈëµ½Êı¾İ¿âÖĞ£¬×¢ÒâÓĞ¸ö¿Ó£ºÈôÔÚÏß³ÌÖĞ²Ù×÷Êı¾İ¿â»á³öÏÖËøµÃÎÊÌâ
+				//å°†å¸–å­ä¿¡æ¯æ’å…¥åˆ°æ•°æ®åº“ä¸­ï¼Œæ³¨æ„æœ‰ä¸ªå‘ï¼šè‹¥åœ¨çº¿ç¨‹ä¸­æ“ä½œæ•°æ®åº“ä¼šå‡ºç°é”å¾—é—®é¢˜
 				map = (HashMap<String, ArrayList<String>>) msg.obj;
 				dbManager.insertMessages(map);
 				break;
-			case REFRESH_DATA_FINISH:	//ÏÂÀ­Ë¢ĞÂÍê³É
+			case REFRESH_DATA_FINISH:	//ä¸‹æ‹‰åˆ·æ–°å®Œæˆ
 				if(adapter != null){
-					//×¢Òâ£ºÕâÑùĞ´ÊÇÎªÁË½â¾önotifyDataSetChanged()²»Ë¢ĞÂµÄÎÊÌâ£¬²»Ë¢ĞÂ²úÉúµÄÔ­ÒòÎÊ¶ÈÄï
+					//æ³¨æ„ï¼šè¿™æ ·å†™æ˜¯ä¸ºäº†è§£å†³notifyDataSetChanged()ä¸åˆ·æ–°çš„é—®é¢˜ï¼Œä¸åˆ·æ–°äº§ç”Ÿçš„åŸå› é—®åº¦å¨˜
 					adapter.date.clear();
 					adapter.date.addAll(map.get("date"));
 					adapter.userName.clear();
@@ -59,7 +59,7 @@ public class ForumFragment extends Fragment {
 				}
 				myListView.onRefreshComplete();	
 				break;
-			case LOAD_DATA_FINISH:      //¼ÓÔØ¸ü¶àÍê³É
+			case LOAD_DATA_FINISH:      //åŠ è½½æ›´å¤šå®Œæˆ
 				if(adapter !=null){
 					adapter.map = (HashMap<String, ArrayList<String>>)msg.obj;
 					adapter.notifyDataSetChanged();
@@ -74,7 +74,7 @@ public class ForumFragment extends Fragment {
 		}
 	};
 	
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public ForumFragment(){
 		
 	}
@@ -85,7 +85,7 @@ public class ForumFragment extends Fragment {
 		dbManager = new DBManager(context);
 		
 		if(map == null) {
-			//¿ªÆôÏß³Ì·µ»ØÌû×ÓĞÅÏ¢
+			//å¼€å¯çº¿ç¨‹è¿”å›å¸–å­ä¿¡æ¯
 			GetMessagesNetThread thread = new GetMessagesNetThread(mHandler, "http://cqcreer.jd-app.com/get_note.php?index=0", 1);
 			thread.start();
 		}		
@@ -109,20 +109,20 @@ public class ForumFragment extends Fragment {
 		initView();
 	}
 	
-	//³õÊ¼»¯Ïà¹ØÊı¾İ£¬´ÓÍøÉÏÏÂÔØÌû×ÓĞÅÏ¢²åÈëµ½Êı¾İ¿â£¬ÔÙ´ÓÊı¾İ¿â¶Á³ö´«¸øÊÊÅäÆ÷
+	//åˆå§‹åŒ–ç›¸å…³æ•°æ®ï¼Œä»ç½‘ä¸Šä¸‹è½½å¸–å­ä¿¡æ¯æ’å…¥åˆ°æ•°æ®åº“ï¼Œå†ä»æ•°æ®åº“è¯»å‡ºä¼ ç»™é€‚é…å™¨
 	private void buildData() {		
 		map = dbManager.getMessages();	
 		
 	}
 	
-	//³õÊ¼»¯view
+	//åˆå§‹åŒ–view
 	private void initView() {
-		//ÉèÖÃÊÊÅäÆ÷
+		//è®¾ç½®é€‚é…å™¨
 		myListView = (MyListView)getView().findViewById(R.id.mylistview);
 		adapter = new ForumFragmentAdapter(context, map);
 		myListView.setAdapter(adapter);
 
-		//ÏÂÀ­Ë¢ĞÂµÄ¼àÌıÆ÷
+		//ä¸‹æ‹‰åˆ·æ–°çš„ç›‘å¬å™¨
 		myListView.setOnRefreshListener(new com.ing.eatwhat.widget.MyListView.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -130,7 +130,7 @@ public class ForumFragment extends Fragment {
 			}
 		});
 
-		//¼ÓÔØ¸ü¶àµÄ¼àÌıÆ÷
+		//åŠ è½½æ›´å¤šçš„ç›‘å¬å™¨
 		myListView.setOnLoadListener(new com.ing.eatwhat.widget.MyListView.OnLoadMoreListener() {
 			@Override
 			public void onLoadMore() {
@@ -138,11 +138,11 @@ public class ForumFragment extends Fragment {
 			}
 		});
 
-		//Ñ¡ÖĞÃ¿Ò»Ìõ¼ÇÂ¼µÄ¼àÌıÆ÷
+		//é€‰ä¸­æ¯ä¸€æ¡è®°å½•çš„ç›‘å¬å™¨
 		myListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-				//»ñÈ¡µã»÷µÄitemµÄĞÅÏ¢
+				//è·å–ç‚¹å‡»çš„itemçš„ä¿¡æ¯
 				TextView tv_userName =(TextView) v.findViewById(R.id.tv_userName);
 				TextView tv_date =(TextView) v.findViewById(R.id.tv_date);
 				TextView tv_content =(TextView) v.findViewById(R.id.tv_content);
@@ -160,9 +160,9 @@ public class ForumFragment extends Fragment {
 		});	
 	}
 	
-	//ÏÂÀ­Ë¢ĞÂºÍ¼ÓÔØ¸ü¶à  ¶ÔÊı¾İµÄ´¦Àí
+	//ä¸‹æ‹‰åˆ·æ–°å’ŒåŠ è½½æ›´å¤š  å¯¹æ•°æ®çš„å¤„ç†
 	private void loadData(final int op) {
-		//¿ªÆôÏß³Ì·µ»ØÌû×ÓĞÅÏ¢
+		//å¼€å¯çº¿ç¨‹è¿”å›å¸–å­ä¿¡æ¯
 		GetMessagesNetThread thread = new GetMessagesNetThread(mHandler, "http://cqcreer.jd-app.com/get_note.php?index=0", 1);
 		thread.start();
 		new Thread(){
@@ -170,12 +170,12 @@ public class ForumFragment extends Fragment {
 			public void run() {
 				switch (op) {
 				case 0:
-					//ÏÂÀ­Ë¢ĞÂ2
-					//¶ÔÊı¾İ¿âºÍmap½øĞĞ²Ù×÷
+					//ä¸‹æ‹‰åˆ·æ–°2
+					//å¯¹æ•°æ®åº“å’Œmapè¿›è¡Œæ“ä½œ
 					break;
 				case 1:					
-					//¼ÓÔØ¸ü¶à
-					//¶ÔÊı¾İ¿âºÍmap½øĞĞ²Ù×÷
+					//åŠ è½½æ›´å¤š
+					//å¯¹æ•°æ®åº“å’Œmapè¿›è¡Œæ“ä½œ
 					break;
 				}
 				
@@ -185,8 +185,8 @@ public class ForumFragment extends Fragment {
 					e.printStackTrace();
 				}
 				
-				if(op == 0){	//ÏÂÀ­Ë¢ĞÂ
-					 //Collections.reverse(mList);	/¡¢ÄæĞò
+				if(op == 0){	//ä¸‹æ‹‰åˆ·æ–°
+					 //Collections.reverse(mList);	/ã€é€†åº
 					Message _Msg = mHandler.obtainMessage(REFRESH_DATA_FINISH, map);
 					mHandler.sendMessage(_Msg);
 				}else if(op == 1){

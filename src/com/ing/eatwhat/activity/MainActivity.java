@@ -2,6 +2,7 @@ package com.ing.eatwhat.activity;
 
 import java.util.Date;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.fragment.FoodMenuFragment;
@@ -20,12 +21,12 @@ import android.view.View;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
 	
-	private LinearLayout ll_home;				//Ö÷½çÃæµ×²¿ËÄ¸öiconËùÔÚµÄLinearLayout
+	private LinearLayout ll_home;				//ä¸»ç•Œé¢åº•éƒ¨å››ä¸ªiconæ‰€åœ¨çš„LinearLayout
 	private LinearLayout ll_recommend;
 	private LinearLayout ll_forum;
 	private LinearLayout ll_more;
 	
-	private ImageButton ib_home;				//Ö÷½çÃæµ×²¿ËÄ¸öiconËùÔÚµÄImageButton
+	private ImageButton ib_home;				//ä¸»ç•Œé¢åº•éƒ¨å››ä¸ªiconæ‰€åœ¨çš„ImageButton
 	private ImageButton ib_recommend;
 	private ImageButton ib_forum;
 	private ImageButton ib_more;
@@ -40,8 +41,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//È«ÆÁÏÔÊ¾  ÎŞ±êÌâÀ¸
+		//å…¨å±æ˜¾ç¤º  æ— æ ‡é¢˜æ 
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_main);
 		
@@ -96,7 +96,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		}	
 	}
 
-	//¸ü»»iconµÄ±³¾°Í¼Æ¬
+	//æ›´æ¢iconçš„èƒŒæ™¯å›¾ç‰‡
 	@SuppressWarnings("deprecation")
 	private void setPicture(Drawable home, Drawable information,  Drawable forum, Drawable more) {
 		ib_home.setBackgroundDrawable(home);		
@@ -105,7 +105,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		ib_more.setBackgroundDrawable(more);	
 	}
 	
-	//³õÊ¼»¯Ä¬ÈÏµÄFragment
+	//åˆå§‹åŒ–é»˜è®¤çš„Fragment
 	private void initFragment() {
 		fm = this.getSupportFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
@@ -115,7 +115,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		ft.commit();
 	}
 	
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	private void init() {
 		ll_home = (LinearLayout)this.findViewById(R.id.ll_home);
 		ll_recommend = (LinearLayout)this.findViewById(R.id.ll_recommend);
@@ -154,15 +154,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		dw_more_ = getBaseContext().getResources().getDrawable(R.drawable.more_);
 	}
 	
-	//Á½ÃëÖ®ÄÚµã»÷Á½´ÎºóÍË¼üÍË³ö³ÌĞò
+	//ä¸¤ç§’ä¹‹å†…ç‚¹å‡»ä¸¤æ¬¡åé€€é”®é€€å‡ºç¨‹åº
 	@Override
 	public void onBackPressed() {
 		long currentTime = new Date().getTime();  
 		  
-        // Èç¹ûÊ±¼ä¼ä¸ôĞ¡ÓÚÓÚ2Ãë, ÍË³ö³ÌĞò  
+        // å¦‚æœæ—¶é—´é—´éš”å°äºäº2ç§’, é€€å‡ºç¨‹åº  
         if ((currentTime - preTime) > TWO_SECOND) {  
-            AllUse.info(MainActivity.this, "ÔÙ°´Ò»´ÎºóÍË¼üÍË³ö°¥Ñ½Ñ½");
-            // ¸üĞÂÊ±¼ä  
+            AllUse.info(MainActivity.this, "å†æŒ‰ä¸€æ¬¡åé€€é”®é€€å‡ºå“å‘€å‘€");
+            // æ›´æ–°æ—¶é—´  
             preTime = currentTime;
         } else {
         	MainActivity.this.finish();

@@ -30,10 +30,10 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 	private static GridView gridView;
 	private static FoodMenuFragmentAdapter adapter;
 	private Handler mHandler;
-	private String deleted_foodName;		//±»É¾³ıµÄÊ³ÎïÃû
+	private String deleted_foodName;		//è¢«åˆ é™¤çš„é£Ÿç‰©å
 	private DBManager dbManager;
 	
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public FoodMenuFragment() {
 		
 	}
@@ -53,14 +53,14 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 				if(msg.what == 0) {
 					int result = Integer.valueOf(msg.obj.toString());
 					switch(result) {
-					case 2:		//É¾³ıÍøÉÏÊ³ÎïÃûÊ§°Ü
-						AllUse.info(getActivity().getApplicationContext(), "¾¯¸æ£ºÉ¾³ı²ËÃûÊ§°Ü£¬²»´æÔÚ¸Ã²ËÃû£¡");
+					case 2:		//åˆ é™¤ç½‘ä¸Šé£Ÿç‰©åå¤±è´¥
+						AllUse.info(getActivity().getApplicationContext(), "è­¦å‘Šï¼šåˆ é™¤èœåå¤±è´¥ï¼Œä¸å­˜åœ¨è¯¥èœåï¼");
 						break;
-					case 3:		//É¾³ı³É¹¦£¬É¾³ı±¾µØÊı¾İ¿âµÄ¼ÇÂ¼
+					case 3:		//åˆ é™¤æˆåŠŸï¼Œåˆ é™¤æœ¬åœ°æ•°æ®åº“çš„è®°å½•
 						dbManager = new DBManager(getActivity());
 						dbManager.delete(deleted_foodName);
 						AllUse.editFoodNum(getActivity(), -1);
-						refresh();		//¸üĞÂUI×é¼ş
+						refresh();		//æ›´æ–°UIç»„ä»¶
 						break;
 					default:							
 					}
@@ -75,7 +75,7 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 		refresh();
 	}
 	
-	//µã»÷µÄ¼àÌıÆ÷
+	//ç‚¹å‡»çš„ç›‘å¬å™¨
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		TextView tv_frag_food_menu_item_name = (TextView) view.findViewById(R.id.tv_frag_food_menu_item_name);
@@ -91,24 +91,24 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 		startActivity(intent);	
 	}
 
-	//³¤°´µÄ¼àÌıÆ÷
+	//é•¿æŒ‰çš„ç›‘å¬å™¨
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());				
-		builder.setTitle("ÌáÊ¾")
-			   .setMessage("ÊÇ·ñÉ¾³ı")
+		builder.setTitle("æç¤º")
+			   .setMessage("æ˜¯å¦åˆ é™¤")
 			   .setCancelable(false)         				   
-			   .setNegativeButton("È·¶¨", new DialogInterface.OnClickListener() {
+			   .setNegativeButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   	TextView tv_frag_home_name = (TextView) view.findViewById(R.id.tv_frag_food_menu_item_name);
 						deleted_foodName = (String) tv_frag_home_name.getText();
 						
-						//¿ªÆôÏß³ÌÉ¾³ıÍøÉÏµÄ²Ëµ¥
+						//å¼€å¯çº¿ç¨‹åˆ é™¤ç½‘ä¸Šçš„èœå•
 						NetThread mThread = new NetThread(mHandler, User.userName, deleted_foodName, null, null, 5);
 						mThread.start();
 				   }
 			   })					   
-			   .setPositiveButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			   .setPositiveButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   dialog.dismiss();
 				   }
@@ -117,11 +117,11 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 		return false;
 	}
 	
-	//Ë¢ĞÂ
+	//åˆ·æ–°
 	public void refresh(){
-		//GridViewÓëÊı¾İ½øĞĞÊÊÅä
+		//GridViewä¸æ•°æ®è¿›è¡Œé€‚é…
 		gridView = (GridView)view.findViewById(R.id.grid);
-		//ÖØĞÂÊÊÅä
+		//é‡æ–°é€‚é…
 		adapter = new FoodMenuFragmentAdapter(this.getActivity());
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(this);

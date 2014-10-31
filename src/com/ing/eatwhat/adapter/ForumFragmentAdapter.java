@@ -20,7 +20,7 @@ public class ForumFragmentAdapter extends BaseAdapter{
 	public ArrayList<String> content;
 	private int count;
 	
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public ForumFragmentAdapter(Context context, HashMap<String, ArrayList<String>> map) {
 		this.context = context;	
 		this.map = map;
@@ -30,13 +30,13 @@ public class ForumFragmentAdapter extends BaseAdapter{
 		count = date.size();
 	}
 
-	//¸ù¾İ·µ»ØµÄcount»æÖÆÌõÄ¿Êı
+	//æ ¹æ®è¿”å›çš„countç»˜åˆ¶æ¡ç›®æ•°
 	@Override
 	public int getCount() {
 		return count;
 	}
 	
-	//Ò»ÌõÒ»ÌõµØ»æÖÆ
+	//ä¸€æ¡ä¸€æ¡åœ°ç»˜åˆ¶
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(count == 0) {

@@ -19,31 +19,31 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		//ÒşÈ¥±êÌâÀ¸£¨Ó¦ÓÃ³ÌĞòµÄÃû×Ö£©  
+		//éšå»æ ‡é¢˜æ ï¼ˆåº”ç”¨ç¨‹åºçš„åå­—ï¼‰  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //ÒşÈ¥×´Ì¬À¸²¿·Ö(µç³ØµÈÍ¼±êºÍÒ»ÇĞĞŞÊÎ²¿·Ö)
+        //éšå»çŠ¶æ€æ éƒ¨åˆ†(ç”µæ± ç­‰å›¾æ ‡å’Œä¸€åˆ‡ä¿®é¥°éƒ¨åˆ†)
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
         setContentView(R.layout.activity_splash);
 		
 		Timer timer = new Timer();
-		//TimerTaskÊÇÒ»¸ö³éÏóÀà£¬ĞèÒªÊµÏÖÆä·½·¨
+		//TimerTaskæ˜¯ä¸€ä¸ªæŠ½è±¡ç±»ï¼Œéœ€è¦å®ç°å…¶æ–¹æ³•
 		TimerTask task = new TimerTask() {
 			
 			@Override
 			public void run() {
 				SharedPreferences sp = getSharedPreferences("first", Context.MODE_PRIVATE);
-				// È¡µÃÏàÓ¦µÄÖµ£¬Èç¹ûÃ»ÓĞ¸ÃÖµ£¬ËµÃ÷»¹Î´Ğ´Èë£¬ÓÃtrue×÷ÎªÄ¬ÈÏÖµ
+				// å–å¾—ç›¸åº”çš„å€¼ï¼Œå¦‚æœæ²¡æœ‰è¯¥å€¼ï¼Œè¯´æ˜è¿˜æœªå†™å…¥ï¼Œç”¨trueä½œä¸ºé»˜è®¤å€¼
 				boolean isFirstIn = sp.getBoolean("isFirstIn", true);
 				Log.i("isFirstIn", String.valueOf(isFirstIn));
-				//Èç¹ûµÚÒ»´ÎµÇÂ¼£¬ÔòÌøµ½Òıµ¼½çÃæ
+				//å¦‚æœç¬¬ä¸€æ¬¡ç™»å½•ï¼Œåˆ™è·³åˆ°å¼•å¯¼ç•Œé¢
 				if(isFirstIn) {
 					Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
 					startActivity(intent);
 					finish();
 					return;
 				}
-				//ÅĞ¶ÏSharedPreferenced´æ´¢µÄµÇÂ¼ĞÅÏ¢haveLoginedÊÇ·ñÎªtrue
+				//åˆ¤æ–­SharedPreferencedå­˜å‚¨çš„ç™»å½•ä¿¡æ¯haveLoginedæ˜¯å¦ä¸ºtrue
 				if(AllUse.islogined(SplashActivity.this)) {
 					Intent intent = new Intent();
 					intent.setClass(SplashActivity.this, MainActivity.class);
@@ -58,7 +58,7 @@ public class SplashActivity extends Activity {
 			}
 		};
 		
-		//Á½ÃëÖ®ºóÖ´ĞĞÒ»´Î
+		//ä¸¤ç§’ä¹‹åæ‰§è¡Œä¸€æ¬¡
 		timer.schedule(task, 1000*2); 
 	}
 	

@@ -4,10 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import com.ing.eatwhat.R;
+import com.ing.eatwhat.activity.GetLocationActivity;
 import com.ing.eatwhat.database.DBManager;
 import com.ing.eatwhat.entity.AllUse;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -53,9 +55,9 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	private ImageButton draw_image;
 	public RotateAnimation rotateAnimation;
 	private DBManager dbManager;
-	private SoundPool soundPool;// ÒôÆµ³Ø
+	private SoundPool soundPool;// éŸ³é¢‘æ± 
 	private int hitOkSfx;
-	private Vibrator mVibrator;// ¿ªÆôÕğ¶¯
+	private Vibrator mVibrator;// å¼€å¯éœ‡åŠ¨
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,7 +83,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 				startAnimation();
 				isfirstshark=false;
 				String result[] = random();
-//				String result[] = {"Æ»¹û","Î÷¹Ï","ÌÒ×Ó","Ã¢¹û"};
+//				String result[] = {"è‹¹æœ","è¥¿ç“œ","æ¡ƒå­","èŠ’æœ"};
 				if(result!=null){
 					Bitmap bitmap = null;
 					try {
@@ -101,9 +103,9 @@ public class RecommendFragment extends Fragment implements AnimationListener{
                     draw_image.setMaxHeight(screenHeigh/2);
                     draw_image.setMaxWidth(screenWidth/2);
                     draw_image.setScaleType(ScaleType.CENTER_CROP);
-					draw_name.setText("´ĞÉÕÌã½î");//+result[0]
-					address.setText("µØÖ·£º¹¤ÒµÄÏÂ·44ºÅãÆ¸®Ë½·¿²Ë");
-					gongjiao.setText("¹«½»Â·Ïß£º");
+					draw_name.setText("è‘±çƒ§è¹„ç­‹");//+result[0]
+					address.setText("åœ°å€ï¼šå·¥ä¸šå—è·¯44å·é—«åºœç§æˆ¿èœ");
+					gongjiao.setText("å…¬äº¤è·¯çº¿ï¼š");
 					draw_name.setVisibility(View.VISIBLE);
 					draw_show.setVisibility(View.VISIBLE);
 					dianji.setVisibility(View.VISIBLE);
@@ -124,7 +126,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	public void onAnimationEnd(Animation animation) {
 		// TODO Auto-generated method stub
 		switch (index){
-        case 1://µÚÒ»¸ö¶¯»­
+        case 1://ç¬¬ä¸€ä¸ªåŠ¨ç”»
         {
          index++;
          rotateAnimation =new RotateAnimation(-10, 10, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -133,7 +135,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
  		 wait.startAnimation(rotateAnimation);
         }break;
 
-        case 2://µÚ¶ş¸ö¶¯»­
+        case 2://ç¬¬äºŒä¸ªåŠ¨ç”»
         {
          index++;
          rotateAnimation =new RotateAnimation(10, -10, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -142,7 +144,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
  		 wait.startAnimation(rotateAnimation);  
         }break;
 
-        case 3://µÚÈı¸ö¶¯»­
+        case 3://ç¬¬ä¸‰ä¸ªåŠ¨ç”»
         {
          index++;
          rotateAnimation =new RotateAnimation(-10, 10, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -151,7 +153,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
  		 wait.startAnimation(rotateAnimation);  
         }break;
 
-        case 4://µÚËÄ¸ö¶¯»­
+        case 4://ç¬¬å››ä¸ªåŠ¨ç”»
         {
          index = 0;
          rotateAnimation =new RotateAnimation(10, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -173,7 +175,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (sensorManager != null) {// È¡Ïû¼àÌıÆ÷
+		if (sensorManager != null) {// å–æ¶ˆç›‘å¬å™¨
 			sensorManager.unregisterListener(sensorEventListener);
 		}
 	};
@@ -181,7 +183,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (sensorManager != null) {// È¡Ïû¼àÌıÆ÷
+		if (sensorManager != null) {// å–æ¶ˆç›‘å¬å™¨
 			sensorManager.unregisterListener(sensorEventListener);
 		}
 	};
@@ -189,9 +191,9 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	@Override
 	public void onResume() {
 		super.onResume();
-			if (sensorManager != null) {// ×¢²á¼àÌıÆ÷
+			if (sensorManager != null) {// æ³¨å†Œç›‘å¬å™¨
 				sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-				// µÚÒ»¸ö²ÎÊıÊÇListener£¬µÚ¶ş¸ö²ÎÊıÊÇËùµÃ´«¸ĞÆ÷ÀàĞÍ£¬µÚÈı¸ö²ÎÊıÖµ»ñÈ¡´«¸ĞÆ÷ĞÅÏ¢µÄÆµÂÊ
+				// ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯Listenerï¼Œç¬¬äºŒä¸ªå‚æ•°æ˜¯æ‰€å¾—ä¼ æ„Ÿå™¨ç±»å‹ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°å€¼è·å–ä¼ æ„Ÿå™¨ä¿¡æ¯çš„é¢‘ç‡
 			}
 			isfirstshark=true;
 		
@@ -201,7 +203,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	@Override
 	public void onStop() {
 		super.onStop();
-		if (sensorManager != null) {// È¡Ïû¼àÌıÆ÷
+		if (sensorManager != null) {// å–æ¶ˆç›‘å¬å™¨
 			sensorManager.unregisterListener(sensorEventListener);
 		}
 	};
@@ -231,19 +233,22 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), "ÏÔÊ¾¹«½»Â·Ïß¡£", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), GetLocationActivity.class);
+				startActivity(intent);
+				Toast.makeText(getActivity(), "æ˜¾ç¤ºå…¬äº¤è·¯çº¿ã€‚", Toast.LENGTH_SHORT).show();
+				getActivity().finish();
 			}
 		});
         //panel.setOpen(true, true);
         
-        //shake ¼àÌı
+        //shake ç›‘å¬
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
 //		vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		
-		//»ñÈ¡ÆÁÄ»ĞÅÏ¢
+		//è·å–å±å¹•ä¿¡æ¯
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		screenWidth = dm.widthPixels;
 		screenHeigh = dm.heightPixels;
@@ -260,20 +265,20 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	LayoutParams initpara;
 
 	/**
-	 * ÖØÁ¦¸ĞÓ¦¼àÌı
+	 * é‡åŠ›æ„Ÿåº”ç›‘å¬
 	 */
 	private SensorEventListener sensorEventListener = new SensorEventListener() {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			// ´«¸ĞÆ÷ĞÅÏ¢¸Ä±äÊ±Ö´ĞĞ¸Ã·½·¨
+			// ä¼ æ„Ÿå™¨ä¿¡æ¯æ”¹å˜æ—¶æ‰§è¡Œè¯¥æ–¹æ³•
 			float[] values = event.values;
-			float x = values[0]; // xÖá·½ÏòµÄÖØÁ¦¼ÓËÙ¶È£¬ÏòÓÒÎªÕı
-			float y = values[1]; // yÖá·½ÏòµÄÖØÁ¦¼ÓËÙ¶È£¬ÏòÇ°ÎªÕı
-			float z = values[2]; // zÖá·½ÏòµÄÖØÁ¦¼ÓËÙ¶È£¬ÏòÉÏÎªÕı
-			Log.i(TAG, "xÖá·½ÏòµÄÖØÁ¦¼ÓËÙ¶È" + x +  "£»yÖá·½ÏòµÄÖØÁ¦¼ÓËÙ¶È" + y +  "£»zÖá·½ÏòµÄÖØÁ¦¼ÓËÙ¶È" + z);
-			// Ò»°ãÔÚÕâÈı¸ö·½ÏòµÄÖØÁ¦¼ÓËÙ¶È´ïµ½40¾Í´ïµ½ÁËÒ¡»ÎÊÖ»úµÄ×´Ì¬¡£
-			int medumValue = 14;// ÈıĞÇ i9250ÔõÃ´»Î¶¼²»»á³¬¹ı20£¬Ã»°ì·¨£¬Ö»ÉèÖÃ19ÁË
+			float x = values[0]; // xè½´æ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦ï¼Œå‘å³ä¸ºæ­£
+			float y = values[1]; // yè½´æ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦ï¼Œå‘å‰ä¸ºæ­£
+			float z = values[2]; // zè½´æ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦ï¼Œå‘ä¸Šä¸ºæ­£
+			Log.i(TAG, "xè½´æ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦" + x +  "ï¼›yè½´æ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦" + y +  "ï¼›zè½´æ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦" + z);
+			// ä¸€èˆ¬åœ¨è¿™ä¸‰ä¸ªæ–¹å‘çš„é‡åŠ›åŠ é€Ÿåº¦è¾¾åˆ°40å°±è¾¾åˆ°äº†æ‘‡æ™ƒæ‰‹æœºçš„çŠ¶æ€ã€‚
+			int medumValue = 14;// ä¸‰æ˜Ÿ i9250æ€ä¹ˆæ™ƒéƒ½ä¸ä¼šè¶…è¿‡20ï¼Œæ²¡åŠæ³•ï¼Œåªè®¾ç½®19äº†
 			if (Math.abs(x) > medumValue || Math.abs(y) > medumValue || Math.abs(z) > medumValue) {
 //				if(isfirstshark)
 //				vibrator.vibrate(200);
@@ -291,7 +296,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	};
 
 	/**
-	 * ¶¯×÷Ö´ĞĞ
+	 * åŠ¨ä½œæ‰§è¡Œ
 	 */
 	Handler handler = new Handler() {
 
@@ -304,7 +309,7 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 					startAnimation();
 					isfirstshark=false;
 					String result[] = random();
-//					String result[] = {"Æ»¹û","Î÷¹Ï","ÌÒ×Ó","Ã¢¹û"};
+//					String result[] = {"è‹¹æœ","è¥¿ç“œ","æ¡ƒå­","èŠ’æœ"};
 					if(result!=null){
 						Bitmap bitmap = null;
 						try {
@@ -324,9 +329,9 @@ public class RecommendFragment extends Fragment implements AnimationListener{
                         draw_image.setMaxHeight(screenHeigh/2);
                         draw_image.setMaxWidth(screenWidth/2);
                         draw_image.setScaleType(ScaleType.CENTER_CROP);
-						draw_name.setText("´ĞÉÕÌã½î");//+result[0]
-						address.setText("µØÖ·£º¹¤ÒµÄÏÂ·44ºÅãÆ¸®Ë½·¿²Ë");
-						gongjiao.setText("¹«½»Â·Ïß£º");
+						draw_name.setText("è‘±çƒ§è¹„ç­‹");//+result[0]
+						address.setText("åœ°å€ï¼šå·¥ä¸šå—è·¯44å·é—«åºœç§æˆ¿èœ");
+						gongjiao.setText("å…¬äº¤è·¯çº¿ï¼š");
 						draw_name.setVisibility(View.VISIBLE);
 						draw_show.setVisibility(View.VISIBLE);
 						dianji.setVisibility(View.VISIBLE);
@@ -334,20 +339,20 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 						gongjiao.setVisibility(View.VISIBLE);
 						Log.i("url", result[1]+screenHeigh+" "+screenWidth);
 					}
-//					Toast.makeText(getActivity(), "¼ì²âµ½Ò¡»Î£¬Ö´ĞĞ²Ù×÷£¡"+random(), Toast.LENGTH_SHORT).show();
+//					Toast.makeText(getActivity(), "æ£€æµ‹åˆ°æ‘‡æ™ƒï¼Œæ‰§è¡Œæ“ä½œï¼"+random(), Toast.LENGTH_SHORT).show();
 				}
 				else{
-//					AllUse.info(getActivity(), "Ö»ÄÜÒ¡Ò»´ÎÅ¶£¡");
-					if (sensorManager != null) {// È¡Ïû¼àÌıÆ÷
+//					AllUse.info(getActivity(), "åªèƒ½æ‘‡ä¸€æ¬¡å“¦ï¼");
+					if (sensorManager != null) {// å–æ¶ˆç›‘å¬å™¨
 						sensorManager.unregisterListener(sensorEventListener);
 					}
 				}
-				Log.i(TAG, "¼ì²âµ½Ò¡»Î£¬Ö´ĞĞ²Ù×÷£¡");				
+				Log.i(TAG, "æ£€æµ‹åˆ°æ‘‡æ™ƒï¼Œæ‰§è¡Œæ“ä½œï¼");				
 				break;
 			case ISFIRSTSHAKE:
-				if (sensorManager != null) {// ×¢²á¼àÌıÆ÷
+				if (sensorManager != null) {// æ³¨å†Œç›‘å¬å™¨
 					sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-					// µÚÒ»¸ö²ÎÊıÊÇListener£¬µÚ¶ş¸ö²ÎÊıÊÇËùµÃ´«¸ĞÆ÷ÀàĞÍ£¬µÚÈı¸ö²ÎÊıÖµ»ñÈ¡´«¸ĞÆ÷ĞÅÏ¢µÄÆµÂÊ
+					// ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯Listenerï¼Œç¬¬äºŒä¸ªå‚æ•°æ˜¯æ‰€å¾—ä¼ æ„Ÿå™¨ç±»å‹ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°å€¼è·å–ä¼ æ„Ÿå™¨ä¿¡æ¯çš„é¢‘ç‡
 				}
 				isfirstshark=true;
 				break;
@@ -368,11 +373,11 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 			String[] result={arr_name.get(next),arr_picPath.get(next)};
 			return result;
 		} else if (length == 1) {
-			AllUse.info(getActivity(), "Ö»ÓĞÒ»¸ö²ËëÈÄ¾ÓĞÒ¡Ò»Ò¡µÄÀÖÈ¤Å¶~");
+			AllUse.info(getActivity(), "åªæœ‰ä¸€ä¸ªèœè‚´æœ¨æœ‰æ‘‡ä¸€æ‘‡çš„ä¹è¶£å“¦~");
 			String[] result={arr_name.get(0),arr_picPath.get(0)};
 			return result;
 		} else {
-			AllUse.info(getActivity(), "ÏÈÌí¼ÓÒ»¸ö²ËëÈ°É~");
+			AllUse.info(getActivity(), "å…ˆæ·»åŠ ä¸€ä¸ªèœè‚´å§~");
 		}
 		return null;
 	}
@@ -384,10 +389,10 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 		rotateAnimation.setDuration(200);
 		rotateAnimation.setAnimationListener(this);
 		wait.startAnimation(rotateAnimation);
-		// ËÙÂÊ×îµÍ0.5×î¸ßÎª2£¬1´ú±í Õı³£ËÙ¶È
+		// é€Ÿç‡æœ€ä½0.5æœ€é«˜ä¸º2ï¼Œ1ä»£è¡¨ æ­£å¸¸é€Ÿåº¦
 		soundPool.play(hitOkSfx, 1, 1, 0, 0, 1);
 		mVibrator.vibrate(300);
-		// µÚÒ»¸ö£û£ıÀïÃæÊÇ½Ú×àÊı×é£¬ µÚ¶ş¸ö²ÎÊıÊÇÖØ¸´´ÎÊı£¬-1Îª²»ÖØ¸´£¬·Ç-1¶íÈÕ´ÓpatternµÄÖ¸¶¨ÏÂ±ê¿ªÊ¼ÖØ¸´
+		// ç¬¬ä¸€ä¸ªï½›ï½é‡Œé¢æ˜¯èŠ‚å¥æ•°ç»„ï¼Œ ç¬¬äºŒä¸ªå‚æ•°æ˜¯é‡å¤æ¬¡æ•°ï¼Œ-1ä¸ºä¸é‡å¤ï¼Œé-1ä¿„æ—¥ä»patternçš„æŒ‡å®šä¸‹æ ‡å¼€å§‹é‡å¤
 		mVibrator.vibrate(new long[] { 100, 200, 100, 300 }, -1);
 		Thread updateThread = new Thread(new Runnable() {
 			@Override
@@ -403,11 +408,11 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 				handler.sendMessage(msg);
 			}
 		});
-		updateThread.start(); /* Æô¶¯Ïß³Ì */
+		updateThread.start(); /* å¯åŠ¨çº¿ç¨‹ */
 		
 	}
 	/** 
-	  * ½«Í¼Æ¬ÉèÖÃÎªÔ²½Ç 
+	  * å°†å›¾ç‰‡è®¾ç½®ä¸ºåœ†è§’ 
 	  */ 
 	 public  Bitmap toRoundCorner(Bitmap bitmap, int pixels) { 
 	  Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), 
@@ -427,10 +432,10 @@ public class RecommendFragment extends Fragment implements AnimationListener{
 	  return output; 
 	 }
 	 public void initSound(){
-		// ÕâÀïÖ¸¶¨ÉùÒô³ØµÄ×î´óÒôÆµÁ÷ÊıÄ¿Îª10£¬
-			// ÉùÒôÆ·ÖÊÎª5´ó¼Ò¿ÉÒÔ×Ô ¼º²âÊÔ¸ĞÊÜÏÂĞ§¹û
+		// è¿™é‡ŒæŒ‡å®šå£°éŸ³æ± çš„æœ€å¤§éŸ³é¢‘æµæ•°ç›®ä¸º10ï¼Œ
+			// å£°éŸ³å“è´¨ä¸º5å¤§å®¶å¯ä»¥è‡ª å·±æµ‹è¯•æ„Ÿå—ä¸‹æ•ˆæœ
 			soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
-			// ÔØÈëÒôÆµÁ÷
+			// è½½å…¥éŸ³é¢‘æµ
 			hitOkSfx = soundPool.load(getActivity(), R.raw.shake, 0);
 	 }
 }

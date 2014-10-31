@@ -21,35 +21,35 @@ public class GuideActivity extends Activity implements OnPageChangeListener, OnC
     private ViewPagerAdapter vpAdapter;  
     private List<View> views;
     
-    //Òıµ¼Í¼Æ¬×ÊÔ´
+    //å¼•å¯¼å›¾ç‰‡èµ„æº
     private static final int[] pictures = {R.drawable.guide_pic1, R.drawable.guide_pic2, R.drawable.guide_pic3, R.drawable.guide_pic4}; 
-    // µ×²¿Ğ¡µãÍ¼Æ¬  
+    // åº•éƒ¨å°ç‚¹å›¾ç‰‡  
     private ImageView[] dots;  
-    // ¼ÇÂ¼µ±Ç°Ñ¡ÖĞÎ»ÖÃ  
+    // è®°å½•å½“å‰é€‰ä¸­ä½ç½®  
     private int currentIndex; 
   
     @Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState); 
-        //ÒşÈ¥±êÌâÀ¸£¨Ó¦ÓÃ³ÌĞòµÄÃû×Ö£©  
+        //éšå»æ ‡é¢˜æ ï¼ˆåº”ç”¨ç¨‹åºçš„åå­—ï¼‰  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //ÒşÈ¥×´Ì¬À¸²¿·Ö(µç³ØµÈÍ¼±êºÍÒ»ÇĞĞŞÊÎ²¿·Ö)
+        //éšå»çŠ¶æ€æ éƒ¨åˆ†(ç”µæ± ç­‰å›¾æ ‡å’Œä¸€åˆ‡ä¿®é¥°éƒ¨åˆ†)
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
         setContentView(R.layout.activity_guide);  
         
-        //³õÊ¼»¯Ò³Ãæ
+        //åˆå§‹åŒ–é¡µé¢
         initViews();
         
-        // ³õÊ¼»¯µ×²¿Ğ¡µã  
+        // åˆå§‹åŒ–åº•éƒ¨å°ç‚¹  
         initDots();  
    }  
   
-    //³õÊ¼»¯Ò³Ãæ
+    //åˆå§‹åŒ–é¡µé¢
     private void initViews() {  
     	views = new ArrayList<View>();         
         LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);            
-        //³õÊ¼»¯Òıµ¼Í¼Æ¬ÁĞ±í  
+        //åˆå§‹åŒ–å¼•å¯¼å›¾ç‰‡åˆ—è¡¨  
         for(int i=0; i<pictures.length; i++) {  
         	if(i != (pictures.length-1)) {
 	    		LinearLayout ll = new LinearLayout(this);  
@@ -62,29 +62,29 @@ public class GuideActivity extends Activity implements OnPageChangeListener, OnC
              
         }        
         vp = (ViewPager)findViewById(R.id.viewpager);  
-        //³õÊ¼»¯Adapter  
+        //åˆå§‹åŒ–Adapter  
         vpAdapter = new ViewPagerAdapter(this, views);  
         vp.setAdapter(vpAdapter);  
-        //°ó¶¨»Øµ÷  
+        //ç»‘å®šå›è°ƒ  
         vp.setOnPageChangeListener(this); 
     }
   
-    //³õÊ¼»¯µ×²¿Ğ¡µã
+    //åˆå§‹åŒ–åº•éƒ¨å°ç‚¹
     private void initDots() {  
     	 LinearLayout ll = (LinearLayout) findViewById(R.id.ll);      	  
          dots = new ImageView[pictures.length];     
-         //Ñ­»·È¡µÃĞ¡µãÍ¼Æ¬  
+         //å¾ªç¯å–å¾—å°ç‚¹å›¾ç‰‡  
          for (int i = 0; i < pictures.length; i++) {  
              dots[i] = (ImageView) ll.getChildAt(i);  
-             dots[i].setEnabled(true);				//¶¼ÉèÎª»ÒÉ«  
+             dots[i].setEnabled(true);				//éƒ½è®¾ä¸ºç°è‰²  
              dots[i].setOnClickListener(this);  
-             dots[i].setTag(i);						//ÉèÖÃÎ»ÖÃtag£¬·½±ãÈ¡³öÓëµ±Ç°Î»ÖÃ¶ÔÓ¦  
+             dots[i].setTag(i);						//è®¾ç½®ä½ç½®tagï¼Œæ–¹ä¾¿å–å‡ºä¸å½“å‰ä½ç½®å¯¹åº”  
          }  
-         currentIndex = 0;  						//µ±Ç°Ë÷Òı
-         dots[currentIndex].setEnabled(false);		//ÉèÖÃÎª°×É«£¬¼´Ñ¡ÖĞ×´Ì¬   
+         currentIndex = 0;  						//å½“å‰ç´¢å¼•
+         dots[currentIndex].setEnabled(false);		//è®¾ç½®ä¸ºç™½è‰²ï¼Œå³é€‰ä¸­çŠ¶æ€   
     }  
   
-    //ÉèÖÃµ±Ç°µÄÒıµ¼Ò³
+    //è®¾ç½®å½“å‰çš„å¼•å¯¼é¡µ
     private void setCurrentView(int position)  
     {  
         if (position < 0 || position >= pictures.length) {  
@@ -94,35 +94,35 @@ public class GuideActivity extends Activity implements OnPageChangeListener, OnC
         vp.setCurrentItem(position);  
     }  
     
-    //ÉèÖÃµ±Ç°µÄÒıµ¼Ğ¡µãµÄÑ¡ÖĞ
+    //è®¾ç½®å½“å‰çš„å¼•å¯¼å°ç‚¹çš„é€‰ä¸­
     private void setCurrentDot(int position) {  
         if (position < 0 || position > views.size() - 1  
                 || currentIndex == position) {  
             return;  
         }   
-        dots[position].setEnabled(false);  			//µ±Ç°±»µã»÷µÄÒ³Ãæ¶ÔÓ¦µÄdotÉèÖÃÎªÑ¡ÖĞ×´Ì¬£¬²»¿Éµã»÷
-        dots[currentIndex].setEnabled(true);    	//Ö®Ç°µÄ±»Ñ¡ÖĞÒ³Ãæ¶ÔÓ¦µÄdotÉèÖÃÎªÎ´Ñ¡ÖĞ×´Ì¬£¬¿Éµã»÷
-        currentIndex = position;  					//µ±Ç°Ë÷Òı
+        dots[position].setEnabled(false);  			//å½“å‰è¢«ç‚¹å‡»çš„é¡µé¢å¯¹åº”çš„dotè®¾ç½®ä¸ºé€‰ä¸­çŠ¶æ€ï¼Œä¸å¯ç‚¹å‡»
+        dots[currentIndex].setEnabled(true);    	//ä¹‹å‰çš„è¢«é€‰ä¸­é¡µé¢å¯¹åº”çš„dotè®¾ç½®ä¸ºæœªé€‰ä¸­çŠ¶æ€ï¼Œå¯ç‚¹å‡»
+        currentIndex = position;  					//å½“å‰ç´¢å¼•
     }  
   
-    // µ±»¬¶¯×´Ì¬¸Ä±äÊ±µ÷ÓÃ  
+    // å½“æ»‘åŠ¨çŠ¶æ€æ”¹å˜æ—¶è°ƒç”¨  
     @Override  
     public void onPageScrollStateChanged(int arg0) {  
     }  
   
-    // µ±µ±Ç°Ò³Ãæ±»»¬¶¯Ê±µ÷ÓÃ  
+    // å½“å½“å‰é¡µé¢è¢«æ»‘åŠ¨æ—¶è°ƒç”¨  
     @Override  
     public void onPageScrolled(int arg0, float arg1, int arg2) {  
     }  
   
-    // µ±ĞÂµÄÒ³Ãæ±»Ñ¡ÖĞÊ±µ÷ÓÃ  
+    // å½“æ–°çš„é¡µé¢è¢«é€‰ä¸­æ—¶è°ƒç”¨  
     @Override  
     public void onPageSelected(int arg0) {  
-        // ÉèÖÃµ×²¿Ğ¡µãÑ¡ÖĞ×´Ì¬  
+        // è®¾ç½®åº•éƒ¨å°ç‚¹é€‰ä¸­çŠ¶æ€  
         setCurrentDot(arg0);  
     }
 
-    //¼àÌıÊÂ¼şµÄ»Øµ÷º¯Êı
+    //ç›‘å¬äº‹ä»¶çš„å›è°ƒå‡½æ•°
 	@Override
 	public void onClick(View view) {
 		int position = (Integer)view.getTag();  

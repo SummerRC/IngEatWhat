@@ -20,7 +20,7 @@ public class AllUse {
 		Toast.makeText(ctx, str, Toast.LENGTH_SHORT).show();
 	}
 			
-	//ÅĞ¶ÏÊÇ·ñÁªÍø
+	//åˆ¤æ–­æ˜¯å¦è”ç½‘
 	public static boolean isHaveInternet(Context ctx) {  
         try {      	
             ConnectivityManager manger = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);  
@@ -31,27 +31,28 @@ public class AllUse {
         }
      }  
 	
-	//ÓÃSharedPreference´¢´æÓÃ»§µÇÂ¼ĞÅÏ¢ºÍµÇÂ¼×´Ì¬,Ë½ÓĞÊı¾İ£¬ÆäËûapp²»ÄÜ·ÃÎÊ
+	//ç”¨SharedPreferenceå‚¨å­˜ç”¨æˆ·ç™»å½•ä¿¡æ¯å’Œç™»å½•çŠ¶æ€,ç§æœ‰æ•°æ®ï¼Œå…¶ä»–appä¸èƒ½è®¿é—®
 	public static void saveLoginStatus(Context ctx, String userName, String userPassword, boolean haveLogined) {
 		
 		SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		
-		editor.putString("userName", userName);           
+		editor.putString("userName", userName);    
+		editor.putString("userPassword", userPassword); 
 		editor.putBoolean("haveLogined", haveLogined);
 		editor.putInt("food_num", 0);     
 		
 		editor.commit();
 	}
 	
-	//»ñµÃ´¢´æµÄÓÃ»§µÇÂ¼ĞÅÏ¢,Èç²»´æÔÚ·µ»Ønull
+	//è·å¾—å‚¨å­˜çš„ç”¨æˆ·ç™»å½•ä¿¡æ¯,å¦‚ä¸å­˜åœ¨è¿”å›null
     public static String getSharedPreferencesContent(Context ctx, String content) {
 	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 		
-	    return sp.getString(content, "null");
+	    return sp.getString(content, "");
     }
     
-	//±à¼­ÓÃ»§µÇÂ¼ĞÅÏ¢ºÍµÇÂ¼×´Ì¬
+	//ç¼–è¾‘ç”¨æˆ·ç™»å½•ä¿¡æ¯å’Œç™»å½•çŠ¶æ€
     public static void editLoginStatus(Context ctx, boolean haveLogined) {
     	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 			Editor editor = sp.edit();
@@ -61,13 +62,13 @@ public class AllUse {
 			editor.commit();
     }
     
-    //»ñµÃ´¢´æµÄÓÃ»§foodÊıÄ¿ĞÅÏ¢,Èç¹û²»´æÔÚ·µ»Ø-1
+    //è·å¾—å‚¨å­˜çš„ç”¨æˆ·foodæ•°ç›®ä¿¡æ¯,å¦‚æœä¸å­˜åœ¨è¿”å›-1
     public static int getFoodNum(Context ctx) {
 	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 		return sp.getInt("food_num", -1);
     }
     
-    //ÉèÖÃÓÃ»§µÄfood_num
+    //è®¾ç½®ç”¨æˆ·çš„food_num
     public static void setFood_num(Context ctx, int num) {
     	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 			Editor editor = sp.edit();
@@ -77,7 +78,7 @@ public class AllUse {
 			editor.commit();
     }
        
-    //±à¼­ÓÃ»§foodÊıÄ¿ĞÅÏ¢(É¾³ı²Ëµ¥ÖĞÒ»¸ö²ËÊ±-1£¬Ôö¼ÓÊ±+1£©
+    //ç¼–è¾‘ç”¨æˆ·foodæ•°ç›®ä¿¡æ¯(åˆ é™¤èœå•ä¸­ä¸€ä¸ªèœæ—¶-1ï¼Œå¢åŠ æ—¶+1ï¼‰
     public static void editFoodNum(Context ctx, int op) {
     	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 			Editor editor = sp.edit();
@@ -88,11 +89,11 @@ public class AllUse {
 			editor.commit();
     }
     
-    //ÅĞ¶ÏÊÇ·ñµÇÂ½¹ı,×¢ÒâĞèÒª¸øËû´«µİÉÏÏÂÎÄ
+    //åˆ¤æ–­æ˜¯å¦ç™»é™†è¿‡,æ³¨æ„éœ€è¦ç»™ä»–ä¼ é€’ä¸Šä¸‹æ–‡
     public static boolean islogined(Context ctx) {
 		SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 		
-		//È¡µÃµÇÂ¼×´Ì¬£¬Èô"haveLogined"²»´æÔÚ¾Í·µ»Øfalse
+		//å–å¾—ç™»å½•çŠ¶æ€ï¼Œè‹¥"haveLogined"ä¸å­˜åœ¨å°±è¿”å›false
 		boolean haveLogined = sp.getBoolean("haveLogined", false);
 		if(haveLogined == true) {
 			User.userName = sp.getString("userName", "");
@@ -106,12 +107,12 @@ public class AllUse {
 	}
 	
     
-    //´¢´æÍ¼Æ¬
+    //å‚¨å­˜å›¾ç‰‡
 	public static void savePicture(Bitmap bitmap, String picPath) {
 		 FileOutputStream fos = null;
 		 try {
 		       fos = new FileOutputStream(picPath);
-	           bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);// °ÑÊı¾İĞ´ÈëÎÄ¼ş
+	           bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);// æŠŠæ•°æ®å†™å…¥æ–‡ä»¶
 	        } catch (FileNotFoundException e) {
 	            e.printStackTrace();
 	        } finally {

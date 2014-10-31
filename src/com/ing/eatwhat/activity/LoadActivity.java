@@ -76,7 +76,7 @@ public class LoadActivity extends Activity{
 				
 			}	
 		});
-		updateThread.start(); /* Æô¶¯Ïß³Ì */
+		updateThread.start(); /* å¯åŠ¨çº¿ç¨‹ */
 	
 		}						
 }

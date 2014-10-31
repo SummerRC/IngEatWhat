@@ -1,5 +1,5 @@
 /**
- * ÏÂÔØÓÃ»§²Ëµ¥ÖĞÊ³ÎïÍ¼Æ¬µÄÏß³Ì£¬²¢½«ÓÃ»§µÄ²Ëµ¥ĞÅÏ¢²åÈëµ½±¾µØÊı¾İ¿â
+ * ä¸‹è½½ç”¨æˆ·èœå•ä¸­é£Ÿç‰©å›¾ç‰‡çš„çº¿ç¨‹ï¼Œå¹¶å°†ç”¨æˆ·çš„èœå•ä¿¡æ¯æ’å…¥åˆ°æœ¬åœ°æ•°æ®åº“
  */
 
 package com.ing.eatwhat.thread;
@@ -22,8 +22,8 @@ import android.os.Message;
 
 public class DownlaodPicNetThread extends Thread{
 	private Handler mHandler;
-	private String foodUri;			//ÆßÅ£ÔÆ´æ´¢µÄµØÖ·µÄÒ»²¿·Ö£ºÓÃ»§Ãû+Ê±¼ä
-	private String foodName;		//ÍøÉÏÓÃ»§µÄÊ³ÎïÃû
+	private String foodUri;			//ä¸ƒç‰›äº‘å­˜å‚¨çš„åœ°å€çš„ä¸€éƒ¨åˆ†ï¼šç”¨æˆ·å+æ—¶é—´
+	private String foodName;		//ç½‘ä¸Šç”¨æˆ·çš„é£Ÿç‰©å
 	private Bitmap bitmap;
 	private final static String SDpath = Environment .getExternalStorageDirectory().getAbsolutePath();
 	Context context;
@@ -39,26 +39,26 @@ public class DownlaodPicNetThread extends Thread{
 		try	{
 			URL url = new URL("http://eatwhat.qiniudn.com/" + foodUri);
            
-			//´ò¿ªurl¶ÔÓ¦×ÊÔ´µÄÊäÈëÁ÷
+			//æ‰“å¼€urlå¯¹åº”èµ„æºçš„è¾“å…¥æµ
 			InputStream is = url.openStream();
            
-			//´ÓÊäÈëÁ÷ÖĞ½âÎö³öÍ¼Æ¬
+			//ä»è¾“å…¥æµä¸­è§£æå‡ºå›¾ç‰‡
 			bitmap = BitmapFactory.decodeStream(is);
 			
-			//¹Ø±ÕÁ÷ÊÍ·Å×ÊÔ´
+			//å…³é—­æµé‡Šæ”¾èµ„æº
 			is.close();
 			
-			//´´½¨´æ·ÅÍ¼Æ¬µÄÎÄ¼şÄ¿Â¼
+			//åˆ›å»ºå­˜æ”¾å›¾ç‰‡çš„æ–‡ä»¶ç›®å½•
 			mkdir();
 			
-			//´æ´¢Í¼Æ¬
+			//å­˜å‚¨å›¾ç‰‡
 	        String picPath = SDpath + "/ingZone/eatWhat/" + foodUri + ".jpg"; 
 	        SavePicture(bitmap, picPath);
 	        
-	        //²åÈëÊı¾İ¿â
+	        //æ’å…¥æ•°æ®åº“
 	        insertDB(picPath);
    
-	        //Ïß³ÌÍê³ÉÈÎÎñºó£¬ÏëUIÏß³Ì·¢ËÍÏûÏ¢£¬Í¨ÖªUIÏß³Ì¸üĞÂUI×é¼ş
+	        //çº¿ç¨‹å®Œæˆä»»åŠ¡åï¼Œæƒ³UIçº¿ç¨‹å‘é€æ¶ˆæ¯ï¼Œé€šçŸ¥UIçº¿ç¨‹æ›´æ–°UIç»„ä»¶
 	        Message msg = new Message();
 	        msg.what = 1;
 			mHandler.sendMessage(msg);
@@ -67,21 +67,21 @@ public class DownlaodPicNetThread extends Thread{
 		}
 	}
 	
-	//´´½¨ÎÄ¼ş¼Ğ
+	//åˆ›å»ºæ–‡ä»¶å¤¹
 	public static void mkdir() {
        File file = new File(SDpath +"/ingZone/eatWhat/");
         
-       //ÅĞ¶ÏÎÄ¼şÄ¿Â¼ÊÇ·ñ´æÔÚ£¬²»´æÔÚ¾Í´´½¨
+       //åˆ¤æ–­æ–‡ä»¶ç›®å½•æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨å°±åˆ›å»º
         if(!file.exists()){  
             file.mkdir();  
         }       
 	}
 	
-	//±£´æÍ¼Æ¬µ½Ö¸¶¨Î»ÖÃ
+	//ä¿å­˜å›¾ç‰‡åˆ°æŒ‡å®šä½ç½®
 	public static void SavePicture(Bitmap bitmap, String picPath) {
 		FileOutputStream fos = null;
 		try {
-			//½«Í¼Æ¬Ğ´Èë¶ÔÓ¦ÎÄ¼ş
+			//å°†å›¾ç‰‡å†™å…¥å¯¹åº”æ–‡ä»¶
 			fos = new FileOutputStream(picPath);
 	        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 		} catch (FileNotFoundException e) {
@@ -96,7 +96,7 @@ public class DownlaodPicNetThread extends Thread{
 	    } 	 
 	}	
 
-	//½«foodĞÅÏ¢²åÈëÊı¾İ¿â
+	//å°†foodä¿¡æ¯æ’å…¥æ•°æ®åº“
 	private void insertDB(String picPath) {
 		DBManager dbManager = new DBManager(context);
 		Food food = new Food();

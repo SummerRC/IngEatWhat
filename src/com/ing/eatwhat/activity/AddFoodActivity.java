@@ -37,24 +37,24 @@ import android.app.AlertDialog;
 
 public class AddFoodActivity extends Activity implements View.OnClickListener{
 	
-	private Button bt_addfood_save;				//±£´æ°´Å¥
+	private Button bt_addfood_save;				//ä¿å­˜æŒ‰é’®
 	private Button bt_addfood_back;
-	private static EditText et_foodname;		//ÊäÈë²ËÃûµÄµÄEditText
-	private static ImageView iv_food;			//ÏÔÊ¾Í¼Æ¬µÄImageView
-	private static TextView tv_addfood_hint;	//ÉÏ´«½ø¶ÈÌáÊ¾µÄTextView
+	private static EditText et_foodname;		//è¾“å…¥èœåçš„çš„EditText
+	private static ImageView iv_food;			//æ˜¾ç¤ºå›¾ç‰‡çš„ImageView
+	private static TextView tv_addfood_hint;	//ä¸Šä¼ è¿›åº¦æç¤ºçš„TextView
 	private Intent getIntent;
-	private final int CAMERA = 1;				//»Øµ÷º¯ÊıµÄ±êÊ¾
-	private final int PHOTO_ALBUM = 2;			//»Øµ÷º¯ÊıµÄ±êÊ¾
-	private Uri picUri;  						//¶¨Î»Í¼Æ¬µÄuri
-	private String picPath;						//´ÓÏà»ú»òÕßÏà²á»ñÈ¡µÄÍ¼Æ¬¾­¹ı´¦Àíºó´æ´¢µÄÎ»ÖÃ
-	private String picName; 					//Í¼Æ¬Ãû£¨±¾µØºÍÍøÉÏÃû³ÆÒ»ÖÂ£©
-	private String oldFoodName;					//¾ÉµÄ²ËÃû
-	private String newFoodName;					//ĞÂµÄ²ËÃû
-	private boolean uploadPicture = false;		//ÓÃÒ»¸ö²¼¶ûÖµ¼ÇÂ¼ÉÏ´«×´Ì¬
-	private boolean isChanged = false;			//ÓÃÒ»¸ö²¼¶ûÖµ¼ÇÂ¼ÊÇ·ñ±»ĞŞ¸Ä¹ı
-	private String token;						//ÉÏ´«ÏÂÔØµÄÆ¾Ö¤
+	private final int CAMERA = 1;				//å›è°ƒå‡½æ•°çš„æ ‡ç¤º
+	private final int PHOTO_ALBUM = 2;			//å›è°ƒå‡½æ•°çš„æ ‡ç¤º
+	private Uri picUri;  						//å®šä½å›¾ç‰‡çš„uri
+	private String picPath;						//ä»ç›¸æœºæˆ–è€…ç›¸å†Œè·å–çš„å›¾ç‰‡ç»è¿‡å¤„ç†åå­˜å‚¨çš„ä½ç½®
+	private String picName; 					//å›¾ç‰‡åï¼ˆæœ¬åœ°å’Œç½‘ä¸Šåç§°ä¸€è‡´ï¼‰
+	private String oldFoodName;					//æ—§çš„èœå
+	private String newFoodName;					//æ–°çš„èœå
+	private boolean uploadPicture = false;		//ç”¨ä¸€ä¸ªå¸ƒå°”å€¼è®°å½•ä¸Šä¼ çŠ¶æ€
+	private boolean isChanged = false;			//ç”¨ä¸€ä¸ªå¸ƒå°”å€¼è®°å½•æ˜¯å¦è¢«ä¿®æ”¹è¿‡
+	private String token;						//ä¸Šä¼ ä¸‹è½½çš„å‡­è¯
 	private Handler mHandler;
-	private DBManager dbManager;				//Êı¾İ¿â¹ÜÀíÀàµÄÊµÀı
+	private DBManager dbManager;				//æ•°æ®åº“ç®¡ç†ç±»çš„å®ä¾‹
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		
 		init();			
 		if(getIntent.getStringExtra("op").compareToIgnoreCase("edit") == 0) {
-			bt_addfood_save.setText("ĞŞ¸Ä");
+			bt_addfood_save.setText("ä¿®æ”¹");
 		}	
 	}
 	
@@ -79,12 +79,12 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 					int tag = Integer.valueOf(result).intValue();
 					switch(tag){
 					case 0:
-						AllUse.info(AddFoodActivity.this, "¾¯¸æ£º¼ÓÈë²Ëµ¥Ê§°Ü£¡²ËÃûÖØ¸´£¡");
-						tv_addfood_hint.setText("¼ÓÈëÊ§°Ü£¬²ËÃûÖØ¸´£¡");
+						AllUse.info(AddFoodActivity.this, "è­¦å‘Šï¼šåŠ å…¥èœå•å¤±è´¥ï¼èœåé‡å¤ï¼");
+						tv_addfood_hint.setText("åŠ å…¥å¤±è´¥ï¼Œèœåé‡å¤ï¼");
 						clean();
 						et_foodname.setText(oldFoodName);
 						break;
-					case 1:     //Ìí¼Ó³É¹¦
+					case 1:     //æ·»åŠ æˆåŠŸ
 						Food food = new Food();
 						AllUse.editFoodNum(AddFoodActivity.this, 1);
 						food.setId(AllUse.getFoodNum(getApplicationContext()));	
@@ -95,35 +95,35 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 						AddFoodActivity.this.finish();
 						break;
 					case 4:
-						AllUse.info(AddFoodActivity.this, "¾¯¸æ£ºÔ­²ËÃû²»´æÔÚ£¡");
-						tv_addfood_hint.setText("¼ÓÈëÊ§°Ü£¬Ô­²ËÃû²»´æÔÚ£¡");
+						AllUse.info(AddFoodActivity.this, "è­¦å‘Šï¼šåŸèœåä¸å­˜åœ¨ï¼");
+						tv_addfood_hint.setText("åŠ å…¥å¤±è´¥ï¼ŒåŸèœåä¸å­˜åœ¨ï¼");
 						clean();
 						et_foodname.setText(oldFoodName);
 						break;
-					case 5:     //ĞŞ¸Ä³É¹¦
+					case 5:     //ä¿®æ”¹æˆåŠŸ
 						dbManager.updateFoodPic(getIntent.getStringExtra("foodname"), picPath);				
 						dbManager.updateFoodName(getIntent.getStringExtra("foodname"), newFoodName);
 						clean();
 						AddFoodActivity.this.finish();
 						break;
 					case 6:
-						AllUse.info(AddFoodActivity.this, "¸Ã²ËÃûÒÑ¾­´æÔÚ£¡");
-						tv_addfood_hint.setText("¸Ã²ËÃû´æÔÚ£¡");
+						AllUse.info(AddFoodActivity.this, "è¯¥èœåå·²ç»å­˜åœ¨ï¼");
+						tv_addfood_hint.setText("è¯¥èœåå­˜åœ¨ï¼");
 						clean();
 						et_foodname.setText(oldFoodName);
 						break;
 					}		
 					break;
 				case 1:
-					//´¦ÀíÏÂÔØµÄÍ¼Æ¬
+					//å¤„ç†ä¸‹è½½çš„å›¾ç‰‡
 					break;
 				case 2:
-					//ÉÏ´«Æ¾Ö¤
+					//ä¸Šä¼ å‡­è¯
 					token = msg.obj.toString().trim();
 					break;
 				case 222:
-					AllUse.info(AddFoodActivity.this, "Ê³ÎïÃû²»ÄÜ°üº¬ÌØÊâ×Ö·û£º? | & ¿Õ¸ñµÈ.");
-					tv_addfood_hint.setText("Ê³ÎïÃû²»ÄÜ°üº¬ÌØÊâ×Ö·û£º? | & ¿Õ¸ñµÈ.");
+					AllUse.info(AddFoodActivity.this, "é£Ÿç‰©åä¸èƒ½åŒ…å«ç‰¹æ®Šå­—ç¬¦ï¼š? | & ç©ºæ ¼ç­‰.");
+					tv_addfood_hint.setText("é£Ÿç‰©åä¸èƒ½åŒ…å«ç‰¹æ®Šå­—ç¬¦ï¼š? | & ç©ºæ ¼ç­‰.");
 					clean();
 					break;
 				}
@@ -131,7 +131,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		};
 	}
 	
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	private void init() {
 		dbManager = new DBManager(this);
 		getIntent = this.getIntent();	
@@ -144,77 +144,77 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		bt_addfood_save.setOnClickListener(this);
 		bt_addfood_back.setOnClickListener(this);
 		if(getIntent.getStringExtra("op").compareToIgnoreCase("edit") == 0) {
-			bt_addfood_save.setText("ĞŞ¸Ä");
+			bt_addfood_save.setText("ä¿®æ”¹");
 			oldFoodName = getIntent.getStringExtra("foodname");
 			et_foodname.setText(oldFoodName);			
 			iv_food.setImageURI(Uri.fromFile(new File(dbManager.query(oldFoodName).getPicPath())));
 		}
 	}
 		
-	//±£´æ°´Å¥¡¢È¡Ïû°´Å¥¡¢ImageViewµÄ¼àÌıÆ÷
+	//ä¿å­˜æŒ‰é’®ã€å–æ¶ˆæŒ‰é’®ã€ImageViewçš„ç›‘å¬å™¨
 	@Override
 	public void onClick(View view) {
 		switch(view.getId()) {
-		case R.id.bt_addfood_back:				//·µ»Ø°´Å¥
+		case R.id.bt_addfood_back:				//è¿”å›æŒ‰é’®
 			if(uploadPicture) {
-				AllUse.info(AddFoodActivity.this, "ÕıÔÚÉÏ´«Í¼Æ¬£¬ÇëÉÔºó");
+				AllUse.info(AddFoodActivity.this, "æ­£åœ¨ä¸Šä¼ å›¾ç‰‡ï¼Œè¯·ç¨å");
 				return;
 			}
 			AddFoodActivity.this.finish();
 			break;
-		case R.id.bt_addfood_save:				//±£´æ°´Å¥
+		case R.id.bt_addfood_save:				//ä¿å­˜æŒ‰é’®
 			newFoodName = et_foodname.getText().toString();
 			bt_save();
 			break;
-		case R.id.iv_food:						//µã»÷ImageView
+		case R.id.iv_food:						//ç‚¹å‡»ImageView
 			dialogClick(view);
 			break;
 		}		
 	}	
 		
-	//ÌáÊ¾Ñ¡ÔñÏà»ú»¹ÊÇÏà²á
+	//æç¤ºé€‰æ‹©ç›¸æœºè¿˜æ˜¯ç›¸å†Œ
 	public void dialogClick(View view) {
-		// ¼ì²âsdÊÇ·ñ¿ÉÓÃ
+		// æ£€æµ‹sdæ˜¯å¦å¯ç”¨
 		String SDStatus = Environment.getExternalStorageState();
 	    if (!SDStatus.equals(Environment.MEDIA_MOUNTED)) { 
-	    	AllUse.info(AddFoodActivity.this, "¾¯¸æ£ºSD¿¨²»¿ÉÓÃ£¡");
+	    	AllUse.info(AddFoodActivity.this, "è­¦å‘Šï¼šSDå¡ä¸å¯ç”¨ï¼");
 	        return;
 	    }
-		//Îª»ñµÃÉÏ´«Æ¾Ö¤¿ªÆôÒ»¸öÏß³Ì
+		//ä¸ºè·å¾—ä¸Šä¼ å‡­è¯å¼€å¯ä¸€ä¸ªçº¿ç¨‹
 		NetThread tokenThread = new NetThread(mHandler, null, null, null, null, 6);
 		tokenThread.start();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("ÌáÊ¾")
-			   .setMessage("ÇëÑ¡Ôñ²åÈëÍ¼Æ¬·½Ê½£º")
-			   .setCancelable(true)           //°´·µ»Ø¼ü¿ÉÒÔÍË³ö 
-			   .setNegativeButton("Ïà»ú", new DialogInterface.OnClickListener() {
+		builder.setTitle("æç¤º")
+			   .setMessage("è¯·é€‰æ‹©æ’å…¥å›¾ç‰‡æ–¹å¼ï¼š")
+			   .setCancelable(true)           //æŒ‰è¿”å›é”®å¯ä»¥é€€å‡º 
+			   .setNegativeButton("ç›¸æœº", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   //µ÷ÓÃÏà»ú
+					   //è°ƒç”¨ç›¸æœº
 					   Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			           startActivityForResult(camera, CAMERA);   	//CAMERAÊÇ¸ö±ê¼Ç£¬¸ù¾İ±ê¼ÇÊÇÄÄ¸öIntentÒıÆğµÄ»Øµ÷º¯Êı			           
+			           startActivityForResult(camera, CAMERA);   	//CAMERAæ˜¯ä¸ªæ ‡è®°ï¼Œæ ¹æ®æ ‡è®°æ˜¯å“ªä¸ªIntentå¼•èµ·çš„å›è°ƒå‡½æ•°			           
 				   }
 			   })  
-			   .setNeutralButton("Ïà²á", new DialogInterface.OnClickListener() {
+			   .setNeutralButton("ç›¸å†Œ", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   //µ÷ÓÃÏµÍ³Ïà²á
-					   Intent picture = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//µ÷ÓÃandroidµÄÍ¼¿â 
-					   startActivityForResult(picture, PHOTO_ALBUM); 		//PHOTO_ALBUMÊÇ¸ö±ê¼Ç£¬¸ù¾İ±ê¼ÇÊÇÄÄ¸öIntentÒıÆğµÄ»Øµ÷º¯Êı			
+					   //è°ƒç”¨ç³»ç»Ÿç›¸å†Œ
+					   Intent picture = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//è°ƒç”¨androidçš„å›¾åº“ 
+					   startActivityForResult(picture, PHOTO_ALBUM); 		//PHOTO_ALBUMæ˜¯ä¸ªæ ‡è®°ï¼Œæ ¹æ®æ ‡è®°æ˜¯å“ªä¸ªIntentå¼•èµ·çš„å›è°ƒå‡½æ•°			
 					   }
 			   })	   
-			   .setPositiveButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			   .setPositiveButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   dialog.dismiss();
 				   }
 			   }).show();	 
 	}
 	
-	//»Øµ÷º¯Êı
+	//å›è°ƒå‡½æ•°
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         isChanged = true;
         if(!(resultCode == Activity.RESULT_OK)) {
-	    	AllUse.info(AddFoodActivity.this, "²Ù×÷Ê§°Ü£¬ÇëÖØÊÔ£¡");
+	    	AllUse.info(AddFoodActivity.this, "æ“ä½œå¤±è´¥ï¼Œè¯·é‡è¯•ï¼");
 	    	return;
 	    }
         switch(requestCode) {
@@ -228,14 +228,14 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
         
 	}
 	  
-	//Ïà²áÑ¡ÔñÕÕÆ¬ºó£¬»Øµ÷º¯Êı»áµ÷ÓÃÕâ¸ö·½·¨´¦ÀíÍ¼Æ¬
+	//ç›¸å†Œé€‰æ‹©ç…§ç‰‡åï¼Œå›è°ƒå‡½æ•°ä¼šè°ƒç”¨è¿™ä¸ªæ–¹æ³•å¤„ç†å›¾ç‰‡
 	private void photoAlbum(int resultCode, Intent data) {
 		if(data == null || resultCode != RESULT_OK) {
-	    	AllUse.info(AddFoodActivity.this, "Î´Ñ¡ÖĞÈÎºÎÍ¼Æ¬!");
+	    	AllUse.info(AddFoodActivity.this, "æœªé€‰ä¸­ä»»ä½•å›¾ç‰‡!");
 	    	return;
 	    }
 		
-		picUri = data.getData();		//¶¨Î»µ½Í¼Æ¬Î»ÖÃ£¬ÉÏ´«µÄÊÇÔ­Í¼
+		picUri = data.getData();		//å®šä½åˆ°å›¾ç‰‡ä½ç½®ï¼Œä¸Šä¼ çš„æ˜¯åŸå›¾
 	    String[] filePathColumn = { MediaStore.Images.Media.DATA };
 	    Cursor cursor = getContentResolver().query(picUri, filePathColumn, null, null, null);
 	    cursor.moveToFirst();
@@ -246,34 +246,34 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	   
 		try {
 			BitmapFactory.Options options = new BitmapFactory.Options(); 
-	        options.inSampleSize = 2;//Í¼Æ¬¿í¸ß¶¼ÎªÔ­À´µÄ¶ş·ÖÖ®Ò»£¬¼´Í¼Æ¬ÎªÔ­À´µÄËÄ·ÖÖ®Ò» 
+	        options.inSampleSize = 2;//å›¾ç‰‡å®½é«˜éƒ½ä¸ºåŸæ¥çš„äºŒåˆ†ä¹‹ä¸€ï¼Œå³å›¾ç‰‡ä¸ºåŸæ¥çš„å››åˆ†ä¹‹ä¸€ 
 	        bitmap = BitmapFactory.decodeFile(picturePath, options);   	
 		} catch (Exception e) {
 			e.printStackTrace();
-			AllUse.info(AddFoodActivity.this, "Í¼Æ¬¼ÓÔØÊ§°Ü!");
+			AllUse.info(AddFoodActivity.this, "å›¾ç‰‡åŠ è½½å¤±è´¥!");
 			return;
 		} catch (OutOfMemoryError e) {
-			AllUse.info(AddFoodActivity.this, "Í¼Æ¬Ì«´ó,Çë»»ÕÅÍ¼Æ¬£¡");
+			AllUse.info(AddFoodActivity.this, "å›¾ç‰‡å¤ªå¤§,è¯·æ¢å¼ å›¾ç‰‡ï¼");
 			return;
 		} catch (Error e) {
 			e.printStackTrace();
-			AllUse.info(AddFoodActivity.this, "Í¼Æ¬Ì«´ó£¬ÄÚ´æÒç³ö!");
+			AllUse.info(AddFoodActivity.this, "å›¾ç‰‡å¤ªå¤§ï¼Œå†…å­˜æº¢å‡º!");
 			return;
 	    } 
-		//½«Í¼Æ¬ÏÔÊ¾ÔÚImageView
+		//å°†å›¾ç‰‡æ˜¾ç¤ºåœ¨ImageView
 	    iv_food.setImageBitmap(bitmap);  
-	    //»ñµÃÍ¼Æ¬´æ´¢µÄ¾ø¶ÔÂ·¾¶£¬²¢´æ´¢Í¼Æ¬
+	    //è·å¾—å›¾ç‰‡å­˜å‚¨çš„ç»å¯¹è·¯å¾„ï¼Œå¹¶å­˜å‚¨å›¾ç‰‡
 		picPath = this.getPicPath();
 		AllUse.savePicture(bitmap, picPath);		
 	}
 
-	//Ïà»úÅÄÕÕºó»Øµ÷·½·¨»áµ÷ÓÃÕâ¸öº¯Êı£¬´¦ÀíÅÄÉãµÄÕÕÆ¬
+	//ç›¸æœºæ‹ç…§åå›è°ƒæ–¹æ³•ä¼šè°ƒç”¨è¿™ä¸ªå‡½æ•°ï¼Œå¤„ç†æ‹æ‘„çš„ç…§ç‰‡
 	private void camera(int resultCode, Intent data) {
 		if(data == null || resultCode != RESULT_OK) {
-	    	AllUse.info(AddFoodActivity.this, "²Ù×÷È¡Ïû£¡");
+	    	AllUse.info(AddFoodActivity.this, "æ“ä½œå–æ¶ˆï¼");
 	    	return;
 	    }
-		// »ñÈ¡Ïà»ú·µ»ØµÄÊı¾İ£¬²¢×ª»»ÎªBitmapÍ¼Æ¬¸ñÊ½
+		// è·å–ç›¸æœºè¿”å›çš„æ•°æ®ï¼Œå¹¶è½¬æ¢ä¸ºBitmapå›¾ç‰‡æ ¼å¼
         Bundle bundle = data.getExtras();  
         Bitmap bitmap = (Bitmap) bundle.get("data");		
 		if (data.getData() != null) {  
@@ -281,34 +281,34 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
         } else {  
             picUri  = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));      
         }       
-        //½«Í¼Æ¬¿íºÍ¸ß¾ùÑ¹Ëõ³É100
+        //å°†å›¾ç‰‡å®½å’Œé«˜å‡å‹ç¼©æˆ100
         Bitmap rbitmap = ThumbnailUtils.extractThumbnail(bitmap, 100, 100);  
-        //½«Í¼Æ¬ÏÔÊ¾ÔÚImageView
+        //å°†å›¾ç‰‡æ˜¾ç¤ºåœ¨ImageView
         iv_food.setImageBitmap(rbitmap);
-        //»ñµÃÍ¼Æ¬´æ´¢µÄ¾ø¶ÔÂ·¾¶£¬²¢´æ´¢Í¼Æ¬
+        //è·å¾—å›¾ç‰‡å­˜å‚¨çš„ç»å¯¹è·¯å¾„ï¼Œå¹¶å­˜å‚¨å›¾ç‰‡
         picPath = this.getPicPath();
 		AllUse.savePicture(rbitmap, picPath);	
 	}
 	
-	//ÉÏ´«Í¼Æ¬µ½ÆßÅ£ÔÆ´æ´¢£¬ÓÃµÄÊÇUIÏß³Ì
+	//ä¸Šä¼ å›¾ç‰‡åˆ°ä¸ƒç‰›äº‘å­˜å‚¨ï¼Œç”¨çš„æ˜¯UIçº¿ç¨‹
 	public void uploadPicture() {
         uploadPicture = true;
 		PutExtra extra = new PutExtra();
 		extra.params = new HashMap<String, String>();
-		extra.params.put("x:a", "²âÊÔÖĞÎÄĞÅÏ¢");
-		tv_addfood_hint.setText("ÉÏ´«ÖĞ...");
+		extra.params.put("x:a", "æµ‹è¯•ä¸­æ–‡ä¿¡æ¯");
+		tv_addfood_hint.setText("ä¸Šä¼ ä¸­...");
 		IO.putFile(AddFoodActivity.this, token, picName, Uri.fromFile(new File(picPath)), extra, new JSONObjectRet() {
 			@Override
 			public void onProcess(long current, long total) {
-				tv_addfood_hint.setText("ÒÑÉÏ´«:" + current + "/" + "¹²¼Æ" + total);
+				tv_addfood_hint.setText("å·²ä¸Šä¼ :" + current + "/" + "å…±è®¡" + total);
 			}
 
 			@Override
 			public void onSuccess(JSONObject resp) {
-				tv_addfood_hint.setText("ÉÏ´«³É¹¦£¡");
-				//Èç¹ûÉÏ´«³É¹¦£¨Ö»ÓĞ±£´æ»òÕßĞŞ¸Ä³É¹¦²Å»áÉÏ´«£©£¬ÄÇÃ´²åÈëµ½Êı¾İ¿â»òÕß¸üĞÂÊı¾İ¿â
+				tv_addfood_hint.setText("ä¸Šä¼ æˆåŠŸï¼");
+				//å¦‚æœä¸Šä¼ æˆåŠŸï¼ˆåªæœ‰ä¿å­˜æˆ–è€…ä¿®æ”¹æˆåŠŸæ‰ä¼šä¸Šä¼ ï¼‰ï¼Œé‚£ä¹ˆæ’å…¥åˆ°æ•°æ®åº“æˆ–è€…æ›´æ–°æ•°æ®åº“
 				if(getIntent.getStringExtra("op").compareToIgnoreCase("save") == 0) {
-					//Îª´æ´¢ÓÃ»§µÄ²ËÃû¿ªÆôÒ»¸öÏß³Ì
+					//ä¸ºå­˜å‚¨ç”¨æˆ·çš„èœåå¼€å¯ä¸€ä¸ªçº¿ç¨‹
 					NetThread thread = new NetThread(mHandler, User.userName, newFoodName, null, picName, 3);
 					thread.start();		
 				} else
@@ -320,15 +320,15 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 
 			@Override
 			public void onFailure(Exception ex) {
-				tv_addfood_hint.setText("´íÎó: "+ ex.getMessage());	
+				tv_addfood_hint.setText("é”™è¯¯: "+ ex.getMessage());	
 				String str = "{\"error\"" + ":" + "\"file exists\"}";
 				if(ex.getMessage().toString().equals(str)) {
-					AllUse.info(getApplicationContext(), "²ËÃûÖØ¸´£¬Ìí¼ÓÊ§°Ü£¡");
+					AllUse.info(getApplicationContext(), "èœåé‡å¤ï¼Œæ·»åŠ å¤±è´¥ï¼");
 					clean();
 					et_foodname.setText(oldFoodName);
 					return;
 				} else {			
-					AllUse.info(AddFoodActivity.this, "Ç×£¬ÍøÂç²»¸øÁ¦£¬ÉÔºóÔÙÊÔ°É!" + ex.getMessage());
+					AllUse.info(AddFoodActivity.this, "äº²ï¼Œç½‘ç»œä¸ç»™åŠ›ï¼Œç¨åå†è¯•å§!" + ex.getMessage());
 					clean();
 					AddFoodActivity.this.finish();
 				}
@@ -337,80 +337,80 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		});	
 	}
 	
-	//·µ»ØÒ»¸ö¾ø¶ÔÂ·¾¶¡¢×÷ÎªÕÕÆ¬µÄ´æ´¢Î»ÖÃ
+	//è¿”å›ä¸€ä¸ªç»å¯¹è·¯å¾„ã€ä½œä¸ºç…§ç‰‡çš„å­˜å‚¨ä½ç½®
   	public String getPicPath() {
-  		//»ñµÃSD¿¨µÄÂ·¾¶
+  		//è·å¾—SDå¡çš„è·¯å¾„
         final String SDpath = Environment .getExternalStorageDirectory().getAbsolutePath();
         File file = new File(SDpath +"/ingZone/eatWhat/");
-        // ´´½¨ÎÄ¼ş¼Ğ
+        // åˆ›å»ºæ–‡ä»¶å¤¹
         file.mkdirs(); 
-        //ÕÕÆ¬µÄÃüÃû£¬Ä¿±êÎÄ¼ş¼ĞÏÂ£¬ÒÔÓÃ»§Ãû¼Óµ±Ç°Ê±¼äÊı×Ö´®ÎªÃû³Æ£¬¼´¿ÉÈ·±£Ã¿ÕÅÕÕÆ¬Ãû³Æ²»ÏàÍ¬
+        //ç…§ç‰‡çš„å‘½åï¼Œç›®æ ‡æ–‡ä»¶å¤¹ä¸‹ï¼Œä»¥ç”¨æˆ·ååŠ å½“å‰æ—¶é—´æ•°å­—ä¸²ä¸ºåç§°ï¼Œå³å¯ç¡®ä¿æ¯å¼ ç…§ç‰‡åç§°ä¸ç›¸åŒ
         Date date = new Date();
-        //»ñÈ¡µ±Ç°Ê±¼ä²¢ÇÒ½øÒ»²½×ª»¯Îª×Ö·û´®
+        //è·å–å½“å‰æ—¶é—´å¹¶ä¸”è¿›ä¸€æ­¥è½¬åŒ–ä¸ºå­—ç¬¦ä¸²
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmSS", Locale.getDefault());
         picName = User.userName + format.format(date);
         String path = SDpath + "/ingZone/eatWhat/" + picName + ".jpg";
         return path;
   	}	
   	
-  	//¼àÌıÆ÷¼àÌıµ½ÓÃ»§µã»÷±£´æ°´Å¥£¬Ôòµ÷ÓÃ¸Ãº¯Êı
+  	//ç›‘å¬å™¨ç›‘å¬åˆ°ç”¨æˆ·ç‚¹å‡»ä¿å­˜æŒ‰é’®ï¼Œåˆ™è°ƒç”¨è¯¥å‡½æ•°
   	public void bt_save() {
-  		//ÅĞ¶ÏÊÇ·ñÁªÍø
+  		//åˆ¤æ–­æ˜¯å¦è”ç½‘
 		if(!AllUse.isHaveInternet(this)){
-			AllUse.info(AddFoodActivity.this, "Î´Á¬½ÓÍøÂç,²Ù×÷Ê§°Ü");
+			AllUse.info(AddFoodActivity.this, "æœªè¿æ¥ç½‘ç»œ,æ“ä½œå¤±è´¥");
 			return;
 		}
 		if(uploadPicture) {
-			AllUse.info(AddFoodActivity.this, "ÕıÔÚÉÏ´«Í¼Æ¬£¬ÇëÉÔºó");
+			AllUse.info(AddFoodActivity.this, "æ­£åœ¨ä¸Šä¼ å›¾ç‰‡ï¼Œè¯·ç¨å");
 			return;
 		}	
 		if(newFoodName.equals("")) {
-			AllUse.info(AddFoodActivity.this, "¾¯¸æ£º²ËÃû²»ÄÜÎª¿Õ£¡");
+			AllUse.info(AddFoodActivity.this, "è­¦å‘Šï¼šèœåä¸èƒ½ä¸ºç©ºï¼");
 			return;
 		}	
 		if(newFoodName.length() > 18) {
-			AllUse.info(AddFoodActivity.this, "¾¯¸æ£º²ËÃûÌ«³¤£¡");
+			AllUse.info(AddFoodActivity.this, "è­¦å‘Šï¼šèœåå¤ªé•¿ï¼");
 			return;
 		}						
 		if(getIntent.getStringExtra("op").compareToIgnoreCase("edit") == 0){		
-			//ÅĞ¶ÏÊ³ÎïÃûºÍ¶ÔÓ¦Í¼Æ¬ÓĞÃ»ÓĞ±»ĞŞ¸Ä»ò²åÈë
+			//åˆ¤æ–­é£Ÿç‰©åå’Œå¯¹åº”å›¾ç‰‡æœ‰æ²¡æœ‰è¢«ä¿®æ”¹æˆ–æ’å…¥
 			if(isChanged == false) {
-				AllUse.info(AddFoodActivity.this, "ÇëĞŞ¸ÄÍ¼Æ¬£¡");
+				AllUse.info(AddFoodActivity.this, "è¯·ä¿®æ”¹å›¾ç‰‡ï¼");
 				return;
 			}
 			if(newFoodName.equals(oldFoodName)) {
-				AllUse.info(AddFoodActivity.this, "ÇëĞŞ¸Ä²ËÃû£¡");
+				AllUse.info(AddFoodActivity.this, "è¯·ä¿®æ”¹èœåï¼");
 				return;
 			}
-			//ÉèÖÃimagebutton¡¢edittext¾ù²»¿Éµã»÷
+			//è®¾ç½®imagebuttonã€edittextå‡ä¸å¯ç‚¹å‡»
 			et_foodname.setEnabled(false);
 			iv_food.setClickable(false);
-			//ÉÏ´«ÕÕÆ¬µ½ÆßÅ£ÔÆ´æ´¢
+			//ä¸Šä¼ ç…§ç‰‡åˆ°ä¸ƒç‰›äº‘å­˜å‚¨
 			uploadPicture();	
 		} else 
 			if(getIntent.getStringExtra("op").compareToIgnoreCase("save") == 0) {			
 				if(isChanged == false) {
-					AllUse.info(AddFoodActivity.this, "Çë²åÈëÍ¼Æ¬£¡");
+					AllUse.info(AddFoodActivity.this, "è¯·æ’å…¥å›¾ç‰‡ï¼");
 					return;
 				}			
-				//ÉèÖÃimagebutton¡¢edittext¾ù²»¿Éµã»÷
+				//è®¾ç½®imagebuttonã€edittextå‡ä¸å¯ç‚¹å‡»
 				et_foodname.setEnabled(false);
 				iv_food.setClickable(false);	
-				//ÉÏ´«ÕÕÆ¬µ½ÆßÅ£ÔÆ´æ´¢
+				//ä¸Šä¼ ç…§ç‰‡åˆ°ä¸ƒç‰›äº‘å­˜å‚¨
 				uploadPicture();						
 			} else {
-				AllUse.info(AddFoodActivity.this, "²Ù×÷Ê§°Ü£¡");
+				AllUse.info(AddFoodActivity.this, "æ“ä½œå¤±è´¥ï¼");
 				return;
 			}
 		
   		
   	}
   	
-  	//´¦Àí·µ»Ø¼ü£¬·ÀÖ¹ÓÃ»§ÔÚÉÏ´«¹ı³ÌÖĞ°´·µ»Ø¼ü
+  	//å¤„ç†è¿”å›é”®ï¼Œé˜²æ­¢ç”¨æˆ·åœ¨ä¸Šä¼ è¿‡ç¨‹ä¸­æŒ‰è¿”å›é”®
   	@Override
   	public void onBackPressed() {
   		if(uploadPicture) {       
-  			AllUse.info(AddFoodActivity.this, "ÕıÔÚÉÏ´«Í¼Æ¬£¬ÇëÉÔºó²Ù×÷");
+  			AllUse.info(AddFoodActivity.this, "æ­£åœ¨ä¸Šä¼ å›¾ç‰‡ï¼Œè¯·ç¨åæ“ä½œ");
   			return;
   		}
   		AddFoodActivity.this.finish();

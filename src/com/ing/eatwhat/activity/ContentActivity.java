@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.ing.eatwhat.R;
 
 public class ContentActivity extends Activity {
-	TextView tv_userName;			//ÓÃ»§Ãû
-	TextView tv_date;				//Ê±¼ä
-	TextView tv_content;			//ÄÚÈİ
+	TextView tv_userName;			//ç”¨æˆ·å
+	TextView tv_date;				//æ—¶é—´
+	TextView tv_content;			//å†…å®¹
 	ListView pinglist;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

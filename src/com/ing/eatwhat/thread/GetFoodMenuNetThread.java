@@ -1,5 +1,5 @@
 /**
- * 下载指定用户用户菜单的信息，后台接口返回的是一个json
+ * 涓嬭浇鎸囧畾鐢ㄦ埛鐢ㄦ埛鑿滃崟鐨勪俊鎭紝鍚庡彴鎺ュ彛杩斿洖鐨勬槸涓�涓猨son
  */
 
 package com.ing.eatwhat.thread;
@@ -31,7 +31,7 @@ public class GetFoodMenuNetThread extends Thread{
 		try {
 			HttpResponse response = client.execute(get);
 			if(response.getStatusLine().getStatusCode() == 200) {
-				//注意：此处不转码的话，中文字符会乱码（测试了不少转码方法，这个简单可行）
+				//娉ㄦ剰锛氭澶勪笉杞爜鐨勮瘽锛屼腑鏂囧瓧绗︿細涔辩爜锛堟祴璇曚簡涓嶅皯杞爜鏂规硶锛岃繖涓畝鍗曞彲琛岋級
 				result = EntityUtils.toString(response.getEntity(), "UTF-8");
 			}
 		} catch (ClientProtocolException e) {

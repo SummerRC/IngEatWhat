@@ -4,14 +4,12 @@ import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.thread.NetThread;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -40,16 +38,16 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 				case 0:
 					String result = msg.obj.toString().trim();
 					if(result.equalsIgnoreCase("seccess")) {
-						AllUse.info(ChangePasswordActivity.this, "ĞŞ¸Ä³É¹¦");
+						AllUse.info(ChangePasswordActivity.this, "ä¿®æ”¹æˆåŠŸ");
 						finish();
 					}
 					if(result.equalsIgnoreCase("fail")) {
-						AllUse.info(ChangePasswordActivity.this, "ĞŞ¸ÄÊ§°Ü£¬ÇëÖØÊÔ£¡");
+						AllUse.info(ChangePasswordActivity.this, "ä¿®æ”¹å¤±è´¥ï¼Œè¯·é‡è¯•ï¼");
 						clean();
 						return;
 					}
 					if(result.equalsIgnoreCase("wrong")) {
-						AllUse.info(ChangePasswordActivity.this, "ĞŞ¸ÄÊ§°Ü£¬ÇëÉÔºóÖØÊÔ£¡");
+						AllUse.info(ChangePasswordActivity.this, "ä¿®æ”¹å¤±è´¥ï¼Œè¯·ç¨åé‡è¯•ï¼");
 						finish();
 					}
 					break;
@@ -63,7 +61,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 		init();
 	}
 
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	private void init() {
 		et_oldPassword = (EditText) findViewById(R.id.et_oldPassword);
 		et_newPassword = (EditText) findViewById(R.id.et_newPassword);
@@ -86,34 +84,34 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 		String newPassword = et_newPassword.getText().toString().trim();
 		String newPasswordAgain = et_newPasswordAgain.getText().toString().trim();
 		
-		//ÏŞÖÆÈı¸öÎÄ±¾¿ò²»ÄÜÎª¿Õ
+		//é™åˆ¶ä¸‰ä¸ªæ–‡æœ¬æ¡†ä¸èƒ½ä¸ºç©º
 		if(TextUtils.isEmpty(oldPassword) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(newPasswordAgain)) {
-			AllUse.info(ChangePasswordActivity.this, "ÃÜÂë²»ÄÜÎª¿Õ£¡");
+			AllUse.info(ChangePasswordActivity.this, "å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 			clean();
 			return;
 		}
 			
-		//ÏŞÖÆÃÜÂë³¤¶È²»ÄÜÉÙÓÚÁù¸ö×Ö·û
+		//é™åˆ¶å¯†ç é•¿åº¦ä¸èƒ½å°‘äºå…­ä¸ªå­—ç¬¦
 		if(newPassword.length() < 6 || newPasswordAgain.length() < 6) {
-			AllUse.info(ChangePasswordActivity.this, "¾¯¸æ£ºÃÜÂë³¤¶ÈÉÙÓÚ6¸ö×Ö·û£¡");
+			AllUse.info(ChangePasswordActivity.this, "è­¦å‘Šï¼šå¯†ç é•¿åº¦å°‘äº6ä¸ªå­—ç¬¦ï¼");
 			clean();
 			return;
 		}
-		//ÏŞÖÆÃÜÂë³¤¶È²»ÄÜ¶àÓÚ18¸ö×Ö·û
+		//é™åˆ¶å¯†ç é•¿åº¦ä¸èƒ½å¤šäº18ä¸ªå­—ç¬¦
 		if(newPassword.length() > 18 || newPasswordAgain.length() > 18) {
-			AllUse.info(ChangePasswordActivity.this, "¾¯¸æ£ºÃÜÂë³¤¶È´óÓÚ18¸ö×Ö·û£¡");
+			AllUse.info(ChangePasswordActivity.this, "è­¦å‘Šï¼šå¯†ç é•¿åº¦å¤§äº18ä¸ªå­—ç¬¦ï¼");
 			clean();
 			return;
 		}	
 		
 		if(!newPassword.equals(newPasswordAgain)) {
-			AllUse.info(ChangePasswordActivity.this, "¾¯¸æ£ºÁ½´ÎÃÜÂë²»Ò»ÖÂ£¡");
+			AllUse.info(ChangePasswordActivity.this, "è­¦å‘Šï¼šä¸¤æ¬¡å¯†ç ä¸ä¸€è‡´ï¼");
 			clean();
 			return;
 		}
 		
-		//È¥¾©¶«ÔÆÇæĞŞ¸ÄÃÜÂë
-		NetThread thread = new NetThread(mHandler, User.userName, User.userPassword, newPassword, null, 8);
+		//å»äº¬ä¸œäº‘æ“ä¿®æ”¹å¯†ç 
+		NetThread thread = new NetThread(mHandler, User.userName, oldPassword, newPassword, null, 8);
 		thread.start();
 	}
 

@@ -1,5 +1,5 @@
 /**
- * ¹¦ÄÜ£ºÊı¾İ¿âµÄ´´½¨ºÍ¸üĞÂ
+ * åŠŸèƒ½ï¼šæ•°æ®åº“çš„åˆ›å»ºå’Œæ›´æ–°
  */
 
 package com.ing.eatwhat.database;
@@ -11,27 +11,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper{
 
-	private String food_sql;		//½¨food±íÖ´ĞĞµÄSQLÓï¾ä
-	private String forum_sql;		//½¨forum±íÖ´ĞĞµÄSQLÓï¾ä
+	private String food_sql;		//å»ºfoodè¡¨æ‰§è¡Œçš„SQLè¯­å¥
+	private String forum_sql;		//å»ºforumè¡¨æ‰§è¡Œçš„SQLè¯­å¥
 	
-	//¸Ã¹¹Ôìº¯Êı4¸ö²ÎÊı,Ö±½Óµ÷ÓÃ¸¸ÀàµÄ¹¹Ôìº¯Êı.ÆäÖĞµÚÒ»¸ö²ÎÊıÎªÉÏÏÂÎÄ¡¢µÚ¶ş¸ö²ÎÊıÎªÊı¾İ¿âµÄÃû×Ö¡¢µÚ3¸ö²ÎÊıÊÇÓÃÀ´ÉèÖÃÓÎ±ê¶ÔÏóµÄ£¬ÕâÀïÒ»°ãÉèÖÃÎªnull¡¢²ÎÊıËÄÊÇÊı¾İ¿âµÄ°æ±¾ºÅ.
+	//è¯¥æ„é€ å‡½æ•°4ä¸ªå‚æ•°,ç›´æ¥è°ƒç”¨çˆ¶ç±»çš„æ„é€ å‡½æ•°.å…¶ä¸­ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºä¸Šä¸‹æ–‡ã€ç¬¬äºŒä¸ªå‚æ•°ä¸ºæ•°æ®åº“çš„åå­—ã€ç¬¬3ä¸ªå‚æ•°æ˜¯ç”¨æ¥è®¾ç½®æ¸¸æ ‡å¯¹è±¡çš„ï¼Œè¿™é‡Œä¸€èˆ¬è®¾ç½®ä¸ºnullã€å‚æ•°å››æ˜¯æ•°æ®åº“çš„ç‰ˆæœ¬å·.
 	public DBHelper(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);		
 	}
 
-	//¸Ãº¯ÊıÔÚÊı¾İ¿âµÚÒ»´Î±»½¨Á¢Ê±µ÷ÓÃ
+	//è¯¥å‡½æ•°åœ¨æ•°æ®åº“ç¬¬ä¸€æ¬¡è¢«å»ºç«‹æ—¶è°ƒç”¨
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		//½¨Á¢food±í£¨Èı¸ö×Ö¶Î£ºÊ³ÎïµÄid¡¢Ê³ÎïÃû¡¢Ê³ÎïÍ¼Æ¬´æ´¢ÔÚSD¿¨µÄ¾ø¶ÔÂ·¾¶£©
+		//å»ºç«‹foodè¡¨ï¼ˆä¸‰ä¸ªå­—æ®µï¼šé£Ÿç‰©çš„idã€é£Ÿç‰©åã€é£Ÿç‰©å›¾ç‰‡å­˜å‚¨åœ¨SDå¡çš„ç»å¯¹è·¯å¾„ï¼‰
 		food_sql = "create table if not exists food(id int, name varchar(20), picPath varchar(50))";
 		db.execSQL(food_sql);
 		
-		//½¨Á¢forum±í£¨ËÄ¸ö×Ö¶Î£ºÌû×ÓµÄid¡¢Ìû×Ó·¢±íÊ±¼ä¡¢·¢±íÌû×ÓµÄÓÃ»§Ãû¡¢Ìû×ÓÄÚÈİ£©
+		//å»ºç«‹forumè¡¨ï¼ˆå››ä¸ªå­—æ®µï¼šå¸–å­çš„idã€å¸–å­å‘è¡¨æ—¶é—´ã€å‘è¡¨å¸–å­çš„ç”¨æˆ·åã€å¸–å­å†…å®¹ï¼‰
 		forum_sql = "create table if not exists forum(id int, date date(50), userName varchar(50), content varchar(255))";
 		db.execSQL(forum_sql);
 	}
 
-	//Èç¹ûµ±Ç°´«ÈëµÄÊı¾İ¿â°æ±¾ºÅ±ÈÉÏÒ»´Î´´½¨µÄ°æ±¾¸ß£¬SQLiteOpenHelper¾Í»áµ÷ÓÃonUpgrade()·½·¨
+	//å¦‚æœå½“å‰ä¼ å…¥çš„æ•°æ®åº“ç‰ˆæœ¬å·æ¯”ä¸Šä¸€æ¬¡åˆ›å»ºçš„ç‰ˆæœ¬é«˜ï¼ŒSQLiteOpenHelperå°±ä¼šè°ƒç”¨onUpgrade()æ–¹æ³•
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		//	do  nothing

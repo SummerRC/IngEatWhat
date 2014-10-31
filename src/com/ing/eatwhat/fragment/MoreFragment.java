@@ -20,41 +20,41 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class MoreFragment extends Fragment implements View.OnClickListener{
-	Button bt_frag_more_username;		//ÏÔÊ¾ÓÃ»§ÃûµÄ°´Å¥£¬¿É¼àÌı	
-	Button bt_frag_more_changePassword; //ĞŞ¸ÄÃÜÂë
-	Button bt_frag_more_timeLine;		//Ê±¼äÖá
-	Button bt_frag_more_update;			//Éı¼¶
-	Button bt_frag_more_tips;			//Ğ¡ÌùÊ¿
-	Button bt_frag_more_about;			//¹ØÓÚÎÒÃÇ	
-	Button bt_frag_more_exit;			//ÍË³öµ±Ç°ÕËºÅ
+	Button bt_frag_more_username;		//æ˜¾ç¤ºç”¨æˆ·åçš„æŒ‰é’®ï¼Œå¯ç›‘å¬	
+	Button bt_frag_more_changePassword; //ä¿®æ”¹å¯†ç 
+	Button bt_frag_more_timeLine;		//æ—¶é—´è½´
+	Button bt_frag_more_update;			//å‡çº§
+	Button bt_frag_more_tips;			//å°è´´å£«
+	Button bt_frag_more_about;			//å…³äºæˆ‘ä»¬	
+	Button bt_frag_more_exit;			//é€€å‡ºå½“å‰è´¦å·
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_more, container, false);
 	}
 	
-	//µ±Fragment¶ÔÏó¿É¼ûÊ±µ÷ÓÃ
+	//å½“Fragmentå¯¹è±¡å¯è§æ—¶è°ƒç”¨
 	@Override
 	public void onStart() {
 		super.onStart();
 		
-		bt_frag_more_username = (Button) getView().findViewById(R.id.bt_frag_more_username);				//ÓÃ»§Ãû
-		bt_frag_more_changePassword = (Button) getView().findViewById(R.id.bt_frag_more_changePassword);	//¸ü¸ÄÃÜÂë
-		bt_frag_more_timeLine = (Button) getView().findViewById(R.id.bt_frag_more_timeLine);				//Ê±¼äÖá
-		bt_frag_more_update = (Button) getView().findViewById(R.id.bt_frag_more_update);					//¸üĞÂ
-		bt_frag_more_tips = (Button) getView().findViewById(R.id.bt_frag_more_tips);						//Ğ¡ÌùÊ¿
-		bt_frag_more_about = (Button) getView().findViewById(R.id.bt_frag_more_about);						//¹ØÓÚÎÒÃÇ
-		bt_frag_more_exit =(Button) getView().findViewById(R.id.bt_frag_more_exit);							//ÍË³ö
+		bt_frag_more_username = (Button) getView().findViewById(R.id.bt_frag_more_username);				//ç”¨æˆ·å
+		bt_frag_more_changePassword = (Button) getView().findViewById(R.id.bt_frag_more_changePassword);	//æ›´æ”¹å¯†ç 
+		bt_frag_more_timeLine = (Button) getView().findViewById(R.id.bt_frag_more_timeLine);				//æ—¶é—´è½´
+		bt_frag_more_update = (Button) getView().findViewById(R.id.bt_frag_more_update);					//æ›´æ–°
+		bt_frag_more_tips = (Button) getView().findViewById(R.id.bt_frag_more_tips);						//å°è´´å£«
+		bt_frag_more_about = (Button) getView().findViewById(R.id.bt_frag_more_about);						//å…³äºæˆ‘ä»¬
+		bt_frag_more_exit =(Button) getView().findViewById(R.id.bt_frag_more_exit);							//é€€å‡º
 		
 		bt_frag_more_username.setText(User.userName);
 	}
 	
-	//µ±Fragment¿ÉÓëÓÃ»§½»»¥Ê±µ÷ÓÃ
+	//å½“Fragmentå¯ä¸ç”¨æˆ·äº¤äº’æ—¶è°ƒç”¨
 	@Override
 	public void onResume() {
 		super.onResume();
 
-		//×¢²á¼àÌı
+		//æ³¨å†Œç›‘å¬
 		bt_frag_more_username.setOnClickListener(this);		
 	    bt_frag_more_changePassword.setOnClickListener(this); 
 		bt_frag_more_timeLine.setOnClickListener(this);		
@@ -67,27 +67,27 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 	@Override
 	public void onClick(View view) {
 		switch(view.getId()){
-		case R.id.bt_frag_more_username:		//µã»÷ÓÃ»§ÃûµÄ°´Å¥½øÈë×Ô¼ºµÄ¸öÈË×ÊÁÏ
+		case R.id.bt_frag_more_username:		//ç‚¹å‡»ç”¨æˆ·åçš„æŒ‰é’®è¿›å…¥è‡ªå·±çš„ä¸ªäººèµ„æ–™
 			
 			break;
-		case R.id.bt_frag_more_changePassword:	//ĞŞ¸ÄÃÜÂë
+		case R.id.bt_frag_more_changePassword:	//ä¿®æ”¹å¯†ç 
 			Intent intent_changePassword = new Intent(getActivity(), ChangePasswordActivity.class);
 			startActivity(intent_changePassword);
 			break;
-		case R.id.bt_frag_more_timeLine:		//Ê±¼äÖá
+		case R.id.bt_frag_more_timeLine:		//æ—¶é—´è½´
 			Intent intent_timeLine = new Intent(getActivity(), TimeLineActivity.class);
 			startActivity(intent_timeLine);
 			break;
-		case R.id.bt_frag_more_update:			//¸üĞÂ
+		case R.id.bt_frag_more_update:			//æ›´æ–°
 			update();
 			break;
-		case R.id.bt_frag_more_tips:			//Ğ¡ÌùÊ¿
+		case R.id.bt_frag_more_tips:			//å°è´´å£«
 			break;
-		case R.id.bt_frag_more_about:			//¹ØÓÚÎÒÃÇ
+		case R.id.bt_frag_more_about:			//å…³äºæˆ‘ä»¬
 			Intent intent_about = new Intent(getActivity(), AboutActivity.class);
 			startActivity(intent_about);
 			break;
-		case R.id.bt_frag_more_exit:			//ÍË³ö
+		case R.id.bt_frag_more_exit:			//é€€å‡º
 			exit();
 			break;
 		
@@ -95,18 +95,18 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 		
 	}
 	
-	//µ÷ÓÃ¸Ã·½·¨¸üĞÂÓ¦ÓÃ³ÌĞò
+	//è°ƒç”¨è¯¥æ–¹æ³•æ›´æ–°åº”ç”¨ç¨‹åº
 	private void  update() {
-		AllUse.info(getActivity(), "µ±Ç°°æ±¾ÒÑÊÇ×îĞÂ°æ£¡");
+		AllUse.info(getActivity(), "å½“å‰ç‰ˆæœ¬å·²æ˜¯æœ€æ–°ç‰ˆï¼");
 	}
 	
-	//ÍË³öµ±Ç°ÕËºÅÊ±µ÷ÓÃ
+	//é€€å‡ºå½“å‰è´¦å·æ—¶è°ƒç”¨
 	private void exit() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());				
-		builder.setTitle("ÌáÊ¾")
-			   .setMessage("ÍË³ö½«²»ÔÙÎªÄú±£´æµÇÂ½×´Ì¬")
+		builder.setTitle("æç¤º")
+			   .setMessage("é€€å‡ºå°†ä¸å†ä¸ºæ‚¨ä¿å­˜ç™»é™†çŠ¶æ€")
 			   .setCancelable(false)         				   
-			   .setNegativeButton("È·¶¨", new DialogInterface.OnClickListener() {
+			   .setNegativeButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					    SharedPreferences sp = getActivity().getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 						Editor editor=sp.edit();
@@ -115,7 +115,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 						getActivity().finish();								
 				   }
 			   })					   
-			   .setPositiveButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			   .setPositiveButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   dialog.dismiss();
 				   }

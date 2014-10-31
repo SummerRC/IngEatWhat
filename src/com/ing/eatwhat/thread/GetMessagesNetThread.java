@@ -20,9 +20,9 @@ public class GetMessagesNetThread extends Thread {
 	DefaultHttpClient client;
 	HttpResponse response;
 	Message msg;
-	int i = -1;					//¹¦ÄÜÑ¡Ôñ
+	int i = -1;					//åŠŸèƒ½é€‰æ‹©
 
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	public GetMessagesNetThread(Handler mHandler, String url, int i) {
 		this.mHandler = mHandler;
 		this.url = url;
@@ -32,18 +32,18 @@ public class GetMessagesNetThread extends Thread {
 	
 	public void run() {		
 		client = new DefaultHttpClient();
-	    client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 5000);  //ÉèÖÃÇëÇó³¬Ê±Ê±¼ä
-	    client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 50000);         // ¶ÁÈ¡³¬Ê±
+	    client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 5000);  //è®¾ç½®è¯·æ±‚è¶…æ—¶æ—¶é—´
+	    client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 50000);         // è¯»å–è¶…æ—¶
 	    HttpGet get = new HttpGet(url);	    
 		try {
 			response = client.execute(get);
 			if(response.getStatusLine().getStatusCode() == 200) {
 				switch(i){
 				case 0:
-					addNote();		//·¢Ìû
+					addNote();		//å‘å¸–
 					break;
 				case 1:
-					getNote();		//·µ»ØÌû×Ó
+					getNote();		//è¿”å›å¸–å­
 					break;
 				default:
 					break;
@@ -55,7 +55,7 @@ public class GetMessagesNetThread extends Thread {
 	}
 
 	/**
-	 * ·¢Ìû
+	 * å‘å¸–
 	 */
 	private void addNote() throws Exception {	
 		BufferedReader bin = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -67,7 +67,7 @@ public class GetMessagesNetThread extends Thread {
 	}
 	
 	/**
-	 * ·µ»Ø×î¶àÊ®¸öÌû×Ó
+	 * è¿”å›æœ€å¤šåä¸ªå¸–å­
 	 */
 	private void getNote() throws Exception {	
 		HttpEntity entity = response.getEntity();			
@@ -81,7 +81,7 @@ public class GetMessagesNetThread extends Thread {
 			sBuilder.append(s);
 		}
 	
-		//¹Ø±ÕÁ÷¡¢ÊÍ·Å×ÊÔ´
+		//å…³é—­æµã€é‡Šæ”¾èµ„æº
 		inputStream.close();								
 		inputStreamReader.close();
 		reader.close();		
@@ -89,23 +89,23 @@ public class GetMessagesNetThread extends Thread {
 		String abc = sBuilder.toString();
 		abc = abc.replace("'", "\"");
 
-		//½«×Ö·û´®×ª»»³ÉÒ»¸öJsonÊı×é
+		//å°†å­—ç¬¦ä¸²è½¬æ¢æˆä¸€ä¸ªJsonæ•°ç»„
 		JSONArray jsonArray = new JSONArray(abc); 	
 
-		//´æ´¢·¢ÌûÊ±¼ä¡¢ÓÃ»§ÃûºÍÄÚÈİµÄÊı×é	
+		//å­˜å‚¨å‘å¸–æ—¶é—´ã€ç”¨æˆ·åå’Œå†…å®¹çš„æ•°ç»„	
 		HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		ArrayList<String> date = new ArrayList<String>();		
 		ArrayList<String> userName = new ArrayList<String>();
 		ArrayList<String> content = new ArrayList<String>();
 		
-		//È¡³öJsonÊı×éÀïµÄÏà¹ØĞÅÏ¢
+		//å–å‡ºJsonæ•°ç»„é‡Œçš„ç›¸å…³ä¿¡æ¯
 		for(int i=0; i<10; i++){							
 			date.add(jsonArray.getJSONObject(i).get("date").toString());
 			userName.add(jsonArray.getJSONObject(i).get("username").toString());
 			content.add(jsonArray.getJSONObject(i).get("content").toString().replace('$',' '));
 		}      		 
 		
-		//½«Ìû×ÓĞÅÏ¢·â×°µ½HashMapÖĞ£¬Í¨¹ıMessage·¢ËÍ³öÈ¥
+		//å°†å¸–å­ä¿¡æ¯å°è£…åˆ°HashMapä¸­ï¼Œé€šè¿‡Messageå‘é€å‡ºå»
 		map.put("date", date);
 		map.put("userName", userName);
 		map.put("content", content);
