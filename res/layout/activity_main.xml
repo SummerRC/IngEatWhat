@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+ 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ececec"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/frag_Container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/bottomList"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomList"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:baselineAligned="false" 
+            android:background="#f9f9f9"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_home"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:orientation="vertical" >
+
+                <ImageButton
+                    android:id="@+id/ib_home"
+                    android:contentDescription="@string/app_name"
+                    android:layout_marginTop="5sp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:background="@drawable/home" />
+                  
+                <TextView
+                    android:paddingBottom="1sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#f6f6f6"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="菜单"
+                    android:textSize="13sp"
+                    android:textColor="#000000"    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_yaoyiyao"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:orientation="vertical"  >
+               
+                <ImageButton
+                    android:contentDescription="@string/app_name"
+                    android:layout_marginTop="5sp"
+                    android:id="@+id/ib_yaoyiyao"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" 
+                    android:layout_gravity="center"    
+                    android:scaleType="fitXY"               
+                    android:background="@drawable/recommend_" />
+                
+                <TextView
+                    android:paddingBottom="1sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#f6f6f6"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="摇一摇"
+                    android:textSize="13sp"
+                    android:textColor="#000000"
+                    />
+            </LinearLayout>
+
+            
+
+            <LinearLayout
+                android:id="@+id/ll_more"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:orientation="vertical" >
+
+                   
+                <ImageButton
+                    android:contentDescription="@string/app_name"
+                    android:layout_marginTop="5sp"
+                    android:id="@+id/ib_more"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+      				android:scaleType="fitXY"
+                    android:background="@drawable/more" />
+                  
+                <TextView
+                    android:paddingBottom="1sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#f6f6f6"                  
+                    android:gravity="bottom|center_horizontal"
+                    android:text="更多"
+                    android:textSize="13sp"
+                    android:textColor="#000000"   />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
