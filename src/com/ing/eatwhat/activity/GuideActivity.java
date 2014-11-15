@@ -1,13 +1,18 @@
 package com.ing.eatwhat.activity;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.adapter.ViewPagerAdapter;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +35,7 @@ public class GuideActivity extends Activity implements OnPageChangeListener, OnC
   
     @Override  
     protected void onCreate(Bundle savedInstanceState) {  
+    	Log.e("q", "2");
         super.onCreate(savedInstanceState); 
         //隐去标题栏（应用程序的名字）  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -54,7 +60,10 @@ public class GuideActivity extends Activity implements OnPageChangeListener, OnC
         	if(i != (pictures.length-1)) {
 	    		LinearLayout ll = new LinearLayout(this);  
 	            ll.setLayoutParams(mParams);  
-	            ll.setBackgroundResource(pictures[i]);  
+	            InputStream in = this.getResources().openRawResource(pictures[i]);
+	            Bitmap bitmap = BitmapFactory.decodeStream(in);								//decodeStream解析更省内存
+	            BitmapDrawable drawable = new BitmapDrawable(bitmap);
+	            ll.setBackgroundDrawable(drawable);
 	            views.add(ll);
         	} else {
         		views.add(this.getLayoutInflater().inflate(R.layout.ll, null));

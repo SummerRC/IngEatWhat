@@ -5,6 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="F:/workspace/android/哎呀吃什么/libs/umeng-update-v2.4.2.jar"/>
+	<classpathentry kind="lib" path="F:/workspace/android/哎呀吃什么/libs/umeng-update-v2.4.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

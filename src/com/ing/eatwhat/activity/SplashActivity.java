@@ -1,5 +1,7 @@
 package com.ing.eatwhat.activity;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.ing.eatwhat.R;
@@ -11,11 +13,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 public class SplashActivity extends Activity {
 	
@@ -29,7 +33,17 @@ public class SplashActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
   
-	
+        InputStream in = this.getResources().openRawResource(R.drawable.bg_splash);
+        ImageView iv_splash =  (ImageView) this.findViewById(R.id.iv_splash);
+        iv_splash.setImageBitmap(BitmapFactory.decodeStream(in));
+        if(in != null){
+        	try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
+        
         //实例化一个计时器后台线程
 		Timer timer = new Timer();
 		//TimerTask是一个抽象类，需要实现其方法
