@@ -17,8 +17,8 @@ import android.widget.EditText;
 
 @SuppressLint("HandlerLeak")
 public class RegisterActivity extends Activity{
-	private static Handler mHandler;         //注意：handler如果不申明为静态的话,eclipse警告可能会导致内存泄露，详情:http://www.cppblog.com/tx7do/archive/2013/11/14/204251.aspx
-	private EditText et_logon_username;          //注册用户名的文本框
+	private static Handler mHandler;        		 //注意：handler如果不申明为静态的话,eclipse警告可能会导致内存泄露，详情:http://www.cppblog.com/tx7do/archive/2013/11/14/204251.aspx
+	private EditText et_logon_username;       //注册用户名的文本框
 	private EditText et_logon_password1;     //输入密码的文本框
 	private EditText et_logon_password2;     //确认密码的文本框
 	private static long preTime = 0;
