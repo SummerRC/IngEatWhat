@@ -62,15 +62,9 @@ public class SettingActivity extends Activity implements
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-		if(progress <10) {
-			frag_more_seekbar.setProgress(10);
-			this.progress = 10;
-			tx_sensitive.setText("当前灵敏度为：10");
-		} else {
 			// 拖动的时候
 			this.progress = progress;
 			tx_sensitive.setText("当前灵敏度:" + progress);
-		}	
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
+import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.fragment.FoodMenuFragment;
 import com.ing.eatwhat.fragment.MoreFragment;
 import com.ing.eatwhat.fragment.RecommendFragment;
@@ -65,6 +67,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		
 		init();
 		initFragment();		
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		Log.e("h","a");
+		if(AllUse.getSharedPreferencesContent(this, "userName").equalsIgnoreCase("null")) {
+			User.userName = "游客";
+		} else {
+			User.userName = AllUse.getSharedPreferencesContent(this, "userName");
+		}
 	}
 
 	//初始化
@@ -187,7 +200,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             // 更新时间  
             preTime = currentTime;
         } else {
-        	MainActivity.this.finish();
+        	android.os.Process.killProcess(android.os.Process.myPid()); 		//结束整个应用程序
+        	//System.exit(0);
         }	         
 	}
 	

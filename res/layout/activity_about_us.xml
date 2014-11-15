@@ -9,7 +9,8 @@
         android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal" > 
+        android:orientation="horizontal" >
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
@@ -21,13 +22,20 @@
             android:textColor="#0096ff"
             android:textSize="23sp" />
     </RelativeLayout>
-    <RelativeLayout 
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:layout_weight="1"
-        android:background="@drawable/about_us">
+        android:background="#ececec" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:background="@drawable/about_us_now" />
 
         <Button
             android:id="@+id/bt_back"
@@ -36,10 +44,27 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
-            android:text="返回" 
-            android:textSize="23sp"
+            android:background="@drawable/register"
+            android:text="返回"
             android:textColor="#0096ff"
-            android:background="@drawable/register"/>
+            android:textSize="23sp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="105dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/imageView1"
+            android:background="@drawable/about_us_aiyaya" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/imageView2"
+            android:background="@drawable/aboutus_aboutus" />
 
     </RelativeLayout>
+
 </LinearLayout>

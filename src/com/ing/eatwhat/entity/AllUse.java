@@ -69,7 +69,7 @@ public class AllUse {
     	SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		
-		editor.putString("userName", "游客");    
+		editor.putString("userName", "null");    
 		editor.putString("userPassword", ""); 
 		
 		editor.commit();
