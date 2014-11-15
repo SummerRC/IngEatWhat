@@ -65,12 +65,15 @@ public class LoginActivity extends Activity {
 					}					
 					if(result.compareToIgnoreCase("wrong") == 0) {
 						AllUse.info(LoginActivity.this, "密码错误！");
-						clean();
+						et_login_password.setText("");
+						et_login_password.requestFocus();
 						return;
 					} 					
 					if(result.compareToIgnoreCase("notexist") == 0) {
 						AllUse.info(LoginActivity.this, "用户名不存在!");
-						clean();
+						et_login_name.setText("");
+						et_login_password.setText("");
+						et_login_name.requestFocus();
 						return;
 					} 					
 					break;					
@@ -78,7 +81,6 @@ public class LoginActivity extends Activity {
 					break;
 				default:
 					AllUse.info(getApplicationContext(), "未知错误!");
-					clean();
 					return;
 				}				
 			}
@@ -92,21 +94,31 @@ public class LoginActivity extends Activity {
 			return;
 		}
 		//用户名、密码不能为空
-		if(TextUtils.isEmpty(et_login_name.getText().toString().trim()) || TextUtils.isEmpty(et_login_password.getText().toString().trim())) {
-			AllUse.info(LoginActivity.this, "用户名和密码不能为空！");
-			clean();
+		if(TextUtils.isEmpty(et_login_name.getText().toString().trim())) { 
+			AllUse.info(LoginActivity.this, "用户名不能为空！");
+			et_login_password.setText("");
+			et_login_name.requestFocus();
+			return;
+		}
+		if(TextUtils.isEmpty(et_login_password.getText().toString().trim())) {
+			AllUse.info(LoginActivity.this, "密码不能为空！");
+			et_login_password.requestFocus();
 			return;
 		}
 		//用户名、密码长度不能超过18个字符
-		if(et_login_name.getText().length() > 18 || et_login_password.getText().length() > 18 ) {
-			AllUse.info(LoginActivity.this, "警告：用户名和密码长度均不能超出18个字符！");
-			clean();
+		if(et_login_name.getText().length() > 18) {
+			AllUse.info(LoginActivity.this, "警告：用户名不能超出18个字符！");
+			et_login_name.requestFocus();
 			return;
 		}		
+		if(et_login_password.getText().length() > 18 ) {
+			AllUse.info(LoginActivity.this, "警告：密码不能超出18个字符！");
+			et_login_password.requestFocus();
+			return;
+		}
 		//判断是否联网
 		if(!AllUse.isHaveInternet(LoginActivity.this)){
 			AllUse.info(LoginActivity.this, "网络连接错误,操作失败");
-			clean();
 			return;
 		}	
 		
@@ -119,11 +131,5 @@ public class LoginActivity extends Activity {
 		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 		startActivity(intent);
 		finish();
-	}
-	
-	//将EditText清空，并初始化User.userName和 User.userPassword
-	private void clean() {
-		et_login_name.setText("");
-		et_login_password.setText("");
 	}
 }
