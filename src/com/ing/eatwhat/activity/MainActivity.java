@@ -183,7 +183,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		  
         // 如果时间间隔小于于2秒, 退出程序  
         if ((currentTime - preTime) > TWO_SECOND) {  
-            AllUse.info(MainActivity.this, "再按一次后退键退出哎呀呀");
+            AllUse.info(MainActivity.this, "快速双击两次退出哎呀呀");
             // 更新时间  
             preTime = currentTime;
         } else {
