@@ -1,7 +1,6 @@
 package com.ing.eatwhat.activity;
 
 import com.ing.eatwhat.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

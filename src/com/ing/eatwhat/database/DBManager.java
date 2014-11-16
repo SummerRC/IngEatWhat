@@ -7,12 +7,10 @@ package com.ing.eatwhat.database;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.Food;
 import com.ing.eatwhat.entity.User;

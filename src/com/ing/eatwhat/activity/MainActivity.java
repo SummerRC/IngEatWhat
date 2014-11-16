@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -72,7 +71,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	@Override
 	public void onStart() {
 		super.onStart();
-		Log.e("h","a");
 		if(AllUse.getSharedPreferencesContent(this, "userName").equalsIgnoreCase("null")) {
 			User.userName = "游客";
 		} else {

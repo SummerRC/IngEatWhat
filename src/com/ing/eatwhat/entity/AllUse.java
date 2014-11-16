@@ -4,14 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.widget.Toast;
 
 public class AllUse {
@@ -142,11 +140,9 @@ public class AllUse {
         // 如果时间间隔小于于2秒, 退出程序  
         if ((currentTime - preTime) < 1*1000) {  
         	 preTime = currentTime;
-        	 Log.e("-1", "-1");
         	 return -1;    
         } else {
         	 preTime = currentTime;
-        	 Log.e("0", "0");
         	 return 0;
         }
 	}

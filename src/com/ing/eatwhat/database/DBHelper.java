@@ -12,7 +12,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper{
 
 	private String food_sql;		//建food表执行的SQL语句
-	private String forum_sql;		//建forum表执行的SQL语句
 	
 	//该构造函数4个参数,直接调用父类的构造函数.其中第一个参数为上下文、第二个参数为数据库的名字、第3个参数是用来设置游标对象的，这里一般设置为null、参数四是数据库的版本号.
 	public DBHelper(Context context, String name, CursorFactory factory, int version) {

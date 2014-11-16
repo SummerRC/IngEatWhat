@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -35,7 +34,6 @@ public class GuideActivity extends Activity implements OnPageChangeListener, OnC
   
     @Override  
     protected void onCreate(Bundle savedInstanceState) {  
-    	Log.e("q", "2");
         super.onCreate(savedInstanceState); 
         //隐去标题栏（应用程序的名字）  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);

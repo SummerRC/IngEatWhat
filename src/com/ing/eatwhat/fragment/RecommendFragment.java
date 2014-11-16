@@ -16,7 +16,6 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,14 +62,12 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Log.e("onCreateView", "onCreateView");
 		return inflater.inflate(R.layout.fragment_recommend, container, false);
 	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		Log.e("onActivityCreated", "onActivityCreated");
 		init();
 	}
 
@@ -126,7 +123,6 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 
 	@Override
 	public void onResume() {
-		Log.e("onResume", "onResume");
 		super.onResume();
 			if (mSensorManager != null) {			// 注册监听器
 				// 第一个参数是Listener，第二个参数是所得传感器类型，第三个参数值获取传感器信息的频率
@@ -137,9 +133,7 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 	
 	@Override
 	public void onPause() {
-		Log.e("onPause", "onPause");
 		if (mSensorManager != null) {				// 取消监听器
-			Log.e("not null", "哈哈");
 			mSensorManager.unregisterListener(RecommendFragment.this);
 		}
 		super.onPause();
@@ -147,17 +141,14 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 	
 	@Override
 	public void onStop() {
-		Log.e("onStop", "onStop");
 		super.onStop();
 		/*if (mSensorManager != null) {				// 取消监听器
 			mSensorManager.unregisterListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
 		}*/
-		Log.e("onStop", "onStop");
 	};
 	
 	@Override
 	public void onDestroy() {
-		Log.e("onPause", "onPause");
 		super.onDestroy();
 		/*if (mSensorManager != null) {				// 取消监听器
 			mSensorManager.unregisterListener(this);

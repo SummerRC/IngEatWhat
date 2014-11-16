@@ -7,7 +7,6 @@ import java.util.TimerTask;
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;

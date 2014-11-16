@@ -4,10 +4,8 @@ import android.app.Activity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.database.DBManager;
-
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
