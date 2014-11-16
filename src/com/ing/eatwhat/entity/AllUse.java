@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -17,7 +19,7 @@ public class AllUse {
 	public static int real_foodnum = 0;
 
 	//Toast
-	public static void info(Context ctx, String str) {
+	public static void info(Application ctx, String str) {
 		Toast.makeText(ctx, str, Toast.LENGTH_SHORT).show();
 	}
 			

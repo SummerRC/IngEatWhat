@@ -2,6 +2,7 @@ package com.ing.eatwhat.activity;
 
 import java.util.Date;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -194,7 +195,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		  
         // 如果时间间隔小于于2秒, 退出程序  
         if ((currentTime - preTime) > TWO_SECOND) {  
-            AllUse.info(MainActivity.this, "快速双击两次退出哎呀呀");
+            AllUse.info(getApplication(), "快速双击两次退出哎呀呀");
             // 更新时间  
             preTime = currentTime;
         } else {
@@ -209,28 +210,26 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         menu.setHeaderTitle("操作：");
         //添加菜单项
         menu.add(0, IMEI1, 0, "退出");
-        menu.add(0, IMEI2, 0, "登录");
-        menu.add(0, IMEI3, 0, "注册");
+        menu.add(0, IMEI2, 0, "注册");
+        menu.add(0, IMEI3, 0, "重新");
     }
     
     //菜单单击响应
     @Override
     public boolean onContextItemSelected(MenuItem item){
-        //获取当前被选择的菜单项的信息
-        //AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-        //Log.i("braincol",String.valueOf(info.id));        
         switch(item.getItemId()){
-        case IMEI1:
-            //在这里添加处理代码
-            
+        case IMEI1:			//退出
+        	android.os.Process.killProcess(android.os.Process.myPid()); 		//结束整个应用程序
             break;
-        case IMEI2:
-            //在这里添加处理代码
-            
-            break;    
-        case IMEI3:
-            //在这里添加处理代码
-            
+        case IMEI2:			//注册
+        	Intent gegister_intent = new Intent(this, RegisterActivity.class);
+        	startActivity(gegister_intent);
+        	this.finish();
+            break;    			
+        case IMEI3:			//重新登录
+        	Intent login_intent = new Intent(this, LoginActivity.class);
+        	startActivity(login_intent);
+        	this.finish();
             break;
         }
         return true;

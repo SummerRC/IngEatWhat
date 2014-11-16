@@ -117,7 +117,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		// 检测sd是否可用
 		String SDStatus = Environment.getExternalStorageState();
 	    if (!SDStatus.equals(Environment.MEDIA_MOUNTED)) { 
-	    	AllUse.info(AddFoodActivity.this, "警告：SD卡不可用！");
+	    	AllUse.info(getApplication(), "警告：SD卡不可用！");
 	        return;
 	    }
 		
@@ -152,7 +152,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
       
         if(!(resultCode == Activity.RESULT_OK)) {
-	    	AllUse.info(AddFoodActivity.this, "操作失败，请重试！");
+	    	AllUse.info(getApplication(), "操作失败，请重试！");
 	    	return;
 	    }
         switch(requestCode) {
@@ -168,7 +168,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	//相机拍照后回调方法会调用这个函数，处理拍摄的照片
 	private void camera(int resultCode, Intent data) {
 		if(data == null || resultCode != RESULT_OK) {
-	    	AllUse.info(AddFoodActivity.this, "操作取消！");
+	    	AllUse.info(getApplication(), "操作取消！");
 	    	return;
 	    }
 		haveInsertedPic = true;
@@ -192,7 +192,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	//相册选择照片后，回调函数会调用这个方法处理图片
 	private void photoAlbum(int resultCode, Intent data) {
 		if(data == null || resultCode != RESULT_OK) {
-	    	AllUse.info(AddFoodActivity.this, "未选中任何图片!");
+	    	AllUse.info(getApplication(), "未选中任何图片!");
 	    	return;
 	    }
 		haveInsertedPic = true;
@@ -212,14 +212,14 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			bitmap = BitmapFactory.decodeFile(picturePath);
 		} catch (Exception e) {
 			e.printStackTrace();
-			AllUse.info(AddFoodActivity.this, "图片加载失败!");
+			AllUse.info(getApplication(), "图片加载失败!");
 			return;
 		} catch (OutOfMemoryError e) {
-			AllUse.info(AddFoodActivity.this, "图片太大,请换张图片！");
+			AllUse.info(getApplication(), "图片太大,请换张图片！");
 			return;
 		} catch (Error e) {
 			e.printStackTrace();
-			AllUse.info(AddFoodActivity.this, "图片太大，内存溢出!");
+			AllUse.info(getApplication(), "图片太大，内存溢出!");
 			return;
 	    } 
 		//将图片显示在ImageView
@@ -249,11 +249,11 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
   	//监听器监听到用户点击保存按钮，则调用该函数。分两种操作：添加（op=ADD) 和 修改（op=EDIT)
   	public void bt_save() {
 		if(newFoodName.equals("")) {
-			AllUse.info(AddFoodActivity.this, "警告：菜名不能为空！");
+			AllUse.info(getApplication(), "警告：菜名不能为空！");
 			return;
 		}	
 		if(newFoodName.length() > 18) {
-			AllUse.info(AddFoodActivity.this, "警告：菜名太长！");
+			AllUse.info(getApplication(), "警告：菜名太长！");
 			return;
 		}		
 		
@@ -290,7 +290,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
   	//修改操作（菜名与图片必须修改一个)
   	private void edit() {
   		if(newFoodName.equalsIgnoreCase(oldFoodName) && !haveInsertedPic) {	//两者都没修改
-  			AllUse.info(this, "请修改菜单");
+  			AllUse.info(getApplication(), "请修改菜单");
   			return;
   		}
   		if(newFoodName.equals(oldFoodName)) {															//修改了图片	

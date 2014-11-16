@@ -1,5 +1,7 @@
 package com.ing.eatwhat.activity;
 
+import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -49,7 +51,7 @@ public class LoginActivity extends Activity {
 					//获取线程返回的结果
 					String result = msg.obj.toString().trim();	
 					if(result.compareToIgnoreCase("ok") == 0) {						
-						AllUse.info(LoginActivity.this, "登陆成功!");		
+						AllUse.info(getApplication(), "登陆成功!");		
 						
 						User.userName = et_login_name.getText().toString().trim();
 						User.userPassword = et_login_password.getText().toString().trim();	
@@ -64,13 +66,13 @@ public class LoginActivity extends Activity {
 						finish();	
 					}					
 					if(result.compareToIgnoreCase("wrong") == 0) {
-						AllUse.info(LoginActivity.this, "密码错误！");
+						AllUse.info(getApplication(), "密码错误！");
 						et_login_password.setText("");
 						et_login_password.requestFocus();
 						return;
 					} 					
 					if(result.compareToIgnoreCase("notexist") == 0) {
-						AllUse.info(LoginActivity.this, "用户名不存在!");
+						AllUse.info(getApplication(), "用户名不存在!");
 						et_login_name.setText("");
 						et_login_password.setText("");
 						et_login_name.requestFocus();
@@ -80,7 +82,7 @@ public class LoginActivity extends Activity {
 				case 1:                     //获取用户food数目线程发送的消息	
 					break;
 				default:
-					AllUse.info(getApplicationContext(), "未知错误!");
+					AllUse.info(getApplication(), "未知错误!");
 					return;
 				}				
 			}
@@ -95,30 +97,30 @@ public class LoginActivity extends Activity {
 		}
 		//用户名、密码不能为空
 		if(TextUtils.isEmpty(et_login_name.getText().toString().trim())) { 
-			AllUse.info(LoginActivity.this, "用户名不能为空！");
+			AllUse.info(getApplication(), "用户名不能为空！");
 			et_login_password.setText("");
 			et_login_name.requestFocus();
 			return;
 		}
 		if(TextUtils.isEmpty(et_login_password.getText().toString().trim())) {
-			AllUse.info(LoginActivity.this, "密码不能为空！");
+			AllUse.info(getApplication(), "密码不能为空！");
 			et_login_password.requestFocus();
 			return;
 		}
 		//用户名、密码长度不能超过18个字符
 		if(et_login_name.getText().length() > 18) {
-			AllUse.info(LoginActivity.this, "警告：用户名不能超出18个字符！");
+			AllUse.info(getApplication(), "警告：用户名不能超出18个字符！");
 			et_login_name.requestFocus();
 			return;
 		}		
 		if(et_login_password.getText().length() > 18 ) {
-			AllUse.info(LoginActivity.this, "警告：密码不能超出18个字符！");
+			AllUse.info(getApplication(), "警告：密码不能超出18个字符！");
 			et_login_password.requestFocus();
 			return;
 		}
 		//判断是否联网
 		if(!AllUse.isHaveInternet(LoginActivity.this)){
-			AllUse.info(LoginActivity.this, "网络连接错误,操作失败");
+			AllUse.info(getApplication(), "网络连接错误,操作失败");
 			return;
 		}	
 		
@@ -131,5 +133,14 @@ public class LoginActivity extends Activity {
 		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 		startActivity(intent);
 		finish();
+	}
+	
+	//监听返回按键
+	@Override
+	public void onBackPressed() {
+		//android.os.Process.killProcess(android.os.Process.myPid()); 		//结束整个应用程序
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+		this.finish();
 	}
 }

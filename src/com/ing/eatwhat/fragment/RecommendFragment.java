@@ -185,18 +185,19 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 					iv_food.setImageBitmap(bitmap);
 					tv_foodname.setText(food.getName());
 				} else {
+					AllUse.info(getActivity().getApplication(), "一次只能摇一次哟~");
 					if (mSensorManager != null) {			// 取消监听器
 						mSensorManager.unregisterListener(RecommendFragment.this);
 					}
-				}
+				}			
 				break;
 			case ISFIRSTSHAKE:
 				if (mSensorManager != null) {	 			// 注册监听器
 					//mSensorManager.registerListener(RecommendFragment.this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 					// 第一个参数是Listener，第二个参数是所得传感器类型，第三个参数值获取传感器信息的频率
 				}
-				AllUse.info(getActivity(), "一次只能摇一次哟~");
-				isfirstshark=true;
+				
+				//isfirstshark=true;
 				break;
 			}
 		}
@@ -207,10 +208,10 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 	private int limit() {
 		int count = AllUse.getFoodNum(getActivity());
 		if (count == 1) {
-			AllUse.info(getActivity(), "只有一个菜肴木有摇一摇的乐趣哦~");
+			AllUse.info(getActivity().getApplication(), "只有一个菜肴木有摇一摇的乐趣哦~");
 		} 
 		else if(count == 0){
-			AllUse.info(getActivity(), "先添加一个菜肴吧~");
+			AllUse.info(getActivity().getApplication(), "先添加一个菜肴吧~");
 			return -1;
 		}
 		return 0;

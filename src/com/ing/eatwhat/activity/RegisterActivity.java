@@ -41,7 +41,7 @@ public class RegisterActivity extends Activity{
 					//result储存的是注册线程返回的信息：ok代表注册成功,failed代表注册失败
 					String result = msg.obj.toString();
 					if(result.compareToIgnoreCase("ok") == 0) {
-						AllUse.info(RegisterActivity.this, "注册成功！");
+						AllUse.info(getApplication(), "注册成功！");
 						
 						User.userName = et_logon_username.getText().toString().trim();
 						User.userPassword = et_logon_password1.getText().toString().trim();
@@ -55,14 +55,14 @@ public class RegisterActivity extends Activity{
 						finish();
 					} else
 						if(result.compareToIgnoreCase("failed") == 0) {
-							AllUse.info(RegisterActivity.this, "用户名已存在！");
+							AllUse.info(getApplication(), "用户名已存在！");
 							et_logon_username.setText("");
 							et_logon_username.requestFocus();
 							return;
 						}
 					break;
 				case 222:
-					AllUse.info(RegisterActivity.this, "用户名不能包含特殊字符：? | & 空格等.");
+					AllUse.info(getApplication(), "用户名不能包含特殊字符：? | & 空格等.");
 					et_logon_username.setText("");
 					et_logon_username.requestFocus();
 					break;
@@ -100,34 +100,34 @@ public class RegisterActivity extends Activity{
 		String password2 = et_logon_password2.getText().toString().trim();		
 		//限制三个文本框不能为空
 		if(TextUtils.isEmpty(name)) {
-			AllUse.info(RegisterActivity.this, "请输入用户名！");
+			AllUse.info(getApplication(), "请输入用户名！");
 			et_logon_username.requestFocus();
 			return -1;
 		}
 		if(TextUtils.isEmpty(password1)) {
-			AllUse.info(RegisterActivity.this, "请输入密码！");
+			AllUse.info(getApplication(), "请输入密码！");
 			et_logon_password1.requestFocus();
 			return -1;
 		}
 		if(TextUtils.isEmpty(password2)) {
-			AllUse.info(RegisterActivity.this, "请确认密码！");
+			AllUse.info(getApplication(), "请确认密码！");
 			et_logon_password2.requestFocus();
 			return -1;
 		}
 		//限制用户名不能少于四个字符
 		if(et_logon_username.getText().length() < 2) {
-			AllUse.info(RegisterActivity.this, "警告：用户名长度少于2个字符！");
+			AllUse.info(getApplication(), "警告：用户名长度少于2个字符！");
 			et_logon_username.requestFocus();
 			return -1;
 		}
 		//限制用户名不能多于18个字符
 		if(et_logon_username.getText().length() > 18) {
-			AllUse.info(RegisterActivity.this, "警告：用户名长度不能超出18个字符！");
+			AllUse.info(getApplication(), "警告：用户名长度不能超出18个字符！");
 			et_logon_username.requestFocus();
 			return -1;
 		}		
 		if(et_logon_password1.getText().length() > 18 || et_logon_password2.getText().length() > 18) {
-			AllUse.info(RegisterActivity.this, "警告：密码长度不能超出18个字符！");
+			AllUse.info(getApplication(), "警告：密码长度不能超出18个字符！");
 			et_logon_password1.setText("");
 			et_logon_password2.setText("");
 			et_logon_password1.requestFocus();
@@ -135,7 +135,7 @@ public class RegisterActivity extends Activity{
 		}
 		//限制密码长度不能少于六个字符
 		if(et_logon_password1.getText().length() < 6 || et_logon_password2.getText().length() < 6 ) {
-			AllUse.info(RegisterActivity.this, "警告：密码长度不能少于6个字符！");
+			AllUse.info(getApplication(), "警告：密码长度不能少于6个字符！");
 			et_logon_password1.setText("");
 			et_logon_password2.setText("");
 			et_logon_password1.requestFocus();
@@ -143,12 +143,21 @@ public class RegisterActivity extends Activity{
 		}
 		//判断两次密码是否一致
 		if(!(password1.compareTo(password2) == 0)){
-			AllUse.info(RegisterActivity.this, "两次密码不一致！");
+			AllUse.info(getApplication(), "两次密码不一致！");
 			et_logon_password1.setText("");
 			et_logon_password2.setText("");
 			et_logon_password1.requestFocus();
 			return -1;
 		}
 		return 0;
+	}
+	
+	//监听返回按键
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent();
+		intent.setClass(RegisterActivity.this, LoginActivity.class);
+		startActivity(intent);
+		finish();
 	}
 }

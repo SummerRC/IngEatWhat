@@ -74,8 +74,9 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 			Intent intent0 = new Intent();
 			intent0.setClass(getActivity(), LoginActivity.class);
 			getActivity().startActivity(intent0);
+			getActivity().finish();
 			break;
-		case R.id.bt_frag_more_setting:				//修改密码
+		case R.id.bt_frag_more_setting:				//设置
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), SettingActivity.class);
 			getActivity().startActivity(intent);
@@ -84,9 +85,11 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 			Intent intent2 = new Intent();
 			intent2.setClass(getActivity(), LoginActivity.class);
 			getActivity().startActivity(intent2);
+			getActivity().finish();
 			break;
 		case R.id.bt_frag_more_update:				//更新
-			update();
+			AllUse.info(getActivity().getApplication(), "没有更新");
+			//update();
 			break;
 		case R.id.bt_frag_more_feedback:			//反馈
 			FeedbackAgent agent = new FeedbackAgent(getActivity());
