@@ -81,6 +81,24 @@ public class RegisterActivity extends Activity{
 		if(limit() == -1) {
 			return;		
 		}
+		if(AllUse.strLimit(et_logon_username.getText().toString().trim()) == -1) {
+			AllUse.info(getApplication(), "警告：用户名不能含有特殊字符！");
+			et_logon_username.setText("");
+			et_logon_username.requestFocus();
+			return;
+		}
+		if(AllUse.strLimit(et_logon_password1.getText().toString().trim()) == -1) {
+			AllUse.info(getApplication(), "警告：密码不能含有特殊字符！");
+			et_logon_password1.setText("");
+			et_logon_password1.requestFocus();
+			return;
+		}
+		if(AllUse.strLimit(et_logon_password2.getText().toString().trim()) == -1) {
+			AllUse.info(getApplication(), "警告：密码不能含有特殊字符！");
+			et_logon_password2.setText("");
+			et_logon_password2.requestFocus();
+			return;
+		}
 		NetThread thread = new NetThread(mHandler, et_logon_username.getText().toString().trim(), et_logon_password1.getText().toString().trim(), null, null, 2);
 		thread.start();
 	}
@@ -100,17 +118,20 @@ public class RegisterActivity extends Activity{
 		String password2 = et_logon_password2.getText().toString().trim();		
 		//限制三个文本框不能为空
 		if(TextUtils.isEmpty(name)) {
-			AllUse.info(getApplication(), "请输入用户名！");
+			AllUse.info(getApplication(), "用户名不能为空！");
+			et_logon_username.setText("");
 			et_logon_username.requestFocus();
 			return -1;
 		}
 		if(TextUtils.isEmpty(password1)) {
-			AllUse.info(getApplication(), "请输入密码！");
+			AllUse.info(getApplication(), "密码不能为空！");
+			et_logon_password1.setText("");
 			et_logon_password1.requestFocus();
 			return -1;
 		}
 		if(TextUtils.isEmpty(password2)) {
-			AllUse.info(getApplication(), "请确认密码！");
+			AllUse.info(getApplication(), "密码不能为空！");
+			et_logon_password2.setText("");
 			et_logon_password2.requestFocus();
 			return -1;
 		}

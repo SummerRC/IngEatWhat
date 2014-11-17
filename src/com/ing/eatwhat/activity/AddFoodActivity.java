@@ -14,10 +14,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -30,13 +32,13 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	private Button bt_addfood_save;					//保存按钮
 	private Button bt_addfood_back;
 	private static EditText et_foodname;			//输入菜名的的EditText
-	private static ImageView iv_picture;				//显示图片的ImageView
+	private static ImageView iv_picture;			//显示图片的ImageView
 	private Intent getIntent;
 	private final int CAMERA = 1;						//回调函数的标示
 	private final int PHOTO_ALBUM = 2;			//回调函数的标示
 	private Uri picUri;  											//定位图片的uri
 	private String picPath;									//从相机或者相册获取的图片经过处理后存储的位置
-	private String picName; 								//图片名（本地和网上名称一致）
+	//private String picName; 								//图片名（本地和网上名称一致）
 	private String oldFoodName;						//旧的菜名
 	private String newFoodName;						//新的菜名
 	private DBManager dbManager;					//数据库管理类的实例
@@ -46,7 +48,8 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	private final static int ADD = 0;					//添加操作
 	private ImageView iv_photo;
 	private ImageView iv_camera;
-	
+	private Bitmap MyBitmap = null;
+	private String default_path;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		//全屏显示  无标题栏
@@ -106,8 +109,10 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			break;
 		case R.id.iv_camera:
 			//调用相机
-		    Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(camera, CAMERA); 
+			default_path = getPicPath();
+			Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(default_path)));
+			startActivityForResult(camera, CAMERA);   	
 			break;
 		}		
 	}	
@@ -128,8 +133,10 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			   .setNegativeButton("相机", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
 					   //调用相机
+					   default_path = getPicPath();
 					   Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-			           startActivityForResult(camera, CAMERA);   				
+					   camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(default_path)));
+					   startActivityForResult(camera, CAMERA);   				
 				   }
 			   })  
 			   .setNeutralButton("相册", new DialogInterface.OnClickListener() {
@@ -167,26 +174,31 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	  
 	//相机拍照后回调方法会调用这个函数，处理拍摄的照片
 	private void camera(int resultCode, Intent data) {
-		if(data == null || resultCode != RESULT_OK) {
+		if(resultCode != RESULT_OK) {
 	    	AllUse.info(getApplication(), "操作取消！");
 	    	return;
 	    }
 		haveInsertedPic = true;
-		// 获取相机返回的数据，并转换为Bitmap图片格式
-        Bundle bundle = data.getExtras();  
-        Bitmap bitmap = (Bitmap) bundle.get("data");		
-		if (data.getData() != null) {  
-            picUri = data.getData();  
-        } else {  
-            picUri  = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));      
-        }       
-       /* //将图片宽和高均压缩成200
-        Bitmap rbitmap = ThumbnailUtils.extractThumbnail(bitmap, 200, 200); */ 
-        //将图片显示在ImageView
-        iv_picture.setImageBitmap(bitmap);
+		Bitmap bitmap = BitmapFactory.decodeFile(default_path);
+		try {			
+			int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), 250, 250);   
+			if(MyBitmap != null) {
+				if(!MyBitmap.isRecycled()) {
+					MyBitmap.recycle();
+				}
+			}
+		     MyBitmap = PicZoom(bitmap, bitmap.getWidth() / scale,bitmap.getHeight() / scale);  
+		     bitmap.recycle();  
+		     System.gc();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+		haveInsertedPic = true;
+		//将图片显示在ImageView
+        iv_picture.setImageBitmap(MyBitmap);
         //获得图片存储的绝对路径，并存储图片到对应路径下
         picPath = this.getPicPath();
-		AllUse.savePicture(bitmap, picPath);	
+		AllUse.savePicture(MyBitmap, picPath);	
 	}
 	
 	//相册选择照片后，回调函数会调用这个方法处理图片
@@ -204,12 +216,17 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	    String picturePath = cursor.getString(columnIndex);
 	    cursor.close();
 	    Bitmap bitmap = null;        
-	   
 		try {
-			/*BitmapFactory.Options options = new BitmapFactory.Options(); 
-	        options.inSampleSize = 2;//图片宽高都为原来的二分之一，即图片为原来的四分之一 
-	        bitmap = BitmapFactory.decodeFile(picturePath, options);   	*/
 			bitmap = BitmapFactory.decodeFile(picturePath);
+			int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), 250, 250);   
+			if(MyBitmap != null) {
+				if(!MyBitmap.isRecycled()) {
+					Log.e("h", "哈哈哈");
+					MyBitmap.recycle();
+				}
+			}
+			MyBitmap = PicZoom(bitmap, bitmap.getWidth() / scale,bitmap.getHeight() / scale);  
+	        bitmap.recycle();  
 		} catch (Exception e) {
 			e.printStackTrace();
 			AllUse.info(getApplication(), "图片加载失败!");
@@ -223,10 +240,10 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			return;
 	    } 
 		//将图片显示在ImageView
-	    iv_picture.setImageBitmap(bitmap);  
+	    iv_picture.setImageBitmap(MyBitmap);  
 	    //获得图片存储的绝对路径，并存储图片到对象
 		picPath = this.getPicPath();
-		AllUse.savePicture(bitmap, picPath);		
+		AllUse.savePicture(MyBitmap, picPath);		
 	}
 
 	
@@ -235,13 +252,15 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
   		//获得SD卡的路径
         final String SDpath = Environment .getExternalStorageDirectory().getAbsolutePath();
         File file = new File(SDpath +"/ingZone/eatWhat/");
-        // 创建文件夹
-        file.mkdirs(); 
+        if(!file.exists()) {
+        	// 创建文件夹
+            file.mkdirs(); 
+        }
         //照片的命名，目标文件夹下，以用户名加当前时间数字串为名称，即可确保每张照片名称不相同
         Date date = new Date();
         //获取当前时间并且进一步转化为字符串
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmSS", Locale.getDefault());
-        picName = format.format(date);
+        String picName = format.format(date);
         String path = SDpath + "/ingZone/eatWhat/" + picName + ".jpg";
         return path;
   	}	
@@ -306,4 +325,29 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
   	public void onBackPressed() {
   		AddFoodActivity.this.finish();
   	}
+  	
+  	 public static int reckonThumbnail(int oldWidth, int oldHeight, int newWidth, int newHeight) {
+         if ((oldHeight > newHeight && oldWidth > newWidth)
+                 || (oldHeight <= newHeight && oldWidth > newWidth)) {
+             int be = (int) (oldWidth / (float) newWidth);
+             if (be <= 1)
+                 be = 1;
+             return be;
+         } else if (oldHeight > newHeight && oldWidth <= newWidth) {
+             int be = (int) (oldHeight / (float) newHeight);
+             if (be <= 1)
+                 be = 1;
+             return be;
+         }
+         return 1;
+     }
+  
+     public static Bitmap PicZoom(Bitmap bmp, int width, int height) {
+         int bmpWidth = bmp.getWidth();
+         int bmpHeght = bmp.getHeight();
+         Matrix matrix = new Matrix();
+         matrix.postScale((float) width / bmpWidth, (float) height / bmpHeght);
+
+         return Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeght, matrix, true);
+     }
 }

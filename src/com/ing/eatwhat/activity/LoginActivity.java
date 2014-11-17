@@ -98,12 +98,14 @@ public class LoginActivity extends Activity {
 		//用户名、密码不能为空
 		if(TextUtils.isEmpty(et_login_name.getText().toString().trim())) { 
 			AllUse.info(getApplication(), "用户名不能为空！");
+			et_login_name.setText("");
 			et_login_password.setText("");
 			et_login_name.requestFocus();
 			return;
 		}
 		if(TextUtils.isEmpty(et_login_password.getText().toString().trim())) {
 			AllUse.info(getApplication(), "密码不能为空！");
+			et_login_password.setText("");
 			et_login_password.requestFocus();
 			return;
 		}
@@ -115,6 +117,18 @@ public class LoginActivity extends Activity {
 		}		
 		if(et_login_password.getText().length() > 18 ) {
 			AllUse.info(getApplication(), "警告：密码不能超出18个字符！");
+			et_login_password.requestFocus();
+			return;
+		}
+		if(AllUse.strLimit(et_login_name.getText().toString().trim()) == -1) {
+			AllUse.info(getApplication(), "警告：用户名不能含有特殊字符！");
+			et_login_name.setText("");
+			et_login_name.requestFocus();
+			return;
+		}
+		if(AllUse.strLimit(et_login_password.getText().toString().trim()) == -1) {
+			AllUse.info(getApplication(), "警告：密码不能含有特殊字符！");
+			et_login_password.setText("");
 			et_login_password.requestFocus();
 			return;
 		}
@@ -143,4 +157,5 @@ public class LoginActivity extends Activity {
 		startActivity(intent);
 		this.finish();
 	}
+	
 }

@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Application;
 import android.content.Context;
@@ -147,6 +149,17 @@ public class AllUse {
         	 preTime = currentTime;
         	 return 0;
         }
+	}
+	
+	public static int strLimit(String str) {
+		String regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]"; 
+	    Pattern p = Pattern.compile(regEx); 
+	    Matcher m = p.matcher(str);                 
+	    if( m.find()){
+	        return -1;
+	    } else {
+	    	return 0;
+	    }
 	}
 	
 }
