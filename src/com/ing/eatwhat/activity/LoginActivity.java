@@ -55,9 +55,10 @@ public class LoginActivity extends Activity {
 						
 						User.userName = et_login_name.getText().toString().trim();
 						User.userPassword = et_login_password.getText().toString().trim();	
+						User.food_num = AllUse.getFoodNum(LoginActivity.this);
 						
 						//初始化用户登录信息
-						AllUse.saveLoginStatus(LoginActivity.this, User.userName, User.userPassword, true);
+						AllUse.saveLoginStatus(LoginActivity.this, User.userName, User.userPassword, User.food_num);
 						
 						//跳转到主界面
 						Intent intent = new Intent();

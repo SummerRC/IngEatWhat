@@ -95,7 +95,7 @@ public class SplashActivity extends Activity {
 			User.userName = AllUse.getSharedPreferencesContent(this, "userName");
 		}	
 		
-		SharedPreferences sp = this.getSharedPreferences("config", Context.MODE_PRIVATE);
+		SharedPreferences sp = this.getSharedPreferences(User.userName + "config", Context.MODE_PRIVATE);
 		int sensitivity = sp.getInt("sensitive", 0);
 		if(sensitivity == 0) {
 			Editor editor = sp.edit();

@@ -1,6 +1,10 @@
 package com.ing.eatwhat.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.ing.eatwhat.R;
+import com.ing.eatwhat.database.DBManager;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.thread.NetThread;
@@ -42,15 +46,10 @@ public class RegisterActivity extends Activity{
 					String result = msg.obj.toString();
 					if(result.compareToIgnoreCase("ok") == 0) {
 						AllUse.info(getApplication(), "注册成功！");
-						
-						User.userName = et_logon_username.getText().toString().trim();
-						User.userPassword = et_logon_password1.getText().toString().trim();
-						
-						//存储新的账号登录信息
-						AllUse.saveLoginStatus(RegisterActivity.this, User.userName, User.userPassword, true);				
-						//跳转到主界面
+						exchange();
+						//跳转到Splah界面
 						Intent intent = new Intent();
-						intent.setClass(RegisterActivity.this, MainActivity.class);
+						intent.setClass(RegisterActivity.this, SplashActivity.class);
 						startActivity(intent);
 						finish();
 					} else
@@ -171,6 +170,31 @@ public class RegisterActivity extends Activity{
 			return -1;
 		}
 		return 0;
+	}
+	
+	//切换账号：将游客数据库中的信息导入到新注册的账号
+	private void exchange() {
+		if(User.userName.equalsIgnoreCase("游客")) {
+			//获得游客账号的food表信息
+			DBManager dbManager = new DBManager(this);
+			HashMap<String, ArrayList<String>> map = dbManager.getAllFood();
+			User.food_num = AllUse.getFoodNum(this);
+			
+			User.userName = et_logon_username.getText().toString().trim();
+			User.userPassword = et_logon_password1.getText().toString().trim();
+			
+			//存储到新注册的账号对应的food表
+			DBManager DBmanager = new DBManager(this);
+			DBmanager.insertAll(map);	
+			
+			//初始化用户登录信息
+			AllUse.saveLoginStatus(this, User.userName, User.userPassword, User.food_num);			
+		} else {
+			User.userName = et_logon_username.getText().toString().trim();
+			User.userPassword = et_logon_password1.getText().toString().trim();
+			//初始化用户登录信息
+			AllUse.saveLoginStatus(this, User.userName, User.userPassword, User.food_num);
+		}	
 	}
 	
 	//监听返回按键

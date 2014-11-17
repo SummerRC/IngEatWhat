@@ -41,6 +41,21 @@ public class DBManager {
 		close();
 	}
 
+	//当注册账号成功后，将游客账号对应的food信息插入到新账号
+	public void insertAll(HashMap<String, ArrayList<String>> map) {
+		db = this.getWritableDB();
+		ArrayList<String> arr_name = map.get("name");
+		ArrayList<String> arr_picPath = map.get("picPath");
+		for(int i=0; i<arr_name.size(); i++) {
+			ContentValues cv = new ContentValues();
+			cv.put("id", i);
+			cv.put("name", arr_name.get(i));
+			cv.put("picPath", arr_picPath.get(i));
+			db.insert("food", null, cv);
+		}
+		db.close(); 
+	}
+	
 	//删除：根据食物名删除一条记录
 	public void delete(String foodName) {
         db = getWritableDB();

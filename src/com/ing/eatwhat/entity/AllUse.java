@@ -37,22 +37,21 @@ public class AllUse {
      }  
 	
 	//用SharedPreference储存用户登录信息和登录状态,私有数据，其他app不能访问
-	public static void saveLoginStatus(Context ctx, String userName, String userPassword, boolean haveLogined) {
+	public static void saveLoginStatus(Context ctx, String userName, String userPassword, int food_num) {
 		
-		SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+		SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		
 		editor.putString("userName", userName);    
 		editor.putString("userPassword", userPassword); 
-		editor.putBoolean("haveLogined", haveLogined);
-		editor.putInt("food_num", 0);     
+		editor.putInt("food_num", food_num);     
 		
 		editor.commit();
 	}
 	
 	//用SharedPreference储存用户手机的IMEI，其他app不能访问
 	public static void saveIMEI(Context ctx, String IMEI) {		
-		SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+		SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		
 		editor.putString("IMEI", IMEI);    
@@ -61,14 +60,14 @@ public class AllUse {
 	
 	//获得储存的用户登录信息,如不存在返回null
     public static String getSharedPreferencesContent(Context ctx, String content) {
-	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+	    SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 		
 	    return sp.getString(content, "null");
     }
     
 	//编辑用户登录信息和登录状态
     public static void editLoginStatus(Context ctx) {
-    	SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+    	SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 		Editor editor = sp.edit();
 		
 		editor.putString("userName", "null");    
@@ -79,13 +78,13 @@ public class AllUse {
     
     //获得储存的用户food数目信息,如果不存在返回-1
     public static int getFoodNum(Context ctx) {
-	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+	    SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 		return sp.getInt("food_num", 0);
     }
     
     //设置用户的food_num
     public static void setFood_num(Context ctx, int num) {
-    	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+    	    SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 			Editor editor = sp.edit();
 			
 			editor.putInt("food_num", num);      		
@@ -94,7 +93,7 @@ public class AllUse {
        
     //编辑用户food数目信息(删除菜单中一个菜时-1，增加时+1）
     public static void editFoodNum(Context ctx, int op) {
-    	    SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+    	    SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 			Editor editor = sp.edit();
 			
 			int num = getFoodNum(ctx) + op;
@@ -105,7 +104,7 @@ public class AllUse {
     
     //判断是否登陆过,注意需要给他传递上下文
     public static boolean islogined(Context ctx) {
-		SharedPreferences sp = ctx.getSharedPreferences("ingEatwhat", Context.MODE_PRIVATE);
+		SharedPreferences sp = ctx.getSharedPreferences(User.userName, Context.MODE_PRIVATE);
 		
 		//取得登录状态，若"haveLogined"不存在就返回false
 		boolean haveLogined = sp.getBoolean("haveLogined", false);

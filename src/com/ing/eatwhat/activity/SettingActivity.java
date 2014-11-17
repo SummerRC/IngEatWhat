@@ -32,7 +32,7 @@ public class SettingActivity extends Activity implements
 		setContentView(R.layout.activity_setting);
 		
 		// 获得当前灵敏度
-		sensitiveSp = getSharedPreferences("config", MODE_PRIVATE);
+		sensitiveSp = getSharedPreferences(User.userName + "config", MODE_PRIVATE);
 		sensitive = sensitiveSp.getInt("sensitive", 0);
 
 		frag_more_seekbar = (SeekBar) findViewById(R.id.sensitivebar);
