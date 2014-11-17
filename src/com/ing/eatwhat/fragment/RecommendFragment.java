@@ -53,7 +53,6 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 	
 	int screenWidth;
 	int screenHeigh;
-	private static final String TAG = "TestSensorActivity";
 	private static final int SENSOR_SHAKE = 10;
 	private static final int ISFIRSTSHAKE = 1;
 	
@@ -305,7 +304,7 @@ public class RecommendFragment extends Fragment implements AnimationListener, Se
 			float z = values[2]; 				// z轴方向的重力加速度，向上为正
 			//Log.i(TAG, "x轴方向的重力加速度" + x +  "；y轴方向的重力加速度" + y +  "；z轴方向的重力加速度" + z);
 			// 一般在这三个方向的重力加速度达到40就达到了摇晃手机的状态。
-			int medumValue = 100 - User.sensitivity;			// 三星 i9250怎么晃都不会超过20，没办法，只设置19了
+			double medumValue = 25 - 0.2 * User.sensitivity;			// 三星 i9250怎么晃都不会超过20，没办法，只设置19了
 			if (Math.abs(x) > medumValue || Math.abs(y) > medumValue || Math.abs(z) > medumValue) {
 				//	if(isfirstshark)
 				//	vibrator.vibrate(200);

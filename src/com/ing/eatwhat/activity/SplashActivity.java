@@ -99,10 +99,10 @@ public class SplashActivity extends Activity {
 		int sensitivity = sp.getInt("sensitive", 0);
 		if(sensitivity == 0) {
 			Editor editor = sp.edit();
-			editor.putInt("sensitive", 85);    
+			editor.putInt("sensitive", 50);    
 			editor.commit();
 			
-			User.sensitivity = 85;
+			User.sensitivity = 50;
 		} else {
 			User.sensitivity = sensitivity;
 		}
