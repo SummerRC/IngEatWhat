@@ -32,7 +32,7 @@
                 android:layout_marginTop="6dp"
                 android:background="#f6f6f6"
                 android:gravity="center"
-                android:text="请叫我汪海"
+                android:text="游客"
                 android:textColor="#0096ff"
                 android:textSize="20sp" />
 
@@ -56,8 +56,9 @@
                     android:id="@+id/bt_frag_more_setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bar"
+                    android:background="#f9f9f9"
                     android:gravity="left|center_vertical"
+                    android:layout_marginLeft="8dp"
                     android:text="灵敏度"
                     android:textColor="#696464"
                     android:textSize="20sp" />
@@ -67,13 +68,14 @@
                 android:id="@+id/time_ly"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
+                android:layout_marginTop="1dp"
                 android:background="#f9f9f9"
                 android:layout_below="@id/changepw_ly"
                 android:orientation="horizontal" >
 
                 <ImageView
                     android:layout_width="30dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                      android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:background="@drawable/personicon" />
@@ -82,9 +84,10 @@
                     android:id="@+id/bt_frag_more_personal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bar"
+                    android:background="#f9f9f9"
                     android:gravity="left|center_vertical"
                     android:text="个人信息"
+                    android:layout_marginLeft="8dp"
                     android:textColor="#696464"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -93,6 +96,7 @@
                 android:id="@+id/update_ly"
                 android:layout_width="match_parent"
                 android:background="#f9f9f9"
+                android:layout_marginTop="1dp"
                 android:layout_height="52dp"
                 android:layout_below="@id/time_ly"
                 android:orientation="horizontal" >
@@ -108,9 +112,10 @@
                     android:id="@+id/bt_frag_more_update"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bar"
+                    android:background="#f9f9f9"
                     android:gravity="left|center_vertical"
                     android:text="检查更新"
+                    android:layout_marginLeft="8dp"
                     android:textColor="#696464"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -119,6 +124,7 @@
                 android:id="@+id/gift_ly"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
+                android:layout_marginTop="1dp"
                 android:background="#f9f9f9"
                 android:layout_below="@id/update_ly"
                 android:orientation="horizontal" >
@@ -134,9 +140,10 @@
                     android:id="@+id/bt_frag_more_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bar"
+                    android:background="#f9f9f9"
                     android:gravity="left|center_vertical"
                     android:text="反馈"
+                    android:layout_marginLeft="8dp"
                     android:textColor="#696464"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -145,6 +152,7 @@
                 android:id="@+id/about_ly"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
+                android:layout_marginTop="1dp"
                 android:background="#f9f9f9"
                 android:layout_below="@id/gift_ly"
                 android:orientation="horizontal" >
@@ -160,9 +168,10 @@
                     android:id="@+id/bt_frag_more_about"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bar"
+                    android:background="#f9f9f9"
                     android:gravity="left|center_vertical"
                     android:text="关于我们"
+                    android:layout_marginLeft="8dp"
                     android:textColor="#696464"
                     android:textSize="20sp" />
             </LinearLayout>

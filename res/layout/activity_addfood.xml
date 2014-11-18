@@ -15,7 +15,7 @@
             android:id="@+id/bt_addfood_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignBottom="@+id/tv_addfood_title"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="16dp"
             android:background="@drawable/addfood_back"
@@ -23,7 +23,7 @@
             android:textSize="23sp" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tv_addfood_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -37,7 +37,7 @@
             android:id="@+id/bt_addfood_save"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignBottom="@+id/tv_addfood_title"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:background="@drawable/addfood_save"

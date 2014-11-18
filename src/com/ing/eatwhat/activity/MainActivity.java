@@ -1,7 +1,6 @@
 package com.ing.eatwhat.activity;
 
 import java.util.Date;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,13 +15,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
-import com.ing.eatwhat.fragment.FoodMenuFragment;
 import com.ing.eatwhat.fragment.MoreFragment;
 import com.ing.eatwhat.fragment.RecommendFragment;
+import com.ing.eatwhat.gridview.FoodMenuFragment;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 

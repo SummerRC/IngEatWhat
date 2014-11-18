@@ -19,12 +19,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.app.AlertDialog;
 
 public class AddFoodActivity extends Activity implements View.OnClickListener{
@@ -50,6 +50,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	private ImageView iv_camera;
 	private Bitmap MyBitmap = null;
 	private String default_path;
+	private TextView tv_addfood_title;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		//全屏显示  无标题栏
@@ -69,12 +70,13 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		iv_picture.setOnClickListener(this);
 		bt_addfood_save.setOnClickListener(this);
 		bt_addfood_back.setOnClickListener(this);
+		tv_addfood_title = (TextView) this.findViewById(R.id.tv_addfood_title);
 		
 		dbManager = new DBManager(this);
 		getIntent = this.getIntent();	
 		if(getIntent.getStringExtra("op").compareToIgnoreCase("edit") == 0) {
 			op = EDIT;	//是修改操作
-			//bt_addfood_save.setText("修改");
+			tv_addfood_title.setText("修改");
 			oldFoodName = getIntent.getStringExtra("foodname");
 			et_foodname.setText(oldFoodName);			
 			iv_picture.setImageURI(Uri.fromFile(new File(dbManager.query(oldFoodName).getPicPath())));
@@ -221,7 +223,6 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), 250, 250);   
 			if(MyBitmap != null) {
 				if(!MyBitmap.isRecycled()) {
-					Log.e("h", "哈哈哈");
 					MyBitmap.recycle();
 				}
 			}
