@@ -3,7 +3,8 @@
     android:layout_height="fill_parent"
     android:background="@drawable/addfood_backgrounds"
     android:orientation="vertical"
-    android:theme="@android:style/Theme.NoTitleBar" >
+    android:theme="@android:style/Theme.NoTitleBar"
+    android:id="@+id/about_us_linearlaout" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -49,7 +50,7 @@
             android:textColor="#0096ff"
             android:textSize="23sp" />
 
-        <ImageView
+<!--         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="105dp"
@@ -63,8 +64,106 @@
             android:layout_height="140dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/imageView2"
-            android:background="@drawable/aboutus_aboutus" />
+            android:background="@drawable/aboutus_aboutus" /> -->
+       <LinearLayout 
+            android:id="@+id/about_aiya_title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#29b6f6"
+            android:layout_below="@+id/imageView1"
+           >
+         <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_aiya_title"
+            android:textColor="#ffffff"
+            android:textSize="15pt"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+                />
+       </LinearLayout>
 
+        <View 
+            android:id="@+id/line_01"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/about_aiya_title_layout"
+            android:background="#919294"
+            />
+        <LinearLayout 
+            android:id="@+id/about_aiya_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/line_01"
+            android:background="#ffffff"
+            >
+            <TextView 
+            android:id="@+id/about_aiya_textview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/about_aiya"
+            />  
+        </LinearLayout>
+           <View 
+            android:id="@+id/line_02"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/about_aiya_layout"
+            android:background="#919294"
+            />
+     <LinearLayout 
+            android:id="@+id/about_us_title_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#29b6f6"
+            android:layout_below="@+id/line_02"
+           >
+         <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_us_title"
+            android:textColor="#ffffff"
+            android:textSize="15pt"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+                />
+       </LinearLayout>
+        <View 
+            android:id="@+id/line_03"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/about_us_title_layout"
+            android:background="#919294"
+            />
+        <LinearLayout 
+            android:id="@+id/about_us_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/line_03"
+            android:background="#ffffff"
+            >
+            <TextView 
+            android:id="@+id/about_us_textview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/about_us"
+            />  
+        </LinearLayout>
+           <View 
+            android:id="@+id/line_04"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/about_us_layout"
+            android:background="#919294"
+            />
     </RelativeLayout>
 
 </LinearLayout>

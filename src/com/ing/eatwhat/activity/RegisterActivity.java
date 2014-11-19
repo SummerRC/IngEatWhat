@@ -8,6 +8,7 @@ import com.ing.eatwhat.database.DBManager;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.thread.NetThread;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,9 +19,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 @SuppressLint("HandlerLeak")
-public class RegisterActivity extends Activity{
+public class RegisterActivity extends SlidingBackActivity{
 	private static Handler mHandler;        		 //注意：handler如果不申明为静态的话,eclipse警告可能会导致内存泄露，详情:http://www.cppblog.com/tx7do/archive/2013/11/14/204251.aspx
 	private EditText et_logon_username;       //注册用户名的文本框
 	private EditText et_logon_password1;     //输入密码的文本框
@@ -33,6 +36,9 @@ public class RegisterActivity extends Activity{
 		//全屏显示  无标题栏
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_register);	
+		//添加滑动返回监听
+				//RelativeLayout rl = (RelativeLayout) findViewById(R.id.register_relativelayout);
+				//rl.setOnTouchListener(this);
 		
 		et_logon_username = (EditText)findViewById(R.id.et_logon_username);
 		et_logon_password1 = (EditText)findViewById(R.id.et_logon_password1);

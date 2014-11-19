@@ -5,7 +5,7 @@
     <string name="activity_login_account">请输入账号</string>
     <string name="activity_login_login">登录</string>
     <string name="activity_login_register">注册</string>
-    
+
     <!-- copy -->
     <string name="p2refresh_head_load_more">加载更多</string>
     <string name="p2refresh_end_load_more">更    多</string>
@@ -16,5 +16,9 @@
     <string name="p2refresh_doing_end_refresh">加载中&#8230;</string>
     <string name="p2refresh_refresh_lasttime">最近更新&#160;&#058;&#160;</string>
     <string name="image_desc">图片</string>
-
+     <!-- about us -->
+    <string name="about_aiya_title">关于 .哎呀</string>
+    <string name="about_us_title">关于 .我们</string>
+    <string name="about_aiya">“哎呀吃什么”由山东大学ING工作室出品，于2014年11月11日（光棍节）退出，“哎呀”汇聚了全国各地的资深“吃货”群体，他们热爱美食，热爱生活，热爱分享。</string>
+    <string name="about_us">60多平方米的房间，10几台电脑，一群有共同爱好，志向的山大学生，用学到知识为idea插上翅膀，合作出品属于我们自己的产品，共同学习，进步，成长。正是ING工作室的日常工作，生活的真是写照，纵道路阻且长，我们愿意一直积极面对！</string>
 </resources>

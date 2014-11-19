@@ -12,13 +12,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.thread.NetThread;
 
 @SuppressLint("HandlerLeak")
-public class LoginActivity extends Activity {
+public class LoginActivity extends SlidingBackActivity {
  
 	private Handler mHandler;
 	private EditText et_login_name;               //输入 用户名的文本框
@@ -32,6 +34,9 @@ public class LoginActivity extends Activity {
 		//全屏显示  无标题栏
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_login);
+		//添加滑动返回监听
+		//LinearLayout ll = (LinearLayout) findViewById(R.id.login_linearlayout);
+		//ll.setOnTouchListener(this);
 		
 		et_login_name = (EditText)findViewById(R.id.et_login_name);
 		et_login_password = (EditText)findViewById(R.id.et_login_password);

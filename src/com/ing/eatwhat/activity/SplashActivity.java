@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
 import com.ing.eatwhat.entity.User;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,8 +20,10 @@ import android.telephony.TelephonyManager;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends SlidingBackActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,10 @@ public class SplashActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
   
+    	//添加滑动返回监听
+		//RelativeLayout rl = (RelativeLayout) findViewById(R.id.splash_relativelayout);
+		//rl.setOnTouchListener(this);
+		
         InputStream in = this.getResources().openRawResource(R.drawable.bg_splash);
         ImageView iv_splash =  (ImageView) this.findViewById(R.id.iv_splash);
         iv_splash.setImageBitmap(BitmapFactory.decodeStream(in));

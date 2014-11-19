@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
- 
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -24,100 +24,95 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:baselineAligned="false" 
             android:background="#f9f9f9"
+            android:baselineAligned="false"
             android:orientation="horizontal" >
 
             <LinearLayout
                 android:id="@+id/ll_home"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical" >
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
                 <ImageButton
                     android:id="@+id/ib_home"
-                    android:contentDescription="@string/app_name"
-                    android:layout_marginTop="5sp"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/home" />
-                  
+                    android:layout_marginTop="5sp"
+                    android:background="@drawable/home"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
                 <TextView
-                    android:paddingBottom="1sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="#f6f6f6"
                     android:gravity="bottom|center_horizontal"
+                    android:paddingBottom="1sp"
                     android:text="菜单"
-                    android:textSize="13sp"
-                    android:textColor="#000000"    />
-
+                    android:textColor="#000000"
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_yaoyiyao"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-				android:layout_weight="2"
-				android:orientation="vertical"  >
-               
+                android:layout_weight="2"
+                android:orientation="vertical" >
+
                 <ImageButton
-                    android:contentDescription="@string/app_name"
-                    android:layout_marginTop="5sp"
                     android:id="@+id/ib_yaoyiyao"
                     android:layout_width="25dp"
-                    android:layout_height="25dp" 
-                    android:layout_gravity="center"    
-                    android:scaleType="fitXY"               
-                    android:background="@drawable/recommend_" />
-                
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5sp"
+                    android:background="@drawable/recommend_"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
                 <TextView
-                    android:paddingBottom="1sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="#f6f6f6"
                     android:gravity="bottom|center_horizontal"
+                    android:paddingBottom="1sp"
                     android:text="摇一摇"
-                    android:textSize="13sp"
                     android:textColor="#000000"
-                    />
+                    android:textSize="13sp" />
             </LinearLayout>
-
-            
 
             <LinearLayout
                 android:id="@+id/ll_more"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="vertical" >
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-                   
                 <ImageButton
-                    android:contentDescription="@string/app_name"
-                    android:layout_marginTop="5sp"
                     android:id="@+id/ib_more"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
-      				android:scaleType="fitXY"
-                    android:background="@drawable/more" />
-                  
+                    android:layout_marginTop="5sp"
+                    android:background="@drawable/more"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY" />
+
                 <TextView
-                    android:paddingBottom="1sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="#f6f6f6"                  
+                    android:background="#f6f6f6"
                     android:gravity="bottom|center_horizontal"
+                    android:paddingBottom="1sp"
                     android:text="更多"
-                    android:textSize="13sp"
-                    android:textColor="#000000"   />
+                    android:textColor="#000000"
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

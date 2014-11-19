@@ -3,11 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#f9f9f9"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/login_linearlayout" >
 
-    <LinearLayout  
-        android:layout_width="fill_parent"  
-        android:layout_height="50dp"  
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -15,75 +16,75 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:background="#f6f6f6"
             android:ems="10"
             android:enabled="false"
             android:gravity="center"
-            android:background="#f6f6f6"
             android:text="@+string/activity_login_login"
             android:textColor="#0096ff"
-            android:textSize="23sp" />          
+            android:textSize="23sp" />
     </LinearLayout>
-    
-    <EditText
-           android:id="@+id/editText4"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:background="#ECECEC"
-           android:ems="10"
-           android:enabled="false" />  
-    
-   	<RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
-        android:paddingTop="10dp">
 
-		<LinearLayout 
-		    android:layout_height="55dp" 
-		    android:layout_width="match_parent" 
-		    android:id="@+id/linear_login_name"
-		   	android:layout_marginTop="30dp"
-		    android:orientation="horizontal">
-		
-			<TextView 
-			    android:background="@drawable/login_user"
-			    android:layout_height="match_parent" 
-			    android:layout_margin="10dp"
-			    android:layout_width="48dp"/>
-			
-			<EditText
-			    android:id="@+id/et_login_name"
-			    android:layout_width="match_parent"
-			    android:layout_height="55dp"
-			    android:ems="10"
-			    android:hint="@+string/activity_login_account"
-			    android:textColorHint="#cccccc"
-			    android:inputType="text"
-			    android:paddingLeft="10dp" />	
-		</LinearLayout>
-		        
-		<LinearLayout 
-		    android:layout_height="55dp" 
-		    android:layout_width="match_parent" 
-		    android:id="@+id/linear_login_password"
-		    android:layout_below="@id/linear_login_name" 
-		    android:orientation="horizontal">
-		
-			<TextView 
-			    android:background="@drawable/login_password"
-			    android:layout_height="match_parent"
-			    android:layout_margin="10dp"
-			    android:layout_width="48dp"/>
-			
-			<EditText
-			    android:id="@+id/et_login_password"
-			    android:layout_width="match_parent"
-			    android:layout_height="55dp"
-			    android:ems="10"
-			    android:hint="@+string/activity_login_password"
-			    android:textColorHint="#cccccc"
-			    android:inputType="textPassword"
-			    android:paddingLeft="10dp" />
-		</LinearLayout>
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ECECEC"
+        android:ems="10"
+        android:enabled="false" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="10dp" >
+
+        <LinearLayout
+            android:id="@+id/linear_login_name"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/login_user" />
+
+            <EditText
+                android:id="@+id/et_login_name"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:ems="10"
+                android:hint="@+string/activity_login_account"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textColorHint="#cccccc" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@id/linear_login_name"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/login_password" />
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:ems="10"
+                android:hint="@+string/activity_login_password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textColorHint="#cccccc" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/bt_login"
@@ -97,8 +98,8 @@
             android:onClick="LoginClick"
             android:text="@+string/activity_login_login"
             android:textColor="#0096ff" />
-        
-         <Button
+
+        <Button
             android:id="@+id/bt_logon"
             android:layout_width="100dp"
             android:layout_height="33dp"
@@ -106,10 +107,10 @@
             android:layout_alignBottom="@+id/bt_login"
             android:layout_alignParentRight="true"
             android:layout_marginRight="38dp"
-            android:onClick="LogonClick"
             android:background="@drawable/register"
+            android:onClick="LogonClick"
             android:text="@+string/activity_login_register"
             android:textColor="#0096ff" />
     </RelativeLayout>
-    
+
 </LinearLayout>

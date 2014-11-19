@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f9f9f9"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:id="@+id/register_relativelayout" >
 
     <TextView
         android:id="@+id/more"

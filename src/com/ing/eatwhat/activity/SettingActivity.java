@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class SettingActivity extends Activity implements
+public class SettingActivity extends SlidingBackActivity implements
 		SeekBar.OnSeekBarChangeListener {
 
 	private TextView tx_sensitive;
@@ -30,6 +32,10 @@ public class SettingActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_setting);
+		
+		//添加滑动返回监听
+		RelativeLayout rl = (RelativeLayout) findViewById(R.id.setting_relativelayout);
+		rl.setOnTouchListener(this);
 		
 		// 获得当前灵敏度
 		sensitiveSp = getSharedPreferences(User.userName + "config", MODE_PRIVATE);

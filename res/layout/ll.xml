@@ -15,4 +15,4 @@
         android:background="@drawable/guide_button"
         android:tag="1" />
 
-    </RelativeLayout>
+</RelativeLayout>
