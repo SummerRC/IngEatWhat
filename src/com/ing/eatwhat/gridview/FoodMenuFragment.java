@@ -66,7 +66,7 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 		mScanner = new ImageScanner(this.getActivity());
 		mScanner.scanImages(new ScanCompleteCallBack() {
 			{
-				mProgressDialog = ProgressDialog.show(FoodMenuFragment.this.getActivity(), null, "正在加载...(我是为你们这群使劲加图片的丧病写的~~~");
+				mProgressDialog = ProgressDialog.show(FoodMenuFragment.this.getActivity(), null, "正在加载...");
 			}
 			
 			@Override

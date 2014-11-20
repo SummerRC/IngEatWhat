@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.AllUse;
+import com.ing.eatwhat.entity.ExceptionApplication;
 import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.fragment.MoreFragment;
 import com.ing.eatwhat.fragment.RecommendFragment;
@@ -50,6 +51,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		//全屏显示  无标题栏
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_main);
+		
+		ExceptionApplication.addActivity(this);
 		
 		//友盟自动反馈提示
 		//开发者回复用户反馈后，自动提醒用户
@@ -197,8 +200,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             // 更新时间  
             preTime = currentTime;
         } else {
+        	ExceptionApplication.addActivity(this);
         	android.os.Process.killProcess(android.os.Process.myPid()); 		//结束整个应用程序
-        	//System.exit(0);
+        	System.exit(0);
         }	         
 	}
 	

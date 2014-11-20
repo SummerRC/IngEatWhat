@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -62,7 +61,7 @@ public class MyUncaughtExceptionHandler implements UncaughtExceptionHandler{
     @Override  
     public void uncaughtException(Thread thread, Throwable ex) {  
         if (!handleException(ex) && mDefaultHandler != null) {  							//如果用户没有处理则让系统默认的异常处理器来处理  
-            mDefaultHandler.uncaughtException(thread, ex);  		
+        	mDefaultHandler.uncaughtException(thread, ex);  		
         } else {  
             try {  
                 Thread.sleep(3000);  
@@ -70,8 +69,7 @@ public class MyUncaughtExceptionHandler implements UncaughtExceptionHandler{
                 Log.e(TAG, "error : ", e);  
             }  
             //退出程序  
-            android.os.Process.killProcess(android.os.Process.myPid());  
-            System.exit(1);  
+           ExceptionApplication.finishActivity();
         }  
     }  
   
