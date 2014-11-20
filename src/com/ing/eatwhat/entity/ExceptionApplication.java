@@ -33,7 +33,7 @@ public class ExceptionApplication extends Application {
                 activity.finish();    
             }    
         }  
-        //杀死该应用进程  
+        //杀死该应用进程(这货一般只能结束当前Activity和前一个或两个Activity)
        android.os.Process.killProcess(android.os.Process.myPid());    
     }  
     

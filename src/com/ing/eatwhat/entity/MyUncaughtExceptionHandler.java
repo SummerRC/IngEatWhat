@@ -19,15 +19,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
 
 
 public class MyUncaughtExceptionHandler implements UncaughtExceptionHandler{
 	
 	private final String sdPATH = Environment .getExternalStorageDirectory().getAbsolutePath();
-	public static final String TAG = "CrashHandler";  
-    private Thread.UncaughtExceptionHandler mDefaultHandler;  					//系统默认的UncaughtException处理类  
+	private Thread.UncaughtExceptionHandler mDefaultHandler;  					//系统默认的UncaughtException处理类  
     private static MyUncaughtExceptionHandler INSTANCE = new MyUncaughtExceptionHandler();        //CrashHandler实例  
     private Context mContext;  
     private Map<String, String> infos = new HashMap<String, String>();  		 //用来存储设备信息和异常信息  
@@ -66,7 +64,6 @@ public class MyUncaughtExceptionHandler implements UncaughtExceptionHandler{
             try {  
                 Thread.sleep(3000);  
             } catch (InterruptedException e) {  
-                Log.e(TAG, "error : ", e);  
             }  
             //退出程序  
            ExceptionApplication.finishActivity();
@@ -112,14 +109,13 @@ public class MyUncaughtExceptionHandler implements UncaughtExceptionHandler{
                 infos.put("versionCode", versionCode);  
             }  
         } catch (NameNotFoundException e) {  
-            Log.e(TAG, "an error occured when collect package info", e);  
+
         }  
         Field[] fields = Build.class.getDeclaredFields();  
         for (Field field : fields) {  
             try {  
                 field.setAccessible(true);  
                 infos.put(field.getName(), field.get(null).toString());  
-                Log.d(TAG, field.getName() + " : " + field.get(null));  
             } catch (Exception e) {  
             	e.printStackTrace(); 
             }  
