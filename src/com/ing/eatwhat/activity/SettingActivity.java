@@ -2,7 +2,6 @@ package com.ing.eatwhat.activity;
 
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.entity.User;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -34,7 +33,8 @@ public class SettingActivity extends Activity implements
 		// 获得当前灵敏度
 		sensitiveSp = getSharedPreferences(User.userName + "config", MODE_PRIVATE);
 		sensitive = sensitiveSp.getInt("sensitive", 0);
-
+		this.progress = sensitive;
+		
 		frag_more_seekbar = (SeekBar) findViewById(R.id.sensitivebar);
 		frag_more_seekbar.setProgress(sensitive);
 		frag_more_seekbar.setOnSeekBarChangeListener(this);
@@ -55,8 +55,7 @@ public class SettingActivity extends Activity implements
 	public void save() {
 		Editor editor = sensitiveSp.edit();
 		editor.putInt("sensitive", this.progress);
-		editor.commit();
-		
+		editor.commit();	
 		User.sensitivity = this.progress;
 	}
 
