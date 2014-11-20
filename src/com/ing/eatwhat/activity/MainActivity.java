@@ -115,7 +115,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		FragmentTransaction ft = fm.beginTransaction();
 		RecommendFragment foodMenuFragment = new RecommendFragment();
 		ft.add(R.id.frag_Container, foodMenuFragment, "RecommendFragment");
-		ft.addToBackStack(null);
+		//ft.addToBackStack(null);
 		ft.commit();
 	}
 	
@@ -129,7 +129,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 			if(fm.findFragmentByTag("FoodMenuFragment") != null) {
 				if(!fm.findFragmentByTag("FoodMenuFragment").isVisible()) {
 					ft.replace(R.id.frag_Container,  (FoodMenuFragment)fm.findFragmentByTag("FoodMenuFragment"));			
-					ft.addToBackStack(null);
+					//ft.addToBackStack(null);
 					ft.commit();	
 					setPicture(dw_home_, dw_yaoyiyao, dw_more);
 				}
@@ -137,7 +137,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 			}			
 			FoodMenuFragment foodMenuFragment = new FoodMenuFragment();
 			ft.replace(R.id.frag_Container, foodMenuFragment, "FoodMenuFragment");
-			ft.addToBackStack(null);
+			//ft.addToBackStack(null);
 			ft.commit();	
 			setPicture(dw_home_, dw_yaoyiyao, dw_more);	
 			break;
@@ -145,7 +145,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 			if(fm.findFragmentByTag("RecommendFragment") != null) {
 				if(!fm.findFragmentByTag("RecommendFragment").isVisible()) {
 					ft.replace(R.id.frag_Container,  (RecommendFragment)fm.findFragmentByTag("RecommendFragment"), "RecommendFragment");
-					ft.addToBackStack(null);
+					//ft.addToBackStack(null);
 					ft.commit();	
 					setPicture(dw_home, dw_yaoyiyao_, dw_more);
 				}
@@ -154,7 +154,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 			
 			RecommendFragment recommendFragment = new RecommendFragment();
 			ft.replace(R.id.frag_Container,  recommendFragment,"RecommendFragment");
-			ft.addToBackStack(null);
+			//ft.addToBackStack(null);
 			ft.commit();	
 			setPicture(dw_home, dw_yaoyiyao_, dw_more);
 			break;
@@ -162,7 +162,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 			if(fm.findFragmentByTag("MoreFragment") != null) {
 				if(!fm.findFragmentByTag("MoreFragment").isVisible()) {
 					ft.replace(R.id.frag_Container,  (MoreFragment)fm.findFragmentByTag("MoreFragment"));
-					ft.addToBackStack(null);
+					//ft.addToBackStack(null);
 					ft.commit();	
 					setPicture(dw_home, dw_yaoyiyao, dw_more_);
 				}
@@ -172,7 +172,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 			
 			MoreFragment moreFragment = new MoreFragment();
 			ft.replace(R.id.frag_Container,  moreFragment, "MoreFragment");
-			ft.addToBackStack(null);
+			//ft.addToBackStack(null);
 			ft.commit();	
 			setPicture(dw_home, dw_yaoyiyao, dw_more_);
 			break;	

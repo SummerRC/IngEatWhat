@@ -5,16 +5,8 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="F:/workspace/android/哎呀吃什么/libs/umeng-update-v2.4.2.jar"/>
 	<classpathentry kind="src" path="/NotePad"/>
-	<classpathentry kind="lib" path="F:/programme/android/sdk/platforms/android-10/android.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/F:/programme/android/sdk/docs/reference"/>
-		</attributes>
-		<accessrules>
-			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
-		</accessrules>
-	</classpathentry>
 	<classpathentry kind="src" path="/StickyHeaderGridView"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OSGi%Minimum-1.2"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

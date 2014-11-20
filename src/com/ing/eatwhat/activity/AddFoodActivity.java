@@ -27,7 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.AlertDialog;
 
-public class AddFoodActivity extends Activity implements View.OnClickListener{
+public class AddFoodActivity extends Activity implements View.OnClickListener {
 	
 	private Button bt_addfood_save;					//保存按钮
 	private Button bt_addfood_back;
@@ -102,7 +102,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			bt_save();
 			break;
 		case R.id.iv_picture:							//点击ImageView
-			dialogClick(view);
+			dialogClick(view);	
 			break;
 		case R.id.iv_photo:
 			//调用系统相册
@@ -157,7 +157,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	
 	//回调函数
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) throws java.lang.IllegalArgumentException{
         super.onActivityResult(requestCode, resultCode, data);
       
         if(!(resultCode == Activity.RESULT_OK)) {
@@ -175,7 +175,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	}
 	  
 	//相机拍照后回调方法会调用这个函数，处理拍摄的照片
-	private void camera(int resultCode, Intent data) {
+	private void camera(int resultCode, Intent data){
 		if(resultCode != RESULT_OK) {
 	    	AllUse.info(getApplication(), "操作取消！");
 	    	return;
@@ -184,23 +184,21 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		Bitmap bitmap = BitmapFactory.decodeFile(default_path);
 		try {			
 			int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), 250, 250);   
-			if(MyBitmap != null) {
-				if(!MyBitmap.isRecycled()) {
-					MyBitmap.recycle();
-				}
+			if(MyBitmap != null && !MyBitmap.isRecycled()) {
+				MyBitmap.recycle();
+				MyBitmap = null;
 			}
-		     MyBitmap = PicZoom(bitmap, bitmap.getWidth() / scale,bitmap.getHeight() / scale);  
-		     bitmap.recycle();  
-		     System.gc();
+			 MyBitmap = PicZoom(bitmap, bitmap.getWidth() / scale,bitmap.getHeight() / scale);  
+		     if(bitmap !=null) {
+			     bitmap.recycle();
+		    	 bitmap = null;
+		     }
          } catch (Exception e) {
              e.printStackTrace();
          }
 		haveInsertedPic = true;
 		//将图片显示在ImageView
         iv_picture.setImageBitmap(MyBitmap);
-        //获得图片存储的绝对路径，并存储图片到对应路径下
-        picPath = this.getPicPath();
-		AllUse.savePicture(MyBitmap, picPath);	
 	}
 	
 	//相册选择照片后，回调函数会调用这个方法处理图片
@@ -220,31 +218,36 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 	    Bitmap bitmap = null;        
 		try {
 			bitmap = BitmapFactory.decodeFile(picturePath);
+			if(bitmap.isRecycled()) {			//4.1.1之后会出现Cannot draw recycled bitmaps错误   若用户选择的是处理过的图片，则提示返回
+				AllUse.info(this.getApplication(), "这是张缩略图，请添加原图");
+				return;
+			}
 			int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), 250, 250);   
 			if(MyBitmap != null) {
 				if(!MyBitmap.isRecycled()) {
 					MyBitmap.recycle();
+					MyBitmap = null;
 				}
 			}
 			MyBitmap = PicZoom(bitmap, bitmap.getWidth() / scale,bitmap.getHeight() / scale);  
-	        bitmap.recycle();  
+			if(bitmap != null) {
+				if(!bitmap.isRecycled()) {
+					bitmap.recycle();
+					bitmap = null;
+				}
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			AllUse.info(getApplication(), "图片加载失败!");
 			return;
 		} catch (OutOfMemoryError e) {
 			AllUse.info(getApplication(), "图片太大,请换张图片！");
 			return;
 		} catch (Error e) {
-			e.printStackTrace();
-			AllUse.info(getApplication(), "图片太大，内存溢出!");
+			AllUse.info(getApplication(), "图片太大，加载失败!");
 			return;
 	    } 
-		//将图片显示在ImageView
-	    iv_picture.setImageBitmap(MyBitmap);  
-	    //获得图片存储的绝对路径，并存储图片到对象
-		picPath = this.getPicPath();
-		AllUse.savePicture(MyBitmap, picPath);		
+		
+		iv_picture.setImageBitmap(MyBitmap);  
 	}
 
 	
@@ -276,7 +279,7 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 			AllUse.info(getApplication(), "警告：菜名太长！");
 			return;
 		}		
-		
+	
 		switch(op) {
 		case ADD:
 			add();
@@ -298,6 +301,9 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 		food.setName(newFoodName);
 		
   		if(haveInsertedPic) {			//如果插入了图片
+  			//获得图片存储的绝对路径，并存储图片到对象
+  			picPath = this.getPicPath();
+  			AllUse.savePicture(MyBitmap, picPath);	 			
 			food.setPicPath(picPath);
   		} else {									//否则存储的是默认图片的路径
   			food.setPicPath(Food.getDefaultPicPath(this));
@@ -351,4 +357,14 @@ public class AddFoodActivity extends Activity implements View.OnClickListener{
 
          return Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeght, matrix, true);
      }
+     
+     @Override
+     public void onDestroy() {
+    	 if(MyBitmap != null && !MyBitmap.isRecycled()) {
+    		 MyBitmap.recycle();
+    		 System.gc();
+    	 }
+    	 super.onDestroy();
+     }
+     
 }

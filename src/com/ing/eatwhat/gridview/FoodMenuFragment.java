@@ -34,14 +34,13 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 	private DBManager dbManager;
 	StickyGridAdapter adapter;
 	
-	//private ProgressDialog mProgressDialog;
+	private ProgressDialog mProgressDialog;
 	private ImageScanner mScanner;
 	private GridView mGridView;
 	private List<GridItem> mGridList;
 	private static int section = 1;
 	private Map<String, Integer> sectionMap = new HashMap<String, Integer>();
 
-	
 	//构造函数
 	public FoodMenuFragment() {
 		
@@ -67,13 +66,13 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 		mScanner = new ImageScanner(this.getActivity());
 		mScanner.scanImages(new ScanCompleteCallBack() {
 			{
-				//mProgressDialog = ProgressDialog.show(FoodMenuFragment.this.getActivity(), null, "正在加载...(我是为你们这群使劲加图片的丧病写的~~~");
+				mProgressDialog = ProgressDialog.show(FoodMenuFragment.this.getActivity(), null, "正在加载...(我是为你们这群使劲加图片的丧病写的~~~");
 			}
 			
 			@Override
 			public void scanComplete(Cursor cursor) {
 				// 关闭进度条
-				//mProgressDialog.dismiss();
+				mProgressDialog.dismiss();
 				dbManager = new DBManager(getActivity());
 				HashMap<String, ArrayList<String>> map = dbManager.getAllFood();
 				ArrayList<String> arr_name = map.get("name");
