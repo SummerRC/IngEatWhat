@@ -77,9 +77,9 @@ public class AddFoodActivity extends Activity implements View.OnClickListener {
 		if(getIntent.getStringExtra("op").compareToIgnoreCase("edit") == 0) {
 			op = EDIT;	//是修改操作
 			tv_addfood_title.setText("修改");
-			oldFoodName = getIntent.getStringExtra("foodname");
+			oldFoodName = getIntent.getStringExtra("name");
 			et_foodname.setText(oldFoodName);			
-			iv_picture.setImageURI(Uri.fromFile(new File(dbManager.query(oldFoodName).getPicPath())));
+			iv_picture.setImageURI(Uri.fromFile(new File(getIntent.getStringExtra("picPath"))));
 		} else {
 			op = ADD;	//是添加操作
 		}
@@ -318,11 +318,13 @@ public class AddFoodActivity extends Activity implements View.OnClickListener {
   		if(newFoodName.equalsIgnoreCase(oldFoodName) && !haveInsertedPic) {	//两者都没修改
   			AllUse.info(getApplication(), "请修改菜单");
   			return;
-  		}
+  		}  		
   		if(newFoodName.equals(oldFoodName)) {															//修改了图片	
-  			dbManager.updateFoodPic(getIntent.getStringExtra("foodname"), picPath);		
+  			picPath = this.getPicPath();
+  			AllUse.savePicture(MyBitmap, picPath);	 
+  			dbManager.updateFoodPic(getIntent.getStringExtra("picPath"), picPath);		
 		} else {																														//修改了菜名
-			dbManager.updateFoodName(getIntent.getStringExtra("foodname"), newFoodName);
+			dbManager.updateFoodName(getIntent.getStringExtra("picPath"), newFoodName);
 		}
   		AddFoodActivity.this.finish();	
   	}

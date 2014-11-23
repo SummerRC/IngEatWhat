@@ -9,6 +9,7 @@ import com.ing.eatwhat.R;
 import com.ing.eatwhat.activity.AddFoodActivity;
 import com.ing.eatwhat.database.DBManager;
 import com.ing.eatwhat.entity.AllUse;
+import com.ing.eatwhat.entity.Food;
 import com.ing.eatwhat.gridview.ImageScanner.ScanCompleteCallBack;
 
 import android.app.AlertDialog;
@@ -33,6 +34,8 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 	private String deleted_foodName;		//被删除的食物名
 	private DBManager dbManager;
 	StickyGridAdapter adapter;
+	private ArrayList<String> arr_name;
+	private ArrayList<String> arr_picPath;
 	
 	//private ProgressDialog mProgressDialog;
 	private ImageScanner mScanner;
@@ -71,12 +74,14 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 			
 			@Override
 			public void scanComplete(Cursor cursor) {
+				arr_name = null;
+				arr_picPath = null;
 				// 关闭进度条
 				//mProgressDialog.dismiss();
 				dbManager = new DBManager(getActivity());
 				HashMap<String, ArrayList<String>> map = dbManager.getAllFood();
-				ArrayList<String> arr_name = map.get("name");
-				ArrayList<String> arr_picPath = map.get("picPath");
+				arr_name = map.get("name");
+				arr_picPath = map.get("picPath");
 				for (int i=0; i<arr_name.size(); i++) {
 					// 获取图片的路径
 					String name = arr_name.get(i);
@@ -120,13 +125,19 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 		} else {
 			intent.putExtra("op", "edit"); 
 		}
-		intent.putExtra("foodname", foodName);	
+		if(arr_name.size()>0 && arr_name.size()!=position) {
+			String name = arr_name.get(position);
+			String picPath = arr_picPath.get(position);
+			intent.putExtra("name", name);
+			intent.putExtra("picPath", picPath);
+		}
+		
 		startActivity(intent);	
 	}
 
 	//长按的监听器
 	@Override
-	public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+	public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
 		if(position == AllUse.getFoodNum(getActivity())) {	//屏蔽加号图片的长按点击事件
 			return true;	//点击事件不再向下传递
 		}
@@ -136,10 +147,15 @@ public class FoodMenuFragment extends Fragment implements OnItemClickListener, O
 			   .setCancelable(false)         				   
 			   .setNegativeButton("确定", new DialogInterface.OnClickListener() {
 				   public void onClick(DialogInterface dialog, int id) {
-					   	TextView tv_frag_home_name = (TextView) view.findViewById(R.id.tv_frag_food_menu_item_name);
+					   	/*TextView tv_frag_home_name = (TextView) view.findViewById(R.id.tv_frag_food_menu_item_name);
 						deleted_foodName = (String) tv_frag_home_name.getText();
 						dbManager = new DBManager(getActivity());
-						dbManager.delete(deleted_foodName);
+						dbManager.delete(deleted_foodName);*/
+					   
+					   String picPath = arr_picPath.get(position);
+					   dbManager = new DBManager(getActivity());
+					   dbManager.delete(picPath);
+						
 						AllUse.editFoodNum(getActivity(), -1);
 						refresh();		//更新UI组件
 				   }

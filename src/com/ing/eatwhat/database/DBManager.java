@@ -57,27 +57,27 @@ public class DBManager {
 	}
 	
 	//删除：根据食物名删除一条记录
-	public void delete(String foodName) {
+	public void delete(String picPath) {
         db = getWritableDB();
-        db.delete("food", "name=?", new String[]{foodName});
+        db.delete("food", "picPath=?", new String[]{picPath});
         close();
 	}
 	
 	//更新：更新食物名
-	public void updateFoodName(String foodName, String newFoodName) {	
+	public void updateFoodName(String picPath, String newFoodName) {	
 		 db = getWritableDB();
          ContentValues values = new ContentValues();
          values.put("name", newFoodName);
-         db.update("food", values, "name=?", new String[]{foodName});
+         db.update("food", values, "picPath=?", new String[]{picPath});
          close();
 	}
 	
 	//更新：更新照片的储存地址
-	public void updateFoodPic(String foodName, String newPicPath) {	
+	public void updateFoodPic(String picPath, String newPicPath) {	
 		db = getWritableDB();
         ContentValues values = new ContentValues();
         values.put("picPath", newPicPath);
-        db.update("food", values, "name=?", new String[]{foodName});
+        db.update("food", values, "picPath=?", new String[]{picPath});
         close();
 	}
 	
