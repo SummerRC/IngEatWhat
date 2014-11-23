@@ -25,4 +25,4 @@ local.properties
 proguard/
 #Log Files
 *.log
-
+.classpath
