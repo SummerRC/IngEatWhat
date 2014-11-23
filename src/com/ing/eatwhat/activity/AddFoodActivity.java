@@ -218,24 +218,24 @@ public class AddFoodActivity extends Activity implements View.OnClickListener {
 	    Bitmap bitmap = null;        
 		try {
 			bitmap = BitmapFactory.decodeFile(picturePath);
-			if(bitmap.isRecycled()) {			//4.1.1之后会出现Cannot draw recycled bitmaps错误   若用户选择的是处理过的图片，则提示返回
+			/*if(bitmap.isRecycled()) {			//4.1.1之后会出现Cannot draw recycled bitmaps错误   若用户选择的是处理过的图片，则提示返回
 				AllUse.info(this.getApplication(), "这是张缩略图，请添加原图");
 				return;
-			}
+			}*/
 			int scale = reckonThumbnail(bitmap.getWidth(),bitmap.getHeight(), 250, 250);   
-			if(MyBitmap != null) {
+			/*if(MyBitmap != null) {
 				if(!MyBitmap.isRecycled()) {
 					MyBitmap.recycle();
 					MyBitmap = null;
 				}
-			}
+			}*/
 			MyBitmap = PicZoom(bitmap, bitmap.getWidth() / scale,bitmap.getHeight() / scale);  
-			if(bitmap != null) {
+			/*if(bitmap != null) {
 				if(!bitmap.isRecycled()) {
 					bitmap.recycle();
 					bitmap = null;
 				}
-			}
+			}*/
 		} catch (Exception e) {
 			AllUse.info(getApplication(), "图片加载失败!");
 			return;

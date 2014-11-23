@@ -27,7 +27,7 @@
     <EditText
            android:id="@+id/editText4"
            android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="6dp"
            android:background="#ECECEC"
            android:ems="10"
            android:enabled="false" />  
@@ -46,9 +46,10 @@
 		
 			<TextView 
 			    android:background="@drawable/login_user"
-			    android:layout_height="match_parent" 
-			    android:layout_margin="10dp"
-			    android:layout_width="48dp"/>
+			    android:layout_width="30dp"
+           		android:layout_height="30dp"
+          	    android:layout_gravity="center"
+			    android:layout_margin="10dp"/>
 			
 			<EditText
 			    android:id="@+id/et_login_name"
@@ -70,9 +71,10 @@
 		
 			<TextView 
 			    android:background="@drawable/login_password"
-			    android:layout_height="match_parent"
-			    android:layout_margin="10dp"
-			    android:layout_width="48dp"/>
+			    android:layout_width="30dp"
+           		android:layout_height="30dp"
+          	    android:layout_gravity="center"
+			    android:layout_margin="10dp"/>
 			
 			<EditText
 			    android:id="@+id/et_login_password"

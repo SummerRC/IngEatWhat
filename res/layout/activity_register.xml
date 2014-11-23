@@ -20,7 +20,7 @@
     <EditText
         android:id="@+id/editText4"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="6dp"
         android:layout_alignRight="@+id/linear_emailorPN"
         android:layout_below="@+id/more"
         android:background="#ECECEC"
