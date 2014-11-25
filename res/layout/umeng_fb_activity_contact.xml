@@ -10,7 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
-        android:background="#000000" >
+        android:background="#ececec"
+  >
 
         <ImageView
             android:id="@+id/umeng_fb_back"
@@ -25,9 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/umeng_fb_contact_title"
-            android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:text="联系方式"
+            android:textSize="23sp"
+            android:textColor="#0096ff"
+             />
 
         <ImageView
             android:id="@+id/umeng_fb_save"

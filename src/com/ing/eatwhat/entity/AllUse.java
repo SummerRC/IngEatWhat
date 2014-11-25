@@ -160,5 +160,24 @@ public class AllUse {
 	    	return 0;
 	    }
 	}
+
+/**
+ * ************************************************  CONFIG文件  *************************************************************
+ * *****************************************************************************************************************
+ */
+	//用SharedPreference储存当前用户信息
+	public static void save(Context ctx, String userName) {		
+		SharedPreferences sp = ctx.getSharedPreferences("CONFIG", Context.MODE_PRIVATE);
+		Editor editor = sp.edit();		
+		editor.putString("userName", userName);    
+		editor.commit();
+	}
 	
+	//获得储存的用户信息,如不存在返回游客
+    public static String getCurUserName(Context ctx) {
+	    SharedPreferences sp = ctx.getSharedPreferences("CONFIG", Context.MODE_PRIVATE);
+		
+	    return sp.getString("userName", "游客");
+    }
+
 }

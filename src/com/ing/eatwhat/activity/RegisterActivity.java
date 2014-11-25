@@ -188,12 +188,14 @@ public class RegisterActivity extends Activity{
 			DBmanager.insertAll(map);	
 			
 			//初始化用户登录信息
-			AllUse.saveLoginStatus(this, User.userName, User.userPassword, User.food_num);			
+			AllUse.saveLoginStatus(this, User.userName, User.userPassword, User.food_num);	
+			AllUse.save(this, User.userName);
 		} else {
 			User.userName = et_logon_username.getText().toString().trim();
 			User.userPassword = et_logon_password1.getText().toString().trim();
 			//初始化用户登录信息
 			AllUse.saveLoginStatus(this, User.userName, User.userPassword, User.food_num);
+			AllUse.save(this, User.userName);
 		}	
 	}
 	
