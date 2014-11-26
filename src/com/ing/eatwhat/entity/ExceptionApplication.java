@@ -4,16 +4,31 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Environment;
 
 public class ExceptionApplication extends Application {
 
 	private static ArrayList<Activity> list = new ArrayList<Activity>();  
+	private final static String sdPATH = Environment .getExternalStorageDirectory().getAbsolutePath();
 	
+	public static int localVersion = 0;// 本地安装版本
+
+	public static int serverVersion = 2;// 服务器版本
+	public static String downloadDir = sdPATH + "/ingZone/eatWhat/update/";// 安装目录
 	@Override  
     public void onCreate() {  
         super.onCreate();  
         MyUncaughtExceptionHandler exceptionHandler = MyUncaughtExceptionHandler.getInstance();  
-        exceptionHandler.init(getApplicationContext());  
+        exceptionHandler.init(getApplicationContext());
+    	try {
+			PackageInfo packageInfo = getApplicationContext()
+					.getPackageManager().getPackageInfo(getPackageName(), 0);
+			localVersion = packageInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
     }  
 
      // 向Activity列表中添加Activity对象

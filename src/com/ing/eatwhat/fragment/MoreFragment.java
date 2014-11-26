@@ -10,11 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.ing.eatwhat.R;
 import com.ing.eatwhat.activity.AboutUsActivity;
 import com.ing.eatwhat.activity.LoginActivity;
 import com.ing.eatwhat.activity.SettingActivity;
 import com.ing.eatwhat.entity.AllUse;
+import com.ing.eatwhat.entity.ExceptionApplication;
+import com.ing.eatwhat.entity.UpdateManager;
 import com.ing.eatwhat.entity.User;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -30,7 +33,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 	Button bt_frag_more_feedback;		   //小贴士
 	Button bt_frag_more_about;			      //关于我们	
 	Button bt_frag_more_exit;		             //退出当前账号
-
+	private ExceptionApplication myApplication; 
+	private UpdateManager mUpdateManager;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.fragment_more, container, false);
@@ -88,8 +92,8 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 			getActivity().finish();
 			break;
 		case R.id.bt_frag_more_update:				//更新
-			AllUse.info(getActivity().getApplication(), "没有更新");
-			//update();
+			//AllUse.info(getActivity().getApplication(), "没有更新");
+			checkVersion();
 			break;
 		case R.id.bt_frag_more_feedback:			//反馈
 			FeedbackAgent agent = new FeedbackAgent(getActivity());
@@ -151,6 +155,17 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 			   })
 			   .show();
 	}
-	
+	 /***
+		 * 检查是否更新版本
+		 */
+		public void checkVersion() {
+			myApplication = (ExceptionApplication) this.getActivity().getApplication();
+			if (myApplication.localVersion < myApplication.serverVersion) {
+
+				// 发现新版本，提示用户更新
+				mUpdateManager = new UpdateManager(this.getActivity());
+			    mUpdateManager.checkUpdateInfo();
+			}
+		}
 }
 	
