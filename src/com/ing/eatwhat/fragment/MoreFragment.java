@@ -161,10 +161,11 @@ public class MoreFragment extends Fragment implements View.OnClickListener{
 		public void checkVersion() {
 			myApplication = (ExceptionApplication) this.getActivity().getApplication();
 			if (myApplication.localVersion < myApplication.serverVersion) {
-
 				// 发现新版本，提示用户更新
 				mUpdateManager = new UpdateManager(this.getActivity());
 			    mUpdateManager.checkUpdateInfo();
+			}else{
+				AllUse.info(getActivity().getApplication(), "没有更新");
 			}
 		}
 }

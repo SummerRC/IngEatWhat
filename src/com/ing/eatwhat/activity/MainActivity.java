@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -249,7 +250,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	public void checkVersion() {
 		myApplication = (ExceptionApplication) getApplication();
 		if (myApplication.localVersion < myApplication.serverVersion) {
-
 			// 发现新版本，提示用户更新
 			mUpdateManager = new UpdateManager(this);
 		    mUpdateManager.checkUpdateInfo();

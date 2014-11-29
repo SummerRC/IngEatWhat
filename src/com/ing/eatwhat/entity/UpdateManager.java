@@ -22,15 +22,15 @@ import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class UpdateManager {
-
 	private Context mContext;
-	
+	private ExceptionApplication mApplication;
 	//提示语
 	private String updateMsg = "有最新的软件包哦，亲快下载吧~";
 	
@@ -42,9 +42,9 @@ public class UpdateManager {
 	
 	private Dialog downloadDialog;
 	 /* 下载包安装路径 */
-    private static final String savePath = "/sdcard/updatedemo/";
+    private static String savePath = "/sdcard/updatedemo/";
     
-    private static final String saveFileName = savePath + "UpdateDemoRelease.apk";
+    private static  String saveFileName = savePath + "哎呀吃什么.apk";
 
     /* 进度条与通知ui刷新的handler和msg常量 */
     private ProgressBar mProgress;
@@ -81,6 +81,9 @@ public class UpdateManager {
     
 	public UpdateManager(Context context) {
 		this.mContext = context;
+		mApplication = new ExceptionApplication();
+		apkUrl = mApplication.downloadUrl;
+		savePath = mApplication.downloadDir;
 	}
 	
 	//外部接口让主Activity调用
