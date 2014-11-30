@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
-        android:background="#000000" >
+        android:background="#ffffff" >
 
         <ImageView
             android:id="@+id/umeng_fb_back"
@@ -19,14 +19,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:src="@drawable/umeng_fb_back_selector" />
+            android:src="@drawable/addfood_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/umeng_fb_contact_title"
-            android:textColor="#ffffff"
+            android:text="联系我们"
+            android:textColor="#20a9e2"
             android:textSize="25sp" />
 
         <ImageView
@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:src="@drawable/umeng_fb_tick_selector" />
+            android:src="@drawable/addfood_save" />
     </RelativeLayout>
 
     <RelativeLayout
