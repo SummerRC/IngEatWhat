@@ -81,8 +81,6 @@ public class SplashActivity extends Activity {
 	
 	private void init() {
 		//读取配置信息
-		User.userName = AllUse.getCurUserName(this);
-		
 		if(AllUse.getSharedPreferencesContent(this, "IMEI").equalsIgnoreCase("null")) {
 			//获取设备IMEI码（15位数，唯一标识）并存储
 			User.IMEI = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId();
@@ -91,7 +89,12 @@ public class SplashActivity extends Activity {
 			User.IMEI = AllUse.getSharedPreferencesContent(this, "IMEI");
 		}
 		
-	
+		if(AllUse.getSharedPreferencesContent(this, "userName").equalsIgnoreCase("null")) {
+			User.userName = "游客";
+		} else {
+			User.userName = AllUse.getSharedPreferencesContent(this, "userName");
+		}	
+		
 		SharedPreferences sp = this.getSharedPreferences(User.userName + "config", Context.MODE_PRIVATE);
 		int sensitivity = sp.getInt("sensitive", 0);
 		if(sensitivity == 0) {

@@ -1,12 +1,16 @@
 package com.ing.eatwhat.activity;
 
 import java.util.Date;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -22,11 +26,12 @@ import com.ing.eatwhat.entity.User;
 import com.ing.eatwhat.fragment.MoreFragment;
 import com.ing.eatwhat.fragment.RecommendFragment;
 import com.ing.eatwhat.gridview.FoodMenuFragment;
+import com.ing.eatwhat.entity.UpdateManager;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
-	
+	private ExceptionApplication myApplication; 
 	private LinearLayout ll_home;				//主界面底部四个icon所在的LinearLayout
 	private LinearLayout ll_yaoyiyao;
 	private LinearLayout ll_more;
@@ -42,7 +47,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	private static final int IMEI1 = Menu.FIRST ;
 	private static final int IMEI2 = Menu.FIRST + 1;
 	private static final int IMEI3 = Menu.FIRST + 2;
-	
+	private UpdateManager mUpdateManager;
 	long preTime = 0;  
 	public static final long TWO_SECOND = 2 * 1000;
 	
@@ -53,6 +58,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		setContentView(R.layout.activity_main);
 		
 		ExceptionApplication.addActivity(this);
+		//检查更新
+		checkVersion();
+		
 		
 		//友盟自动反馈提示
 		//开发者回复用户反馈后，自动提醒用户
@@ -236,5 +244,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
         return true;
     }
+    /***
+	 * 检查是否更新版本
+	 */
+	public void checkVersion() {
+		myApplication = (ExceptionApplication) getApplication();
+		if (myApplication.localVersion < myApplication.serverVersion) {
+			// 发现新版本，提示用户更新
+			mUpdateManager = new UpdateManager(this);
+		    mUpdateManager.checkUpdateInfo();
+		}
+	}
 }
 

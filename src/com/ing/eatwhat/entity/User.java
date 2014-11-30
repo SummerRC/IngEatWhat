@@ -10,6 +10,6 @@ public class User {
 	
 	public static String IMEI = "";
 	
-	public static int sensitivity = 50;
+	public static int sensitivity = 50;;
 
 }

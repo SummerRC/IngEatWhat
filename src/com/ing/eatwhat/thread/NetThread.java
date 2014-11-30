@@ -73,6 +73,9 @@ public class NetThread extends Thread {
 		case 8:	   //修改密码
 			url =  STR + "change_password.php?username=" + str1 + "&password=" + str2 + "&new_pw=" + str3;
 			break;
+		case 9:	   //获得最新版本信息
+			url =  "http://1.ingeatwhat.sinaapp.com/check_version.php";
+			break;
 		}
 		try {
 			HttpGet get = new HttpGet(url);
@@ -84,7 +87,7 @@ public class NetThread extends Thread {
 			
 			if(response.getStatusLine().getStatusCode() == 200) {
 			
-				if(op == 1 || op == 2 || op == 3 || op == 4 || op == 5 || op == 8) {
+				if(op == 1 || op == 2 || op == 3 || op == 4 || op == 5 || op == 8 || op == 9) {
 					BufferedReader bin = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 				    result = bin.readLine();			//result存的是状态信息
 				    

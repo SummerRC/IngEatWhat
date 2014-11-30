@@ -1,5 +1,7 @@
 package com.ing.eatwhat.activity;
 
+import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -57,7 +59,6 @@ public class LoginActivity extends Activity {
 						
 						//初始化用户登录信息
 						AllUse.saveLoginStatus(LoginActivity.this, User.userName, User.userPassword, User.food_num);
-						AllUse.save(LoginActivity.this, User.userName);
 						
 						//跳转到主界面
 						Intent intent = new Intent();
